@@ -1,4 +1,5 @@
 
+import sys
 
 class SuspendableTestRunner(object):
     def __init__(self):
@@ -55,32 +56,47 @@ class SuspendableTestResult(object):
         else:
             return str(test)
 
+    def _output_stream(self):
+        if self._stream_type == "stdout":
+            return sys.stdout
+        elif self._stream_type == "stderr":
+            return sys.stderr
+        else:
+            raise "Invalid _stream_type"
+
+    def _write(self, str):
+        output = self._output_stream()
+        output.write(str)
+
+    def _writeln(str):
+        output = self._output_stream()
+        output.writeln(str)
+
     def startTest(self, test):
-        self._stream.write(self.getDescription(test))
-        self._stream.write(" ... ")
-        self._stream.flush()
+        self._write(self.getDescription(test))
+        self._write(" ... ")
 
     def addSuccess(self, test):
         self.addResult("success", test)
-        self._stream.writeln("ok")
+        self._writeln("ok")
 
     def addError(self, test, err):
         self.addResult("error", test, err)
-        self._stream.writeln("ERROR")
+        self._writeln("ERROR")
 
     def addFailure(self, test, err):
         self.addResult("failure", test, err)
-        self._stream.writeln("FAIL")
+        self._writeln("FAIL")
 
     def addSkip(self, test, reason):
         self.addResult("skip", test, reason)
-        self._stream.writeln("skipped {0!r}".format(reason))
+        self._writeln("skipped {0!r}".format(reason))
 
     def addExpectedFailure(self, test, err):
         self.addResult("expected_failure", test, err)
-        self._stream.writeln("expected failure")
+        self._writeln("expected failure")
 
     def addUnexpectedSuccess(self, test):
         self.addResult("unexpected_success", test)
-        self._stream.writeln("unexpected success")
+        self._writeln("unexpected success")
 

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 try:
+    # for PyPy
     from _continuation import continulet
 except ImportError:
+    # for stackless python
     from continulet import continulet
 import os
 import pickle

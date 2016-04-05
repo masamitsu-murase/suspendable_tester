@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import suspendable_runner
+
 try:
     # for PyPy
     from _continuation import continulet
@@ -20,7 +22,10 @@ class _RunnerInterface:
 
 def _run_test(con, test_func):
     runner = _RunnerInterface(con)
-    test_func(runner)
+    result = suspendable_runner.SuspendableTestResult()
+    result.runner = runner
+    print("_run_test: %d" % id(runner))
+    test_func(result)
     return ("finish", None)
 
 

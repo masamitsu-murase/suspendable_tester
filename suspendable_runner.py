@@ -15,6 +15,7 @@ class SuspendableTestResult(object):
     def __init__(self, stream_type="stdout", filename=None):
         self.shouldStop = False
         self.failFast = False
+        self.runner = None
 
         self._stream_type = stream_type
         self._results = []
@@ -59,9 +60,12 @@ class SuspendableTestResult(object):
     def _outputResult(self):
         pass
 
-    def __getstate__():
-        return { "_stream_type": self._stream_type,
-                 "_result": self._results,
+    def __getstate__(self):
+        return { "shouldStop": self.shouldStop,
+                 "failFast": self.failFast,
+                 "runner": self.runner,
+                 "_stream_type": self._stream_type,
+                 "_results": self._results,
                  "filename": self.filename }
 
     def addResult(self, type, test, err=None):

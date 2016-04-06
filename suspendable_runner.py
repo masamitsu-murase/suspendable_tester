@@ -2,25 +2,22 @@
 import sys
 import traceback
 
-class SuspendableTestRunner(object):
-    def __init__(self):
-        pass
-
-    def run(self, test):
-        result = SuspendableTestResult()
-        test(result)
-
-
 class SuspendableTestResult(object):
     def __init__(self, stream_type="stdout", filename=None):
         self.shouldStop = False
         self.failFast = False
-        self.runner = None
+        self.suspendable_runner = None
 
         self._stream_type = stream_type
         self._results = []
         self._file = None
         self.filename = filename
+
+    def before_suspend(self, info):
+        pass
+
+    def after_suspend(self, info):
+        pass
 
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]
@@ -63,7 +60,7 @@ class SuspendableTestResult(object):
     def __getstate__(self):
         return { "shouldStop": self.shouldStop,
                  "failFast": self.failFast,
-                 "runner": self.runner,
+                 "suspendable_runner": self.suspendable_runner,
                  "_stream_type": self._stream_type,
                  "_results": self._results,
                  "filename": self.filename }

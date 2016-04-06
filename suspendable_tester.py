@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import suspendable_runner
-
 try:
     # for PyPy
     from _continuation import continulet
@@ -10,6 +8,19 @@ except ImportError:
     from continulet import continulet
 import os
 import pickle
+import unittest
+import suspendable_runner
+
+class TestCase(unittest.TestCase):
+    def run(self, result):
+        self.__result = result
+        self.__suspendable_runner = result.suspendable_runner
+        super(TestCase, self).run(result)
+
+    def suspend(self, info=None):
+        self.__result.before_suspend(info)
+        self.__suspendable_runner.suspend(info)
+        self.__result.after_suspend(info)
 
 
 class _RunnerInterface:
@@ -21,10 +32,9 @@ class _RunnerInterface:
 
 
 def _run_test(con, test_func):
-    runner = _RunnerInterface(con)
+    ri = _RunnerInterface(con)
     result = suspendable_runner.SuspendableTestResult()
-    result.runner = runner
-    print("_run_test: %d" % id(runner))
+    result.suspendable_runner = ri
     test_func(result)
     return ("finish", None)
 

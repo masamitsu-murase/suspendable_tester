@@ -14,13 +14,27 @@ class SuspendableTestResult(object):
         self.filename = filename
 
     def before_suspend(self, info):
-        pass
+        self._writeln("Suspend...")
 
     def after_suspend(self, info):
-        pass
+        self._writeln("=" * 70)
+        self._writeln("Current results:")
+        for result in self._results:
+            self.show_result(result)
+        self._writeln("=" * 70)
 
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]
+
+    def show_result(self, result):
+        result_type = result[0]
+        if result_type in { "success", "expected_failure", "skip" }:
+            ok = True
+        else:
+            ok = False
+        self._writeln(result_type.ljust(7, " ") + ": " + str(result[1]))
+        if not ok:
+            self._writeln(result[2])
 
     @property
     def errors(self):
@@ -57,13 +71,13 @@ class SuspendableTestResult(object):
     def _outputResult(self):
         pass
 
-    def __getstate__(self):
-        return { "shouldStop": self.shouldStop,
-                 "failFast": self.failFast,
-                 "suspendable_runner": self.suspendable_runner,
-                 "_stream_type": self._stream_type,
-                 "_results": self._results,
-                 "filename": self.filename }
+    # def __getstate__(self):
+    #     return { "shouldStop": self.shouldStop,
+    #              "failFast": self.failFast,
+    #              "suspendable_runner": self.suspendable_runner,
+    #              "_stream_type": self._stream_type,
+    #              "_results": self._results,
+    #              "filename": self.filename }
 
     def addResult(self, type, test, err=None):
         self._results.append((type, test, err))
@@ -92,8 +106,8 @@ class SuspendableTestResult(object):
         output.write(str + "\n")
 
     def startTest(self, test):
-        self._write(self.getDescription(test))
-        self._write(" ... ")
+        self._writeln(self.getDescription(test))
+        self._write(" => ")
 
     def stopTest(self, test):
         pass
@@ -111,6 +125,7 @@ class SuspendableTestResult(object):
     def addError(self, test, err):
         self.addResult("error", test, err)
         self._writeln("ERROR")
+        self._writeln(self._exc_info_to_string(err, test))
 
     def addFailure(self, test, err):
         self.addResult("failure", test, err)
@@ -142,11 +157,9 @@ class SuspendableTestResult(object):
         if exctype is test.failureException:
             # Skip assert*() traceback levels
             length = self._count_relevant_tb_levels(tb)
+            msgLines = traceback.format_exception(exctype, value, tb, length)
         else:
-            length = None
-        tb_e = traceback.TracebackException(
-            exctype, value, tb, limit=length, capture_locals=self.tb_locals)
-        msgLines = list(tb_e.format())
+            msgLines = traceback.format_exception(exctype, value, tb)
 
         return ''.join(msgLines)
 

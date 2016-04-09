@@ -1,22 +1,29 @@
 
-import unittest
-import suspendable_runner
-import suspendable_tester
+import suspendable_unittest
+#import windows_suspender
 
-class SampleTest(suspendable_tester.TestCase):
+import time
+
+
+class SampleTest(suspendable_unittest.TestCase):
     def test_sample1(self):
-        for i in range(2):
-            self.assertEqual("abc", "abc")
-            self.suspend()
-            self.assertEqual("abc", "abc")
+        for x in range(2):
+            start = time.time()
+            self.shutdown(1)
+            end = time.time()
+            self.assertTrue(start + 1 < end, "start should be less than end")
 
     def test_sample2(self):
-        self.suspend()
-        self.assertEqual("abc", "abc")
+        start = time.time()
+        self.shutdown(1)
+        end = time.time()
+        self.assertTrue(start + 1 < end, "start should be less than end")
 
-    def test_sample3(self):
-        self.assertEqual("abc", "abc")
+if __name__ == "__main__":
+    # suspendable_unittest.main(windows_suspender.Suspender())
+    import unittest
+    from suspendable_unittest import dummy_suspender
+    suite = unittest.TestLoader().loadTestsFromTestCase(SampleTest)
+    suspendable_unittest.TestRunner().run(suite, dummy_suspender.Suspender())
 
-suite = unittest.TestLoader().loadTestsFromTestCase(SampleTest)
-suspendable_tester.Runner("C:/temp/hoge.bin").run(suite)
 

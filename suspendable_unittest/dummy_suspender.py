@@ -14,7 +14,6 @@ class Suspender(object):
         if info[0] == "shutdown":
             if info[1] is not None:
                 pass
-            print("Shutdown")
             print("Run again")
 
 

@@ -2,6 +2,7 @@
 
 from .testrunner import TestRunner
 from .testcase import TestCase
+from .basesuspender import BaseSuspender
 
 def main(suspender, filename="teststate.bin"):
     import unittest

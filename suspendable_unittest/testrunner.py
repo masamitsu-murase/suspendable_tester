@@ -25,6 +25,7 @@ class TestRunner(object):
     def run(self, test_suite, suspender, filename="teststate.bin"):
         if os.path.exists(filename):
             self.load_file(filename)
+            suspender.after_suspend()
         else:
             self._continulet = continulet(_run_test, test_suite)
         action, info = self.run_continulet()

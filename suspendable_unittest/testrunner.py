@@ -6,20 +6,13 @@ import os
 
 from .testresult import TestResult
 from .continulet import continulet
-
-
-class _RunnerInterface(object):
-    def __init__(self, con):
-        self.__con = con
-
-    def suspend(self, info=None):
-        self.__con.switch(("suspend", info))
+from .suspendforwarder import SuspendForwarder
 
 
 def _run_test(con, test_suite):
-    ri = _RunnerInterface(con)
+    sf = SuspendForwarder(con)
     result = TestResult()
-    result.suspendable_testrunner = ri
+    result.suspend_forwarder = sf
     test_suite(result)
     return ("finish", None)
 

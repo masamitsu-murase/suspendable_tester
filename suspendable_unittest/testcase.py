@@ -13,3 +13,6 @@ class TestCase(unittest.TestCase):
         self.__suspend_forwarder.suspend(info)
         self.__result.after_suspend(info)
 
+    @staticmethod
+    def add_action(method_name, method):
+        setattr(TestCase, method_name, method)

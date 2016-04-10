@@ -9,13 +9,13 @@ class SampleTest(suspendable_unittest.TestCase):
     def test_sample1(self):
         for x in range(2):
             start = time.time()
-            self.shutdown(1)
+            self.shutdown()
             end = time.time()
             self.assertTrue(start + 1 < end, "start should be less than end")
 
     def test_sample2(self):
         start = time.time()
-        self.shutdown(1)
+        self.shutdown()
         end = time.time()
         self.assertTrue(start + 1 < end, "start should be less than end")
 

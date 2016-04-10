@@ -20,10 +20,6 @@ class SampleTest(suspendable_unittest.TestCase):
         self.assertTrue(start + 1 < end, "start should be less than end")
 
 if __name__ == "__main__":
-    # suspendable_unittest.main(windows_suspender.Suspender())
-    import unittest
     from suspendable_unittest import dummy_suspender
-    suite = unittest.TestLoader().loadTestsFromTestCase(SampleTest)
-    suspendable_unittest.TestRunner().run(suite, dummy_suspender.Suspender())
-
+    suspendable_unittest.main(dummy_suspender.Suspender())
 

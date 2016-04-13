@@ -3,6 +3,8 @@
 import sys
 import traceback
 
+__unittest = False
+
 class TestResult(object):
     def __init__(self, stream_type="stdout", filename=None):
         self.shouldStop = False
@@ -12,17 +14,25 @@ class TestResult(object):
         self._stream_type = stream_type
         self._results = []
         self._file = None
+        self._running_test = None
         self.filename = filename
 
     def before_suspend(self, info):
         self._writeln("Suspend...")
 
     def after_suspend(self, info):
-        self._writeln("=" * 70)
-        self._writeln("Current results:")
-        for result in self._results:
-            self.show_result(result)
-        self._writeln("=" * 70)
+        self._writeln("Resume...")
+        if len(self._results) > 0:
+            self._writeln("-" * 70)
+            self._writeln("Current results:")
+            for result in self._results:
+                self.show_result(result)
+            self._writeln("-" * 70)
+            self._writeln("")
+        if self._running_test:
+            self._writeln(self._running_test)
+            self._write(" => ")
+
 
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]
@@ -36,6 +46,14 @@ class TestResult(object):
         self._writeln(result_type.ljust(7, " ") + ": " + str(result[1]))
         if not ok:
             self._writeln(self._exc_info_to_string(result[2], result[1]))
+
+    def show_results(self):
+        self._writeln("")
+        self._writeln("=" * 70)
+        self._writeln("Results:")
+        for result in self._results:
+            self.show_result(result)
+        self._writeln("=" * 70)
 
     @property
     def errors(self):
@@ -107,6 +125,7 @@ class TestResult(object):
         output.write(str + "\n")
 
     def startTest(self, test):
+        self._running_test = self.getDescription(test)
         self._writeln(self.getDescription(test))
         self._write(" => ")
 
@@ -145,8 +164,7 @@ class TestResult(object):
         self._writeln("unexpected success")
 
     def _is_relevant_tb_level(self, tb):
-        # return '__unittest' in tb.tb_frame.f_globals
-        return False
+        return '__unittest' in tb.tb_frame.f_globals
 
     def _exc_info_to_string(self, err, test):
         """Converts a sys.exc_info()-style tuple of values into a string."""

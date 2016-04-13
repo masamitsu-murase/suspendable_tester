@@ -3,11 +3,15 @@
 import pickle
 import zlib
 import os
+import os.path
+import sys
 
 from .testresult import TestResult
 from .continulet import continulet
 from .suspendforwarder import SuspendForwarder
 
+BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
+DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
 
 def _run_test(con, test_suite):
     sf = SuspendForwarder(con)
@@ -22,7 +26,9 @@ class TestRunner(object):
         self._continulet = None
         self._callback = {}
 
-    def run(self, test_suite, suspender, filename="teststate.bin"):
+    def run(self, test_suite, suspender, filename=DEFAULT_STATEFILE_PATH):
+        if not os.path.isabs(filename):
+            filename = os.path.abspath(filename)
         if os.path.exists(filename):
             self.load_file(filename)
             suspender.after_suspend()

@@ -18,6 +18,8 @@ def _run_test(con, test_suite):
     result = TestResult()
     result.suspend_forwarder = sf
     test_suite(result)
+    if hasattr(result, "show_results"):
+        result.show_results()
     return ("finish", None)
 
 

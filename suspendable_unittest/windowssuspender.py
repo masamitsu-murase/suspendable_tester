@@ -48,10 +48,27 @@ class Suspender(suspendable_unittest.BaseSuspender):
             self.suspend(("reboot",))
         self.add_action("reboot", reboot)
 
+        def exec_for_reboot(self, command, expected_exitcode=0):
+            self.suspend(("exec_for_reboot", command, expected_exitcode))
+        self.add_action("exec_for_reboot", exec_for_reboot)
+
+
     def do_suspend(self, info):
         if info[0] == "reboot":
             register_startup()
             system_reboot()
+
+        elif info[0] == "exec_for_reboot":
+            cmd = info[1]
+            expected_exitcode = info[2]
+            register_startup()
+            ret = subprocess.call(cmd)
+            if type(expected_exitcode) == list or type(expected_exitcode) == tuple:
+                if ret in expected_exitcode:
+                    raise subprocess.CalledProcessError(ret, str(cmd))
+            else:
+                if ret != expected_exitcode:
+                    raise subprocess.CalledProcessError(ret, str(cmd))
 
     def after_suspend(self):
         unregister_startup()

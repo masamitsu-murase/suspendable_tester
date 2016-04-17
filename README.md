@@ -1,13 +1,13 @@
 
-# Suspendable Unittest
+# Pausable Unittest
 
 ## Overview
 
 This is a python *unittest* library.
 
-We can use "Suspendable Unittest":  
+We can use "Pausable Unittest":  
 
-* to suspend running test.
+* to pause running test.
 * to resume the test after the system reboots.
 * for power cycling test.
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import suspendable_unittest
+import pausable_unittest
 
-class BaseSuspender(object):
+class BasePauser(object):
     def __init__(self):
         self.add_actions()
 
@@ -10,11 +10,11 @@ class BaseSuspender(object):
         pass
 
     def add_action(self, method_name, method):
-        suspendable_unittest.TestCase.add_action(method_name, method)
+        pausable_unittest.TestCase.add_action(method_name, method)
 
-    def do_suspend(self, info):
+    def do_pause(self, info):
         pass
 
-    def after_suspend(self):
+    def after_pause(self):
         pass
 

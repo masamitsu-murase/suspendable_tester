@@ -1,11 +1,11 @@
 
-import suspendable_unittest
-import suspendable_unittest.dummysuspender
+import pausable_unittest
+import pausable_unittest.dummypauser
 
 import time
 
 
-class SampleTest(suspendable_unittest.TestCase):
+class SampleTest(pausable_unittest.TestCase):
     def test_sample1(self):
         for x in range(2):
             start = time.time()
@@ -20,5 +20,5 @@ class SampleTest(suspendable_unittest.TestCase):
         self.assertTrue(start + 1 < end, "start should be less than end")
 
 if __name__ == "__main__":
-    suspendable_unittest.main(suspendable_unittest.dummysuspender.Suspender())
+    pausable_unittest.main(pausable_unittest.dummypauser.Pauser())
 

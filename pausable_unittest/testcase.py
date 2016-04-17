@@ -5,13 +5,13 @@ import unittest
 class TestCase(unittest.TestCase):
     def run(self, result):
         self.__result = result
-        self.__suspend_forwarder = result.suspend_forwarder
+        self.__pause_forwarder = result.pause_forwarder
         super(TestCase, self).run(result)
 
-    def suspend(self, info=None):
-        self.__result.before_suspend(info)
-        self.__suspend_forwarder.suspend(info)
-        self.__result.after_suspend(info)
+    def pause(self, info=None):
+        self.__result.before_pause(info)
+        self.__pause_forwarder.pause(info)
+        self.__result.after_pause(info)
 
     @staticmethod
     def add_action(method_name, method):

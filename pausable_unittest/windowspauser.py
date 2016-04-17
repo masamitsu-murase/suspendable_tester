@@ -1,17 +1,17 @@
 
-import suspendable_unittest
+import pausable_unittest
 import os
 import os.path
 import sys
 import subprocess
 
-TASK_NAME = "suspendable_unittest"
+TASK_NAME = "pausable_unittest"
 BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
 BAT_PATH = os.path.join(BASE_DIR, "startup.bat")
 BAT_CONTENT = "cd /d \"%~dp0\"\n" + \
-    ('start "suspendable_unittest" "cmd" "/k" "%s" "%s"\n' % (sys.executable, os.path.basename(sys.argv[0])))
+    ('start "pausable_unittest" "cmd" "/k" "%s" "%s"\n' % (sys.executable, os.path.basename(sys.argv[0])))
 
-class Suspender(suspendable_unittest.BaseSuspender):
+class Pauser(pausable_unittest.BasePauser):
     def check_call(self, command):
         subprocess.check_output(command, stderr=subprocess.STDOUT)
 
@@ -42,15 +42,15 @@ class Suspender(suspendable_unittest.BaseSuspender):
 
     def add_actions(self):
         def reboot(self):
-            self.suspend(("reboot",))
+            self.pause(("reboot",))
         self.add_action("reboot", reboot)
 
         def exec_for_reboot(self, command, expected_exitcode=0):
-            self.suspend(("exec_for_reboot", command, expected_exitcode))
+            self.pause(("exec_for_reboot", command, expected_exitcode))
         self.add_action("exec_for_reboot", exec_for_reboot)
 
 
-    def do_suspend(self, info):
+    def do_pause(self, info):
         if info[0] == "reboot":
             self.register_startup()
             self.system_reboot()
@@ -67,6 +67,6 @@ class Suspender(suspendable_unittest.BaseSuspender):
                 if ret != expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
 
-    def after_suspend(self):
+    def after_pause(self):
         self.unregister_startup()
 

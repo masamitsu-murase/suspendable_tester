@@ -9,7 +9,7 @@ class TestResult(object):
     def __init__(self, stream_type="stdout", filename=None):
         self.shouldStop = False
         self.failFast = False
-        self.suspendable_runner = None
+        self.pausable_runner = None
 
         self._stream_type = stream_type
         self._results = []
@@ -17,10 +17,10 @@ class TestResult(object):
         self._running_test = None
         self.filename = filename
 
-    def before_suspend(self, info):
-        self._writeln("Suspend...")
+    def before_pause(self, info):
+        self._writeln("Pause...")
 
-    def after_suspend(self, info):
+    def after_pause(self, info):
         self._writeln("Resume...")
         if len(self._results) > 0:
             self._writeln("-" * 70)
@@ -93,7 +93,7 @@ class TestResult(object):
     # def __getstate__(self):
     #     return { "shouldStop": self.shouldStop,
     #              "failFast": self.failFast,
-    #              "suspendable_runner": self.suspendable_runner,
+    #              "pausable_runner": self.pausable_runner,
     #              "_stream_type": self._stream_type,
     #              "_results": self._results,
     #              "filename": self.filename }

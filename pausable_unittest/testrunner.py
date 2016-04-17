@@ -8,15 +8,15 @@ import sys
 
 from .testresult import TestResult
 from .continulet import continulet
-from .suspendforwarder import SuspendForwarder
+from .pauseforwarder import PauseForwarder
 
 BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
 DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
 
 def _run_test(con, test_suite):
-    sf = SuspendForwarder(con)
+    sf = PauseForwarder(con)
     result = TestResult()
-    result.suspend_forwarder = sf
+    result.pause_forwarder = sf
     test_suite(result)
     if hasattr(result, "show_results"):
         result.show_results()
@@ -28,21 +28,29 @@ class TestRunner(object):
         self._continulet = None
         self._callback = {}
 
-    def run(self, test_suite, suspender, filename=DEFAULT_STATEFILE_PATH):
+    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH):
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
-        if os.path.exists(filename):
-            self.load_file(filename)
-            suspender.after_suspend()
-        else:
-            self._continulet = continulet(_run_test, test_suite)
-        action, info = self.run_continulet()
-        if action == "suspend":
-            self.save_state(filename)
-            suspender.do_suspend(info)
-        elif action == "finish":
-            if hasattr(suspender, "do_finish"):
-                suspender.do_finish()
+
+        while True:
+            exc = None
+            if os.path.exists(filename):
+                self.load_file(filename)
+                pauser.after_pause()
+            else:
+                self._continulet = continulet(_run_test, test_suite)
+            action, info = self.run_continulet(exc)
+            try:
+                if action == "pause":
+                    self.save_state(filename)
+                    pauser.do_pause(info)
+                elif action == "finish":
+                    if hasattr(pauser, "do_finish"):
+                        pauser.do_finish()
+            except:
+                exc = sys.exc_info()[1]
+            else:
+                break
 
     def load_file(self, filename):
         try:
@@ -69,10 +77,11 @@ class TestRunner(object):
         else:
             self._callback[action] = [ function ]
 
-    def run_continulet(self):
+    def run_continulet(self, exc):
         while True:
-            action, info = self._continulet.switch()
+            action, info = self._continulet.switch(exc)
+            exc = None
             self.exec_callback(action, info)
-            if action in ("finish", "suspend"):
+            if action in ("finish", "pause"):
                 return (action, info)
 

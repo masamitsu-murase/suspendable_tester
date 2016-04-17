@@ -1,17 +1,17 @@
 
-import suspendable_unittest
+import pausable_unittest
 
-class Suspender(suspendable_unittest.BaseSuspender):
+class Pauser(pausable_unittest.BasePauser):
     def add_actions(self):
         def shutdown(self, wake_after_sec=None):
-            self.suspend(("shutdown", wake_after_sec))
+            self.pause(("shutdown", wake_after_sec))
         self.add_action("shutdown", shutdown)
 
         def reboot(self):
-            self.suspend(("reboot",))
+            self.pause(("reboot",))
         self.add_action("reboot", reboot)
 
-    def do_suspend(self, info):
+    def do_pause(self, info):
         if info[0] == "shutdown":
             if info[1] is not None:
                 pass

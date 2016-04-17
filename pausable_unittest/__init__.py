@@ -2,10 +2,10 @@
 
 from .testrunner import TestRunner
 from .testcase import TestCase
-from .basesuspender import BaseSuspender
+from .basepauser import BasePauser
 
-def main(suspender, filename="teststate.bin"):
+def main(pauser, filename="teststate.bin"):
     import unittest
     suite = unittest.TestLoader().loadTestsFromModule(__import__("__main__"))
-    TestRunner().run(suite, suspender, filename)
+    TestRunner().run(suite, pauser, filename)
 

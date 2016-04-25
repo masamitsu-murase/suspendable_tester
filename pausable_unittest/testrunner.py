@@ -32,8 +32,8 @@ class TestRunner(object):
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
 
+        exc = None
         while True:
-            exc = None
             if os.path.exists(filename):
                 self.load_file(filename)
                 pauser.after_pause()

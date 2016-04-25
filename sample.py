@@ -15,7 +15,7 @@ class SampleTest(pausable_unittest.TestCase):
 
     def test_sample2(self):
         start = time.time()
-        self.reboot()
+        self.shutdown()
         end = time.time()
         self.assertTrue(start + 1 < end, "start should be less than end")
 

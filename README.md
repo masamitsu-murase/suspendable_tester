@@ -11,9 +11,43 @@ We can use "Pausable Unittest":
 * to resume the test after the system reboots.
 * for power cycling test.
 
-## Note
-
 "Stackless Python" or PyPy is required.
+
+## Sample
+
+### Reboot test on EFI Shell
+
+You can write your test script as follows:
+
+```python
+# sample_efi.py
+
+import pausable_unittest
+import pausable_unittest.efipauser
+
+class SampleTest(pausable_unittest.TestCase):
+    def test_reboot(self):
+        # Check "reset" command.
+        self.exec_for_reboot("reset")
+        # Then, the system reboots and continues to run this script.
+
+        # Check "reset -w" command.
+        self.exec_for_reboot("reset -w")
+
+        for v in [ 0x06, 0x0E ]:
+            self.exec_for_reboot("MM CF9 %X -IO -w 1 -n" % v)
+
+        self.assertTrue(True, "All reboots are working fine.")
+
+if __name__ == "__main__":
+    pausable_unittest.main(pausable_unittest.efipauser.Pauser())
+```
+
+The, run the script.
+
+```shell
+> python.efi sample_efi.py
+```
 
 ## License
 

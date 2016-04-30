@@ -1,0 +1,4 @@
+language: python
+python:
+  - "pypy"
+script: sh -e test/test.sh

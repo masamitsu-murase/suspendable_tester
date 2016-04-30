@@ -1,0 +1,11 @@
+test_reboot (__main__.SampleTest)
+ => Pause...
+Reboot!
+Resume...
+test_reboot (__main__.SampleTest)
+ => ok
+
+======================================================================
+Results:
+success: test_reboot (__main__.SampleTest)
+======================================================================

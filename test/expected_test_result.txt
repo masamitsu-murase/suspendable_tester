@@ -1,0 +1,31 @@
+test_exec_for_reboot (__main__.SampleTest)
+ => Pause...
+test_exec_for_reboot 0
+Resume...
+test_exec_for_reboot (__main__.SampleTest)
+ => Pause...
+test_exec_for_reboot 1
+Resume...
+test_exec_for_reboot (__main__.SampleTest)
+ => Pause...
+test_exec_for_reboot 2
+Resume...
+test_exec_for_reboot (__main__.SampleTest)
+ => ok
+test_reboot (__main__.SampleTest)
+ => Pause...
+Reboot!
+Resume...
+----------------------------------------------------------------------
+Current results:
+success: test_exec_for_reboot (__main__.SampleTest)
+----------------------------------------------------------------------
+
+test_reboot (__main__.SampleTest)
+ => ok
+
+======================================================================
+Results:
+success: test_exec_for_reboot (__main__.SampleTest)
+success: test_reboot (__main__.SampleTest)
+======================================================================

@@ -3,7 +3,7 @@
 # This script must be called from the root directory.
 cd test
 
-rm -f test_result.txt
+rm -f test_result.txt teststate.bin
 
 for i in {0..4}
 do

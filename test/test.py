@@ -22,7 +22,7 @@ class SampleTest(pausable_unittest.TestCase):
     def test_exec_for_reboot(self):
         for i in range(3):
             start = time.time()
-            self.exec_for_reboot("echo exec_for_reboot: %d" % i)
+            self.exec_for_reboot("bash -c 'echo exec_for_reboot %d'" % i)
             end = time.time()
             margin = 0.5
             self.assertTrue(start + 1 - margin < end, "%f + 2 - %f should be less than %f." % (start, margin, end))

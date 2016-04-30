@@ -1,4 +1,6 @@
 
+import os
+import sys
 import subprocess
 import pausable_unittest
 
@@ -18,6 +20,9 @@ class Pauser(pausable_unittest.BasePauser):
 
 
     def do_pause(self, info):
+        # for consistent output of travis ci.
+        sys.stdout.flush()
+
         if info[0] == "shutdown":
             if info[1] is not None:
                 pass
@@ -27,7 +32,7 @@ class Pauser(pausable_unittest.BasePauser):
         elif info[0] == "exec_for_reboot":
             cmd = info[1]
             expected_exitcode = info[2]
-            ret = subprocess.call(cmd)
+            ret = os.system(cmd)
             if type(expected_exitcode) == list or type(expected_exitcode) == tuple:
                 if ret in expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))

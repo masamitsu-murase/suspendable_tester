@@ -7,11 +7,11 @@ rm -f test_result.txt teststate.bin
 
 for i in {0..4}
 do
-    pypy test.py | tee -a test_result.txt
+    pypy --jit off test.py | tee -a test_result.txt
     sleep 1
 done
 
-pypy check_result.py
+pypy --jit off check_result.py
 
 echo ""
 echo OK

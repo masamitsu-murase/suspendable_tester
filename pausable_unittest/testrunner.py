@@ -7,7 +7,10 @@ import os.path
 import sys
 
 from .testresult import TestResult
-from .continulet import continulet
+try:
+    from _continuation import continulet
+except:
+    from .continulet import continulet
 from .pauseforwarder import PauseForwarder
 
 BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))

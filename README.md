@@ -1,6 +1,8 @@
 
 # Pausable Unittest
 
+[![Build Status](https://travis-ci.org/masamitsu-murase/pausable_unittest.svg?branch=master)](https://travis-ci.org/masamitsu-murase/pausable_unittest)
+
 ## Overview
 
 This is a python *unittest* library.

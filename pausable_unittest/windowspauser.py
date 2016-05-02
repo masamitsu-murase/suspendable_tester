@@ -56,16 +56,36 @@ class Pauser(pausable_unittest.BasePauser):
             self.unregister_startup()
 
 
+    def nonadmin_startup_filepath(self):
+        startup_folder = os.path.join(os.environ["APPDATA"], 'Microsoft\Windows\Start Menu\Programs\Startup')
+        return os.path.join(startup_folder, "pausable_unittest.bat")
+
+
+    def register_nonadmin_startup(self):
+        path = self.nonadmin_startup_filepath()
+        try:
+            with open(path, "w") as f:
+                f.write('"%s"' % BAT_PATH)
+        except:
+            if os.path.exists(path):
+                os.remove(path)
 
     def register_startup(self):
         with open(BAT_PATH, "w") as f:
             f.write(BAT_CONTENT)
         if self.is_admin():
             self.register_admin_startup()
+        else:
+            self.register_nonadmin_startup()
 
     def unregister_startup(self):
         try:
-            self.check_call([ "schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F" ])
+            if self.is_admin():
+                self.check_call([ "schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F" ])
+            else:
+                path = self.nonadmin_startup_filepath()
+                if os.path.exists(path):
+                    os.remove(path)
         except:
             pass
 

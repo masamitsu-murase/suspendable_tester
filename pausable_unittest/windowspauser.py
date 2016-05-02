@@ -4,6 +4,7 @@ import os
 import os.path
 import sys
 import subprocess
+import tempfile
 
 TASK_NAME = "pausable_unittest"
 BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -15,6 +16,9 @@ class Pauser(pausable_unittest.BasePauser):
     def check_call(self, command):
         subprocess.check_output(command, stderr=subprocess.STDOUT)
 
+    def check_output(self, command):
+        return subprocess.check_output(command, stderr=subprocess.STDOUT)
+
     def is_admin(self):
         try:
             self.check_call([ "net", "session" ])
@@ -25,18 +29,63 @@ class Pauser(pausable_unittest.BasePauser):
     def system_reboot(self):
         self.check_call([ "shutdown.exe", "/r", "/t", "5" ])
 
+    def register_admin_startup(self):
+        try:
+            user = os.environ["USERNAME"]
+            command = [ "schtasks.exe", "/Create", "/RU", user, "/SC", "ONLOGON", "/TN", TASK_NAME, "/TR", BAT_PATH, "/RL", "HIGHEST" ]
+            self.check_call(command)
+
+            command = [ "schtasks.exe", "/Query", "/TN", TASK_NAME, "/XML", "ONE" ]
+            xml = self.check_output(command)
+            xml = xml.replace("<DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>",
+                              "<DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>")
+            xml = xml.replace("<StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>",
+                              "<StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>")
+
+            with tempfile.NamedTemporaryFile(dir=BASE_DIR, delete=False) as xml_file:
+                xml_file.write(xml)
+                xml_file.close()
+                xml_filename = xml_file.name
+
+            try:
+                command = [ "schtasks.exe", "/Create", "/TN", TASK_NAME, "/F", "/XML", xml_filename ]
+                self.check_call(command)
+            finally:
+                os.remove(xml_filename)
+        except:
+            self.unregister_startup()
+
+
+    def nonadmin_startup_filepath(self):
+        startup_folder = os.path.join(os.environ["APPDATA"], 'Microsoft\Windows\Start Menu\Programs\Startup')
+        return os.path.join(startup_folder, "pausable_unittest.bat")
+
+
+    def register_nonadmin_startup(self):
+        path = self.nonadmin_startup_filepath()
+        try:
+            with open(path, "w") as f:
+                f.write('"%s"' % BAT_PATH)
+        except:
+            if os.path.exists(path):
+                os.remove(path)
+
     def register_startup(self):
-        user = os.environ["USERNAME"]
         with open(BAT_PATH, "w") as f:
             f.write(BAT_CONTENT)
-        command = [ "schtasks.exe", "/Create", "/RU", user, "/SC", "ONLOGON", "/TN", TASK_NAME, "/TR", BAT_PATH ]
         if self.is_admin():
-            command.extend([ "/RL", "HIGHEST" ])
-        self.check_call(command)
+            self.register_admin_startup()
+        else:
+            self.register_nonadmin_startup()
 
     def unregister_startup(self):
         try:
-            self.check_call([ "schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F" ])
+            if self.is_admin():
+                self.check_call([ "schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F" ])
+            else:
+                path = self.nonadmin_startup_filepath()
+                if os.path.exists(path):
+                    os.remove(path)
         except:
             pass
 

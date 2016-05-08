@@ -34,3 +34,6 @@ class continulet(object):
         self._channel.send(data)
         return self._channel.receive()
 
+    def restorable(self):
+        return self._tasklet.restorable
+

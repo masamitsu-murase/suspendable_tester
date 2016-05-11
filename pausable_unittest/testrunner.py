@@ -49,7 +49,10 @@ class TestRunner(object):
             action, info = self.run_continulet(exc)
 
             if action == "pause":
-                self.save_state(filename)
+                try:
+                    self.save_state(filename)
+                except:
+                    return
 
             try:
                 if action == "pause":

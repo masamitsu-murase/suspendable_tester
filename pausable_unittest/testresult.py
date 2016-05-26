@@ -2,6 +2,8 @@
 
 import sys
 import traceback
+import logging
+from .picklablelogger import PicklableHandler
 
 __unittest = False
 
@@ -10,6 +12,10 @@ class TestResult(object):
         self.shouldStop = False
         self.failFast = False
         self.pausable_runner = None
+
+        self.logger = logging.getLogger("pasable_unittest")
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.addHandler(PicklableHandler())
 
         self._stream_type = stream_type
         self._results = []
@@ -21,7 +27,10 @@ class TestResult(object):
         self._writeln("Pause...")
 
     def after_pause(self, info):
+        self.logger.handlers[0].print_all_logs()
+
         self._writeln("Resume...")
+
         if len(self._results) > 0:
             self._writeln("-" * 70)
             self._writeln("Current results:")
@@ -31,7 +40,6 @@ class TestResult(object):
             self._writeln("")
         if self._running_test:
             self._writeln(self._running_test)
-            self._write(" => ")
 
 
     def _filterResult(self, type):
@@ -127,7 +135,6 @@ class TestResult(object):
     def startTest(self, test):
         self._running_test = self.getDescription(test)
         self._writeln(self.getDescription(test))
-        self._write(" => ")
 
     def stopTest(self, test):
         pass

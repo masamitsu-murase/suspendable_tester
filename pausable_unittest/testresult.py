@@ -8,13 +8,13 @@ from .picklablelogger import PicklableHandler
 __unittest = False
 
 class TestResult(object):
-    def __init__(self, stream_type="stdout", filename=None):
+    def __init__(self, stream_type="stdout", filename=None, loglevel=logging.DEBUG):
         self.shouldStop = False
         self.failFast = False
         self.pausable_runner = None
 
         self.logger = logging.getLogger("pasable_unittest")
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(loglevel)
         self.logger.addHandler(PicklableHandler())
 
         self._stream_type = stream_type
@@ -26,7 +26,11 @@ class TestResult(object):
     def before_pause(self, info):
         self._writeln("Pause...")
 
+        self.logger.handlers[0].destroyLock()
+
     def after_pause(self, info):
+        self.logger.handlers[0].createLock()
+
         self.logger.handlers[0].print_all_logs()
 
         self._writeln("Resume...")

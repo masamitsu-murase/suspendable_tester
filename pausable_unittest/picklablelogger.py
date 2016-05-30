@@ -10,7 +10,7 @@ class PicklableHandler(logging.Handler):
         self.setFormatter(logging.Formatter(fmt, date_format))
         self.__log_list = []
 
-    def createLock(self):
+    def destroyLock(self):
         self.lock = None
 
     def emit(self, record):

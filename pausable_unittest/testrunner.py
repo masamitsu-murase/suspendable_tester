@@ -13,7 +13,7 @@ except:
     from .continulet import continulet
 from .pauseforwarder import PauseForwarder
 
-BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
+BASE_DIR = os.path.abspath(os.getcwd())
 DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
 
 def _run_test(con, test_suite):

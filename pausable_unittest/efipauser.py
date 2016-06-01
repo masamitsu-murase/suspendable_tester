@@ -5,15 +5,16 @@ import os.path
 import sys
 import shutil
 
-BASE_DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
+BASE_DIR = os.path.abspath(os.getcwd())
 STARTUP_PATH = os.path.join(os.path.splitdrive(BASE_DIR)[0], "\\startup.nsh")
 TEMP_STARTUP_PATH = os.path.join(BASE_DIR, "startup.bak")
+SCRIPT_PATH = os.path.relpath(sys.argv[0])
 STARTUP_CONTENT = \
     "@set -v efishellmode 1.1.2\n" + \
     "@echo -off\n" + \
     os.path.splitdrive(BASE_DIR)[0] + "\n" + \
     "cd " + BASE_DIR.replace("/", "\\") + "\n" + \
-    (sys.executable + " " + os.path.basename(sys.argv[0])).replace("/", "\\")
+    (sys.executable + " " + SCRIPT_PATH).replace("/", "\\")
 
 
 class CalledProcessError(Exception):

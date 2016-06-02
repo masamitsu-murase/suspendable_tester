@@ -1,7 +1,7 @@
 
 import sys
 import os.path
-ROOT_DIR = os.path.abspath(os.path.join(os.path.basename(sys.argv[0]), os.pardir, os.pardir))
+ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), os.pardir))
 sys.path.append(ROOT_DIR)
 
 import pausable_unittest
@@ -17,6 +17,20 @@ class SampleTest(pausable_unittest.TestCase):
         margin = 2
         self.assertTrue(start + 1 < end, "%f + 1 should be less than %f." % (start, end))
         self.assertTrue(start + 1 + margin > end, "%f + 1 + %f should be more than %f." % (start, margin, end))
+
+    def test_chdir(self):
+        dir1 = os.path.abspath(os.getcwd())
+        self.reboot()
+        dir2 = os.path.abspath(os.getcwd())
+        self.assertTrue(dir1, dir2)
+
+        os.chdir(os.path.pardir)
+        dir3 = os.path.abspath(os.getcwd())
+        self.reboot()
+        dir4 = os.path.abspath(os.getcwd())
+        self.assertTrue(dir3, dir4)
+
+        os.chdir(dir1)
 
     def test_exec_for_reboot(self):
         for i in range(3):

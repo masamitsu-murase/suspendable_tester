@@ -42,7 +42,7 @@ class TestResult(object):
         if len(self._results) > 0:
             self._writeln("Current results:")
             for result in self._results:
-                self.show_result(result)
+                self._writeln(self.result_text(result))
             self._writeln("-" * 70)
             self._writeln("")
         if self._running_test:
@@ -52,23 +52,25 @@ class TestResult(object):
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]
 
-    def show_result(self, result):
+    def result_text(self, result):
         result_type = result[0]
         if result_type in { "success", "expected_failure", "skip" }:
             ok = True
         else:
             ok = False
-        self._writeln(result_type.ljust(7, " ") + ": " + str(result[1]))
+
+        text = result_type.ljust(7, " ") + ": " + str(result[1])
         if not ok:
-            self._writeln(self._exc_info_to_string(result[2], result[1]))
+            text += self._exc_info_to_string(result[2], result[1])
+        return text
 
     def show_results(self):
-        self._writeln("")
-        self._writeln("=" * 70)
-        self._writeln("Results:")
+        self.raw_log("")
+        self.raw_log("=" * 70)
+        self.raw_log("Results:")
         for result in self._results:
-            self.show_result(result)
-        self._writeln("=" * 70)
+            self.raw_log(self.result_text(result))
+        self.raw_log("=" * 70)
 
     @property
     def errors(self):
@@ -135,7 +137,7 @@ class TestResult(object):
     def startTest(self, test):
         desc = self.getDescription(test)
         self._running_test = desc
-        self.logger.info(desc)
+        self.raw_log(desc + " => Start")
 
     def stopTest(self, test):
         pass

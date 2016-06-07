@@ -3,7 +3,7 @@
 import sys
 import traceback
 import logging
-from .picklablelogger import PicklableHandler
+import picklablelogger
 
 __unittest = False
 
@@ -15,35 +15,38 @@ class TestResult(object):
 
         self.logger = logging.getLogger("pasable_unittest")
         self.logger.setLevel(loglevel)
-        self.logger.addHandler(PicklableHandler())
+        self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
+        if filename != False:
+            self.logger.addHandler(picklablelogger.PicklableFileHandler(filename))
 
         self._stream_type = stream_type
         self._results = []
         self._file = None
         self._running_test = None
-        self.filename = filename
 
     def before_pause(self, info):
-        self._writeln("Pause...")
+        self.raw_log("Pause...")
 
-        self.logger.handlers[0].destroyLock()
+        for handler in self.logger.handlers:
+            if hasattr(handler, "prepare_for_pause"):
+                handler.prepare_for_pause()
 
     def after_pause(self, info):
-        self.logger.handlers[0].createLock()
+        for handler in self.logger.handlers:
+            if hasattr(handler, "resume_from_pause"):
+                handler.resume_from_pause()
 
-        self.logger.handlers[0].print_all_logs()
+        self.raw_log("Resume...")
 
-        self._writeln("Resume...")
-
+        self._writeln("-" * 70)
         if len(self._results) > 0:
-            self._writeln("-" * 70)
             self._writeln("Current results:")
             for result in self._results:
                 self.show_result(result)
             self._writeln("-" * 70)
             self._writeln("")
         if self._running_test:
-            self._writeln(self._running_test)
+            self._writeln(self._running_test + " is running.")
 
 
     def _filterResult(self, type):
@@ -102,14 +105,6 @@ class TestResult(object):
     def _outputResult(self):
         pass
 
-    # def __getstate__(self):
-    #     return { "shouldStop": self.shouldStop,
-    #              "failFast": self.failFast,
-    #              "pausable_runner": self.pausable_runner,
-    #              "_stream_type": self._stream_type,
-    #              "_results": self._results,
-    #              "filename": self.filename }
-
     def addResult(self, type, test, err=None):
         self._results.append((type, test, err))
 
@@ -128,17 +123,19 @@ class TestResult(object):
         else:
             raise "Invalid _stream_type"
 
-    def _write(self, str):
-        output = self._output_stream()
-        output.write(str)
+    def raw_log(self, text):
+        for handler in self.logger.handlers:
+            if hasattr(handler, "raw_writeln"):
+                handler.raw_writeln(text)
 
     def _writeln(self, str):
         output = self._output_stream()
         output.write(str + "\n")
 
     def startTest(self, test):
-        self._running_test = self.getDescription(test)
-        self._writeln(self.getDescription(test))
+        desc = self.getDescription(test)
+        self._running_test = desc
+        self.logger.info(desc)
 
     def stopTest(self, test):
         pass
@@ -151,28 +148,28 @@ class TestResult(object):
 
     def addSuccess(self, test):
         self.addResult("success", test)
-        self._writeln("ok")
+        self.raw_log(self._running_test + " => ok")
 
     def addError(self, test, err):
         self.addResult("error", test, err)
-        self._writeln("ERROR")
-        self._writeln(self._exc_info_to_string(err, test))
+        self.raw_log(self._running_test + " => ERROR")
+        self.raw_log(self._exc_info_to_string(err, test))
 
     def addFailure(self, test, err):
         self.addResult("failure", test, err)
-        self._writeln("FAIL")
+        self.raw_log(self._running_test + " => FAIL")
 
     def addSkip(self, test, reason):
         self.addResult("skip", test, reason)
-        self._writeln("skipped {0!r}".format(reason))
+        self.raw_log(self._running_test + " => skipped {0!r}".format(reason))
 
     def addExpectedFailure(self, test, err):
         self.addResult("expected_failure", test, err)
-        self._writeln("expected failure")
+        self.raw_log(self._running_test + " => expected failure")
 
     def addUnexpectedSuccess(self, test):
         self.addResult("unexpected_success", test)
-        self._writeln("unexpected success")
+        self.raw_log(self._running_test + " => unexpected success")
 
     def _is_relevant_tb_level(self, tb):
         return '__unittest' in tb.tb_frame.f_globals

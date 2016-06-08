@@ -25,7 +25,7 @@ class TestResult(object):
         self._running_test = None
 
     def before_pause(self, info):
-        self.raw_log("Pause...")
+        self.raw_log("[pausable_unittest] Pause...")
 
         for handler in self.logger.handlers:
             if hasattr(handler, "prepare_for_pause"):
@@ -36,7 +36,7 @@ class TestResult(object):
             if hasattr(handler, "resume_from_pause"):
                 handler.resume_from_pause()
 
-        self.raw_log("Resume...")
+        self.raw_log("[pausable_unittest] Resume...")
 
         self._writeln("-" * 70)
         if len(self._results) > 0:
@@ -137,7 +137,7 @@ class TestResult(object):
     def startTest(self, test):
         desc = self.getDescription(test)
         self._running_test = desc
-        self.raw_log(desc + " => Start")
+        self.raw_log(desc + " => start")
 
     def stopTest(self, test):
         pass

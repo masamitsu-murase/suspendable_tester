@@ -12,7 +12,7 @@ BAT_PATH = os.path.join(BASE_DIR, "startup.bat")
 PYTHON_PATH = os.path.abspath(sys.executable)
 SCRIPT_PATH = os.path.relpath(sys.argv[0])
 BAT_CONTENT = "cd /d \"%~dp0\"\n" + \
-    ('start "pausable_unittest" "cmd" "/k" "%s" "%s"\n' % (PYTHON_PATH, SCRIPT_PATH))
+    ('start "pausable_unittest" cmd /k ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
 
 class Pauser(pausable_unittest.BasePauser):
     def check_call(self, command):

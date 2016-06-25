@@ -113,16 +113,7 @@ pausable_unittest.TestRunner().run(suite, efipauser.Pauser())
 
 MIT License に基づく。
 
-The MIT License (MIT)
-
-Copyright (c) 2016 Masamitsu MURASE
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+[English README](https://github.com/masamitsu-murase/pausable_unittest/blob/master/README.md#license) を参照すること。
 
 ## 内部実装仕様の詳細
 
@@ -150,10 +141,6 @@ Pausable Unittest の「テストを途中で中断できる」動作は、 `Pau
   `Pauser` は中断用のメソッドを `TestCase` のインスタンスメソッドとして追加する。
 
 
---------
-
-以下、 T.B.D.
-
 以下、各クラスについて詳細を述べる。
 
 ### TestCase
@@ -172,5 +159,17 @@ class SampleTest(pausable_unittest.TestCase):
 
 unittest の `TestCase` との違いは、「`Pauser` が追加したメソッドを呼び出せるか」である。  
 
+(T.B.D.)
+
 ### Pauser
+
+(T.B.D.)
+
+### TestRunner
+
+(T.B.D.)
+
+### PicklableLogger
+
+(T.B.D.)
 

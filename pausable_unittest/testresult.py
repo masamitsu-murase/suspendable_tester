@@ -3,7 +3,7 @@
 import sys
 import traceback
 import logging
-import .picklablelogger
+from .import picklablelogger
 
 __unittest = False
 

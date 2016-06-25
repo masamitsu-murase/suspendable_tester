@@ -3,6 +3,8 @@
 
 [![Build Status](https://travis-ci.org/masamitsu-murase/pausable_unittest.svg?branch=master)](https://travis-ci.org/masamitsu-murase/pausable_unittest)
 
+[Japanese](https://github.com/masamitsu-murase/pausable_unittest/blob/master/README.ja.md)
+
 ## Overview
 
 This is an extended python *unittest* library.

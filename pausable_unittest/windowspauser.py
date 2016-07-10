@@ -34,7 +34,7 @@ class Pauser(pausable_unittest.BasePauser):
     def register_admin_startup(self):
         try:
             user = os.environ["USERNAME"]
-            command = [ "schtasks.exe", "/Create", "/RU", user, "/SC", "ONLOGON", "/TN", TASK_NAME, "/TR", BAT_PATH, "/RL", "HIGHEST" ]
+            command = [ "schtasks.exe", "/Create", "/RU", user, "/SC", "ONLOGON", "/TN", TASK_NAME, "/TR", BAT_PATH, "/F", "/RL", "HIGHEST" ]
             self.check_call(command)
 
             command = [ "schtasks.exe", "/Query", "/TN", TASK_NAME, "/XML", "ONE" ]

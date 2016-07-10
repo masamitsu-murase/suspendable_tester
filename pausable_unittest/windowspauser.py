@@ -5,6 +5,7 @@ import os.path
 import sys
 import subprocess
 import tempfile
+import ctypes
 
 TASK_NAME = "pausable_unittest"
 BASE_DIR = os.path.abspath(os.getcwd())
@@ -22,11 +23,7 @@ class Pauser(pausable_unittest.BasePauser):
         return subprocess.check_output(command, stderr=subprocess.STDOUT)
 
     def is_admin(self):
-        try:
-            self.check_call([ "net", "session" ])
-            return True
-        except:
-            return False
+        return (ctypes.windll.shell32.IsUserAnAdmin() != 0)
 
     def system_reboot(self):
         self.check_call([ "shutdown.exe", "/r", "/t", "5" ])

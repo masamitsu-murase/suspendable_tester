@@ -3,6 +3,7 @@
 import sys
 import traceback
 import logging
+import time
 from . import picklablelogger
 
 __unittest = False
@@ -25,7 +26,7 @@ class TestResult(object):
         self._running_test = None
 
     def before_pause(self, info):
-        self.raw_log("[pausable_unittest] Pause...")
+        self.logger.info("Pause...")
 
         for handler in self.logger.handlers:
             if hasattr(handler, "prepare_for_pause"):
@@ -36,15 +37,15 @@ class TestResult(object):
             if hasattr(handler, "resume_from_pause"):
                 handler.resume_from_pause()
 
-        self.raw_log("[pausable_unittest] Resume...")
-
         self._writeln("-" * 70)
         if len(self._results) > 0:
             self._writeln("Current results:")
             for result in self._results:
                 self._writeln(self.result_text(result))
             self._writeln("-" * 70)
-            self._writeln("")
+
+        self.logger.info("Resume...")
+
         if self._running_test:
             self._writeln(self._running_test + " is running.")
 
@@ -137,10 +138,13 @@ class TestResult(object):
     def startTest(self, test):
         desc = self.getDescription(test)
         self._running_test = desc
-        self.raw_log(desc + " => start")
+        self._start_time = time.time()
+        self.logger.info("Start %s", desc)
 
     def stopTest(self, test):
-        pass
+        end_time = time.time()
+        time_diff = end_time - self._start_time
+        self.logger.info("End (%fs)", time_diff)
 
     def startTestRun(self, test):
         pass

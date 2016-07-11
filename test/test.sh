@@ -1,6 +1,7 @@
 
-rm -f test/test_result.txt teststate.bin
+rm -f test/test_result.txt teststate.bin command_after_test.txt
 
+# test.py
 for i in {0..6}
 do
     pypy --jit off test/test.py | tee -a test/test_result.txt
@@ -8,6 +9,19 @@ do
 done
 
 pypy --jit off test/check_result.py
+
+
+# test_command_after_test.py
+pypy --jit off test/test_command_after_test.py
+if [ -e command_after_test.txt ]; then
+    exit 1
+fi
+
+pypy --jit off test/test_command_after_test.py
+if [ ! -e command_after_test.txt ]; then
+    exit 1
+fi
+
 
 echo ""
 echo OK

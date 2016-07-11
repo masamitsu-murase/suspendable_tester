@@ -23,7 +23,7 @@ def _run_test(con, test_suite):
     test_suite(result)
     if hasattr(result, "show_results"):
         result.show_results()
-    return ("finish", None)
+    return ("finish", result)
 
 
 class RestorableError(Exception):
@@ -35,7 +35,7 @@ class TestRunner(object):
         self._continulet = None
         self._callback = {}
 
-    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH):
+    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH, command_after_test=None):
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
 
@@ -64,6 +64,9 @@ class TestRunner(object):
                 exc = sys.exc_info()[1]
             else:
                 break
+
+        if action == "finish" and callable(command_after_test):
+            command_after_test({ "result": info })
 
     def load_file(self, filename):
         try:

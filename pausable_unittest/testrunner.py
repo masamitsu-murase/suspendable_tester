@@ -23,6 +23,7 @@ def _run_test(con, test_suite):
     test_suite(result)
     if hasattr(result, "show_results"):
         result.show_results()
+    result.close_logger()
     return ("finish", result)
 
 

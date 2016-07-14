@@ -7,8 +7,8 @@ def format_str(str):
     str = str.replace("\r\n", "\n")
     r = re.compile(r"^\[[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\]", re.MULTILINE)
     str = r.sub("", str)
-    # [2016-07-09T11:58:56]  INFO -- : End (2.593000s)
-    r = re.compile(r"End \([0-9]\.[0-9]+s\)$", re.MULTILINE)
+    # [2016-07-09T11:58:56]  INFO -- : End test..... (2.593000s)
+    r = re.compile(r"End .* \([0-9]\.[0-9]+s\)$", re.MULTILINE)
     str = r.sub("", str)
     return str
 

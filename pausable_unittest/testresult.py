@@ -31,7 +31,10 @@ class TestResult(object):
                 handler.close()
 
     def before_pause(self, info):
-        self.logger.info("Pause...")
+        if self._running_test:
+            self.logger.info("Pause %s...", self._running_test)
+        else:
+            self.logger.info("Pause...")
 
         for handler in self.logger.handlers:
             if hasattr(handler, "prepare_for_pause"):
@@ -49,11 +52,10 @@ class TestResult(object):
                 self._writeln(self.result_text(result))
             self._writeln("-" * 70)
 
-        self.logger.info("Resume...")
-
         if self._running_test:
-            self._writeln(self._running_test + " is running.")
-
+            self.logger.info("Resume %s...", self._running_test)
+        else:
+            self.logger.info("Resume...")
 
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]
@@ -149,7 +151,8 @@ class TestResult(object):
     def stopTest(self, test):
         end_time = time.time()
         time_diff = end_time - self._start_time
-        self.logger.info("End (%fs)", time_diff)
+        desc = self.getDescription(test)
+        self.logger.info("End %s (%fs)", desc, time_diff)
 
     def startTestRun(self, test):
         pass

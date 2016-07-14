@@ -25,6 +25,11 @@ class TestResult(object):
         self._file = None
         self._running_test = None
 
+    def close_logger(self):
+        for handler in self.logger.handlers:
+            if hasattr(handler, "close"):
+                handler.close()
+
     def before_pause(self, info):
         self.logger.info("Pause...")
 

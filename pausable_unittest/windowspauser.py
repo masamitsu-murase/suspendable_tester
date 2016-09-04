@@ -12,8 +12,12 @@ BASE_DIR = os.path.abspath(os.getcwd())
 BAT_PATH = os.path.join(BASE_DIR, "startup.bat")
 PYTHON_PATH = os.path.abspath(sys.executable)
 SCRIPT_PATH = os.path.relpath(sys.argv[0])
-BAT_CONTENT = "cd /d \"%~dp0\"\n" + \
+BAT_CONTENT_CMD_OPEN = "cd /d \"%~dp0\"\n" + \
     ('start "pausable_unittest" cmd /k ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
+BAT_CONTENT_CMD_CLOSE = "cd /d \"%~dp0\"\n" + \
+    ('start "pausable_unittest" cmd /c ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
+
+CMD_OPEN = True
 
 class Pauser(pausable_unittest.BasePauser):
     def check_call(self, command):
@@ -71,7 +75,10 @@ class Pauser(pausable_unittest.BasePauser):
 
     def register_startup(self):
         with open(BAT_PATH, "w") as f:
-            f.write(BAT_CONTENT)
+            if CMD_OPEN:
+                f.write(BAT_CONTENT_CMD_OPEN)
+            else:
+                f.write(BAT_CONTENT_CMD_CLOSE)
         if self.is_admin():
             self.register_admin_startup()
         else:

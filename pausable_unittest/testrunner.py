@@ -42,18 +42,22 @@ class TestRunner(object):
 
         exc = None
         while True:
-            if os.path.exists(filename):
+            if exc:
+                pass
+            elif os.path.exists(filename):
                 self.load_file(filename)
                 pauser.after_pause()
             else:
                 self._continulet = continulet(_run_test, test_suite)
             action, info = self.run_continulet(exc)
+            exc = None
 
             if action == "pause":
                 try:
                     self.save_state(filename)
                 except:
-                    return
+                    exc = sys.exc_info()[1]
+                    continue
 
             try:
                 if action == "pause":
@@ -82,8 +86,8 @@ class TestRunner(object):
         if hasattr(self._continulet, "restorable"):
             if not self._continulet.restorable():
                 raise RestorableError("current tasklet is not restorable")
+        pickled_data = pickle.dumps(self._continulet)
         with open(filename, "wb") as f:
-            pickled_data = pickle.dumps(self._continulet)
             f.write(zlib.compress(pickled_data))
 
     def exec_callback(self, action, info):

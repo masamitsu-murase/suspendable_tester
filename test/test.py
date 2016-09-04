@@ -22,13 +22,13 @@ class SampleTest(pausable_unittest.TestCase):
         dir1 = os.path.abspath(os.getcwd())
         self.reboot()
         dir2 = os.path.abspath(os.getcwd())
-        self.assertTrue(dir1, dir2)
+        self.assertEqual(dir1, dir2)
 
         os.chdir(os.path.pardir)
         dir3 = os.path.abspath(os.getcwd())
         self.reboot()
         dir4 = os.path.abspath(os.getcwd())
-        self.assertTrue(dir3, dir4)
+        self.assertEqual(dir3, dir4)
 
         os.chdir(dir1)
 

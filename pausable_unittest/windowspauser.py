@@ -60,7 +60,7 @@ class Pauser(pausable_unittest.BasePauser):
 
 
     def nonadmin_startup_filepath(self):
-        startup_folder = os.path.join(os.environ["APPDATA"], 'Microsoft\Windows\Start Menu\Programs\Startup')
+        startup_folder = os.path.join(os.environ["APPDATA"], r'Microsoft\Windows\Start Menu\Programs\Startup')
         return os.path.join(startup_folder, "pausable_unittest.bat")
 
 

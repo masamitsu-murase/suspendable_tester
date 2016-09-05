@@ -17,9 +17,11 @@ BAT_CONTENT_CMD_OPEN = "cd /d \"%~dp0\"\n" + \
 BAT_CONTENT_CMD_CLOSE = "cd /d \"%~dp0\"\n" + \
     ('start "pausable_unittest" cmd /c ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
 
-CMD_OPEN = True
 
 class Pauser(pausable_unittest.BasePauser):
+    def __init__(self, close_cmd=False):
+        self._close_cmd = close_cmd
+
     def check_call(self, command):
         subprocess.check_output(command, stderr=subprocess.STDOUT)
 
@@ -75,10 +77,10 @@ class Pauser(pausable_unittest.BasePauser):
 
     def register_startup(self):
         with open(BAT_PATH, "w") as f:
-            if CMD_OPEN:
-                f.write(BAT_CONTENT_CMD_OPEN)
-            else:
+            if self._close_cmd:
                 f.write(BAT_CONTENT_CMD_CLOSE)
+            else:
+                f.write(BAT_CONTENT_CMD_OPEN)
         if self.is_admin():
             self.register_admin_startup()
         else:

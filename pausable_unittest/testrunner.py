@@ -51,7 +51,7 @@ class TestRunner(object):
                 self.load_file(filename)
                 pauser.after_pause()
             else:
-                self._continulet = continulet(_run_test, (test_suite, log_filename)
+                self._continulet = continulet(_run_test, (test_suite, log_filename))
             action, info = self.run_continulet(exc)
             exc = None
 

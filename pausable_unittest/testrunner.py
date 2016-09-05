@@ -16,9 +16,12 @@ from .pauseforwarder import PauseForwarder
 BASE_DIR = os.path.abspath(os.getcwd())
 DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
 
-def _run_test(con, test_suite):
+def _run_test(con, param):
+    test_suite = param[0]
+    log_filename = param[1]
+
     sf = PauseForwarder(con)
-    result = TestResult()
+    result = TestResult(filename=log_filename)
     result.pause_forwarder = sf
     test_suite(result)
     if hasattr(result, "show_results"):
@@ -36,7 +39,7 @@ class TestRunner(object):
         self._continulet = None
         self._callback = {}
 
-    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH, command_after_test=None):
+    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH, command_after_test=None, log_filename=None):
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
 
@@ -48,7 +51,7 @@ class TestRunner(object):
                 self.load_file(filename)
                 pauser.after_pause()
             else:
-                self._continulet = continulet(_run_test, test_suite)
+                self._continulet = continulet(_run_test, (test_suite, log_filename)
             action, info = self.run_continulet(exc)
             exc = None
 

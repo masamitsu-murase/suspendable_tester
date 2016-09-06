@@ -20,6 +20,7 @@ BAT_CONTENT_CMD_CLOSE = "cd /d \"%~dp0\"\n" + \
 
 class Pauser(pausable_unittest.BasePauser):
     def __init__(self, close_cmd=False):
+        super(Pauser, self).__init__()
         self._close_cmd = close_cmd
 
     def check_call(self, command):

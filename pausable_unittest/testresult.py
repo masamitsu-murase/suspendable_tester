@@ -24,6 +24,7 @@ class TestResult(object):
         self._results = []
         self._file = None
         self._running_test = None
+        self._total_start_time = None
 
     def close_logger(self):
         for handler in self.logger.handlers:
@@ -76,8 +77,14 @@ class TestResult(object):
         self.raw_log("")
         self.raw_log("=" * 70)
         self.raw_log("Results:")
-        for result in self._results:
-            self.raw_log(self.result_text(result))
+        self.raw_log(" Ran %d tests in %.1fs" % (len(self._results), self._total_end_time - self._total_start_time))
+        self.raw_log(" success: %3d" % len(self.successes))
+        self.raw_log(" failure: %3d" % len(self.failures))
+        others = len(self._results) - len(self.successes) - len(self.failures)
+        if others > 0:
+            self.raw_log(" others: %d" % others)
+        for i, result in enumerate(self._results):
+            self.raw_log(("%3d:[%6.1fs] " % (i, result[3])) + self.result_text(result))
         self.raw_log("=" * 70)
 
     @property
@@ -116,7 +123,8 @@ class TestResult(object):
         pass
 
     def addResult(self, type, test, err=None):
-        self._results.append((type, test, err))
+        time_diff = time.time() - self._start_time
+        self._results.append((type, test, err, time_diff))
 
     def getDescription(self, test):
         doc_first_line = test.shortDescription()
@@ -146,10 +154,12 @@ class TestResult(object):
         desc = self.getDescription(test)
         self._running_test = desc
         self._start_time = time.time()
+        if self._total_start_time is None:
+            self._total_start_time = self._start_time
         self.logger.info("Start %s", desc)
 
     def stopTest(self, test):
-        end_time = time.time()
+        self._total_end_time = end_time = time.time()
         time_diff = end_time - self._start_time
         desc = self.getDescription(test)
         self.logger.info("End %s (%fs)", desc, time_diff)

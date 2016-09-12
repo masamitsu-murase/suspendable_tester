@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import pickle
+try:
+    import cPickle as pickle
+except:
+    import pickle
 import zlib
 import os
 import os.path
@@ -89,7 +92,7 @@ class TestRunner(object):
         if hasattr(self._continulet, "restorable"):
             if not self._continulet.restorable():
                 raise RestorableError("current tasklet is not restorable")
-        pickled_data = pickle.dumps(self._continulet)
+        pickled_data = pickle.dumps(self._continulet, pickle.HIGHEST_PROTOCOL)
         with open(filename, "wb") as f:
             f.write(zlib.compress(pickled_data))
 

@@ -16,7 +16,7 @@ class PickleTest(pausable_unittest.TestCase):
         m = re.search(r"\s.", "ab cde")
         self.assertTrue(m)
         self.reboot()  # This will cause pickle error.
-        self.assertTrue(m)
+        self.assertTrue(error)
 
 if __name__ == "__main__":
     pausable_unittest.main(testpauser.Pauser())

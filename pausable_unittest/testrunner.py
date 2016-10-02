@@ -43,6 +43,8 @@ class TestRunner(object):
         self._callback = {}
 
     def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH, command_after_test=None, log_filename=None):
+        pauser.add_actions()
+
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
 

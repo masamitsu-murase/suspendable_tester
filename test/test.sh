@@ -22,8 +22,12 @@ if [ ! -e command_after_test.txt ]; then
     exit 1
 fi
 
-# test_command_after_test.py
 pypy --jit off test/test_pickle_handling.py
+if [ -e teststate.bin ]; then
+    exit 1
+fi
+
+pypy --jit off test/test_pauser.py
 if [ -e teststate.bin ]; then
     exit 1
 fi

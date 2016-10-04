@@ -95,6 +95,8 @@ class Pauser(pausable_unittest.BasePauser):
                 path = self.nonadmin_startup_filepath()
                 if os.path.exists(path):
                     os.remove(path)
+            if os.path.exists(BAT_PATH):
+                os.remove(BAT_PATH)
         except:
             pass
 

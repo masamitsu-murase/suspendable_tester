@@ -4,7 +4,7 @@ import pausable_unittest
 
 class BasePauser(object):
     def __init__(self):
-        self.add_actions()
+        pass
 
     def add_actions(self):
         pass

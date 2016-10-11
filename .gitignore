@@ -1,3 +1,4 @@
 *.pyc
 /log*.txt
 /test/test_result.txt
+/test/test_result_info.txt

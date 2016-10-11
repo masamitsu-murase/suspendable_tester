@@ -95,6 +95,8 @@ class Pauser(pausable_unittest.BasePauser):
                 path = self.nonadmin_startup_filepath()
                 if os.path.exists(path):
                     os.remove(path)
+            if os.path.exists(BAT_PATH):
+                os.remove(BAT_PATH)
         except:
             pass
 
@@ -121,7 +123,7 @@ class Pauser(pausable_unittest.BasePauser):
             if type(expected_exitcode) == list or type(expected_exitcode) == tuple:
                 if ret in expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
-            else:
+            elif expected_exitcode is not None:
                 if ret != expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
 

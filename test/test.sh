@@ -1,10 +1,16 @@
 
-rm -f test/test_result.txt teststate.bin command_after_test.txt
+rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
 
 # test.py
 for i in {0..6}
 do
-    pypy --jit off test/test.py | tee -a test/test_result.txt
+    pypy --jit off test/test.py debug | tee -a test/test_result.txt
+    sleep 1
+done
+
+for i in {0..6}
+do
+    pypy --jit off test/test.py | tee -a test/test_result_info.txt
     sleep 1
 done
 
@@ -22,8 +28,12 @@ if [ ! -e command_after_test.txt ]; then
     exit 1
 fi
 
-# test_command_after_test.py
 pypy --jit off test/test_pickle_handling.py
+if [ -e teststate.bin ]; then
+    exit 1
+fi
+
+pypy --jit off test/test_pauser.py
 if [ -e teststate.bin ]; then
     exit 1
 fi

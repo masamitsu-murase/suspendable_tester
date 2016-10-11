@@ -73,7 +73,7 @@ class TestResult(object):
 
         text = result_type.ljust(7, " ") + ": " + str(result[1])
         if not ok:
-            text += self._exc_info_to_string(result[2], result[1])
+            text += self._exc_info_to_string(result[2], result[1], 6)
         return text
 
     def show_results(self):
@@ -81,13 +81,13 @@ class TestResult(object):
         self.raw_log("=" * 70)
         self.raw_log("Results:")
         self.raw_log(" Ran %d tests in %.1fs" % (len(self._results), self._total_end_time - self._total_start_time))
-        self.raw_log(" success: %3d" % len(self.successes))
-        self.raw_log(" failure: %3d" % len(self.failures))
+        self.raw_log(" success: %4d" % len(self.successes))
+        self.raw_log(" failure: %4d" % len(self.failures))
         others = len(self._results) - len(self.successes) - len(self.failures)
         if others > 0:
-            self.raw_log(" others: %d" % others)
+            self.raw_log(" others:  %4d" % others)
         for i, result in enumerate(self._results):
-            self.raw_log(("%3d:[%6.1fs] " % (i, result[3])) + self.result_text(result))
+            self.raw_log(("%4d:[%6.1fs] " % (i, result[3])) + self.result_text(result))
         self.raw_log("=" * 70)
 
     @property
@@ -175,33 +175,33 @@ class TestResult(object):
 
     def addSuccess(self, test):
         self.addResult("success", test)
-        self.raw_log(self._running_test + " => ok")
+        self.logger.info("Result: success")
 
     def addError(self, test, err):
         self.addResult("error", test, err)
-        self.raw_log(self._running_test + " => ERROR")
-        self.raw_log(self._exc_info_to_string(err, test))
+        self.logger.error("Result: ERROR")
+        self.logger.error(self._exc_info_to_string(err, test, 6))
 
     def addFailure(self, test, err):
         self.addResult("failure", test, err)
-        self.raw_log(self._running_test + " => FAIL")
+        self.logger.error("Result: FAILURE")
 
     def addSkip(self, test, reason):
         self.addResult("skip", test, reason)
-        self.raw_log(self._running_test + " => skipped {0!r}".format(reason))
+        self.logger.info("Result: Skipped {0!r}".format(reason))
 
     def addExpectedFailure(self, test, err):
         self.addResult("expected_failure", test, err)
-        self.raw_log(self._running_test + " => expected failure")
+        self.logger.info("Result: expected failure")
 
     def addUnexpectedSuccess(self, test):
         self.addResult("unexpected_success", test)
-        self.raw_log(self._running_test + " => unexpected success")
+        self.logger.error("Result: unexpected success")
 
     def _is_relevant_tb_level(self, tb):
         return '__unittest' in tb.tb_frame.f_globals
 
-    def _exc_info_to_string(self, err, test):
+    def _exc_info_to_string(self, err, test, indent=None):
         """Converts a sys.exc_info()-style tuple of values into a string."""
         exctype, value, tb = err
         # Skip test runner traceback levels
@@ -215,7 +215,13 @@ class TestResult(object):
         else:
             msgLines = traceback.format_exception(exctype, value, tb)
 
-        return ''.join(msgLines)
+        if indent:
+            lines = []
+            for msg in msgLines:
+                lines.extend(msg.rstrip().split("\n"))
+            return ("\n" + ' ' * indent).join(lines)
+        else:
+            return ''.join(msgLines)
 
     def _count_relevant_tb_levels(self, tb):
         length = 0

@@ -2,6 +2,7 @@
 
 import unittest
 import os
+import logging
 
 class TestCase(unittest.TestCase):
     def run(self, result):

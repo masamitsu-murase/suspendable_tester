@@ -8,6 +8,7 @@ import pausable_unittest
 import testpauser
 
 import time
+import logging
 
 class SampleTest(pausable_unittest.TestCase):
     def test_reboot(self):
@@ -42,6 +43,8 @@ class SampleTest(pausable_unittest.TestCase):
             self.assertTrue(start + 1 + margin > end, "%f + 1 + %f should be more than %f." % (start, margin, end))
 
 if __name__ == "__main__":
-    pausable_unittest.main(testpauser.Pauser())
-
+    if len(sys.argv) >= 2 and sys.argv[1] == "debug":
+        pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG)
+    else:
+        pausable_unittest.main(testpauser.Pauser())
 

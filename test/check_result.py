@@ -19,15 +19,19 @@ def format_str(str):
 
 os.chdir(os.path.normpath(os.path.join(__file__, os.path.pardir)))
 
-with open("expected_test_result.txt") as f:
-    expected = format_str(f.read()).split("\n")
-expected.sort()
+def check(expected_result, actual_result):
+    with open(expected_result) as f:
+        expected = format_str(f.read()).split("\n")
+    expected.sort()
 
-with open("test_result.txt") as f:
-    actual = format_str(f.read()).split("\n")
-actual.sort()
+    with open(actual_result) as f:
+        actual = format_str(f.read()).split("\n")
+    actual.sort()
 
-if actual != expected:
-    print("ERROR")
-    exit(1)
+    if actual != expected:
+        print("ERROR")
+        exit(1)
+
+check("expected_test_result.txt", "test_result.txt")
+check("expected_test_result_info.txt", "test_result_info.txt")
 

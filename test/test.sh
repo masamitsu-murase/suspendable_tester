@@ -1,10 +1,16 @@
 
-rm -f test/test_result.txt teststate.bin command_after_test.txt
+rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
 
 # test.py
 for i in {0..6}
 do
-    pypy --jit off test/test.py | tee -a test/test_result.txt
+    pypy --jit off test/test.py debug | tee -a test/test_result.txt
+    sleep 1
+done
+
+for i in {0..6}
+do
+    pypy --jit off test/test.py | tee -a test/test_result_info.txt
     sleep 1
 done
 

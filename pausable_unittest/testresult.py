@@ -9,12 +9,15 @@ from . import picklablelogger
 __unittest = False
 
 class TestResult(object):
-    def __init__(self, stream_type="stdout", filename=None, loglevel=logging.DEBUG):
+    def __init__(self, stream_type="stdout", filename=None, loglevel=None):
+        if loglevel is None:
+            loglevel = logging.INFO
+
         self.shouldStop = False
         self.failFast = False
         self.pausable_runner = None
 
-        self.logger = logging.getLogger("pasable_unittest")
+        self.logger = logging.getLogger("pausable_unittest")
         self.logger.setLevel(loglevel)
         self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
         if filename != False:
@@ -33,9 +36,9 @@ class TestResult(object):
 
     def before_pause(self, info):
         if self._running_test:
-            self.logger.info("Pause %s...", self._running_test)
+            self.logger.debug("Pause %s...", self._running_test)
         else:
-            self.logger.info("Pause...")
+            self.logger.debug("Pause...")
 
         for handler in self.logger.handlers:
             if hasattr(handler, "prepare_for_pause"):
@@ -54,9 +57,9 @@ class TestResult(object):
             self._writeln("-" * 70)
 
         if self._running_test:
-            self.logger.info("Resume %s...", self._running_test)
+            self.logger.debug("Resume %s...", self._running_test)
         else:
-            self.logger.info("Resume...")
+            self.logger.debug("Resume...")
 
     def _filterResult(self, type):
         return [ (x[1], x[2]) for x in self._results if x[0] == type ]

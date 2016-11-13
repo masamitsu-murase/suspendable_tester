@@ -76,12 +76,23 @@ class Pauser(pausable_unittest.BasePauser):
             if os.path.exists(path):
                 os.remove(path)
 
-    def register_startup(self):
+    @property
+    def bat_path(self):
+        return BAT_PATH
+
+    def create_bat(self):
         with open(BAT_PATH, "w") as f:
             if self._close_cmd:
                 f.write(BAT_CONTENT_CMD_CLOSE)
             else:
                 f.write(BAT_CONTENT_CMD_OPEN)
+
+    def remove_bat(self):
+        if os.path.exists(BAT_PATH):
+            os.remove(BAT_PATH)
+
+    def register_startup(self):
+        self.create_bat()
         if self.is_admin():
             self.register_admin_startup()
         else:
@@ -95,8 +106,7 @@ class Pauser(pausable_unittest.BasePauser):
                 path = self.nonadmin_startup_filepath()
                 if os.path.exists(path):
                     os.remove(path)
-            if os.path.exists(BAT_PATH):
-                os.remove(BAT_PATH)
+            self.remove_bat()
         except:
             pass
 
@@ -105,10 +115,9 @@ class Pauser(pausable_unittest.BasePauser):
             self.pause(("reboot",))
         self.add_action("reboot", reboot)
 
-        def exec_for_reboot(self, command, expected_exitcode=0):
-            self.pause(("exec_for_reboot", command, expected_exitcode))
+        def exec_for_reboot(self, command, expected_exitcode=0, register_startup=True):
+            self.pause(("exec_for_reboot", command, expected_exitcode, register_startup))
         self.add_action("exec_for_reboot", exec_for_reboot)
-
 
     def do_pause(self, info):
         if info[0] == "reboot":
@@ -118,7 +127,10 @@ class Pauser(pausable_unittest.BasePauser):
         elif info[0] == "exec_for_reboot":
             cmd = info[1]
             expected_exitcode = info[2]
-            self.register_startup()
+            register_startup = info[3]
+
+            if register_startup:
+                self.register_startup()
             ret = subprocess.call(cmd)
             if type(expected_exitcode) == list or type(expected_exitcode) == tuple:
                 if ret in expected_exitcode:

@@ -38,6 +38,20 @@ if [ -e teststate.bin ]; then
     exit 1
 fi
 
+rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
+
+pypy --jit off test/test_simple_runner.py | tee -a test/test_result.txt
+if [ ! -e teststate.bin ]; then
+    exit 1
+fi
+
+pypy --jit off test/test_simple_runner.py | tee -a test/test_result.txt
+if [ -e teststate.bin ]; then
+    exit 1
+fi
+
+pypy --jit off test/check_simple_runner_result.py
+
 
 echo ""
 echo OK

@@ -115,6 +115,10 @@ class TestResult(object):
         return self._filterResult("success")
 
     @property
+    def results(self):
+        return self._results
+
+    @property
     def testsRun(self):
         return len(self._results)
 

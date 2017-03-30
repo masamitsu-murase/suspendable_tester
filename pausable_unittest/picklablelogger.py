@@ -20,8 +20,12 @@ class PicklableHandler(logging.Handler):
 
 
 class PicklableStreamHandler(PicklableHandler):
-    def __init__(self, stream_type="stdout", fmt=FORMAT, date_format=DATE_FORMAT):
+    MAX_LOG_COUNT = 1000
+
+    def __init__(self, stream_type="stdout", fmt=FORMAT, date_format=DATE_FORMAT, max_log_count=MAX_LOG_COUNT):
         super(PicklableStreamHandler, self).__init__()
+        self.__log_count = 0
+        self.__max_log_count = max_log_count
         self.__log_list = []
         self.__stream_type = stream_type
 
@@ -30,7 +34,11 @@ class PicklableStreamHandler(PicklableHandler):
         self.raw_writeln(log)
 
     def raw_writeln(self, text):
-        self.__log_list.append(text)
+        if self.__max_log_count and self.__log_count >= self.__max_log_count:
+            self.__log_list[self.__log_count % self.__max_log_count] = text
+        else:
+            self.__log_list.append(text)
+        self.__log_count += 1
         if self.__stream_type == "stderr":
             sys.stderr.write(text + "\n")
         else:
@@ -45,8 +53,14 @@ class PicklableStreamHandler(PicklableHandler):
             output = sys.stderr
         else:
             output = sys.stdout
-        for log in self.__log_list:
-            output.write(log + "\n")
+        if self.__max_log_count and self.__log_count >= self.__max_log_count:
+            output.write("...snip...\n")
+            for i in range(self.__max_log_count):
+                index = (self.__log_count - self.__max_log_count + i) % self.__max_log_count
+                output.write(self.__log_list[index] + "\n")
+        else:
+            for log in self.__log_list:
+                output.write(log + "\n")
 
 class PicklableFileHandler(PicklableHandler):
     def __init__(self, filename=None, fmt=FORMAT, date_format=DATE_FORMAT):

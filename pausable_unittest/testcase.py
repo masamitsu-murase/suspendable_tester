@@ -25,7 +25,7 @@ def log_assertion1(method_name):
             error = True
             raise
         finally:
-            if not error:
+            if not error and self.assertion_log:
                 self.logger.info("success %s: %s", method_name, msg)
     return wrapper
 
@@ -48,7 +48,7 @@ def log_assertion2(method_name):
             error = True
             raise
         finally:
-            if not error:
+            if not error and self.assertion_log:
                 self.logger.info("success %s: %s", method_name, msg)
     return wrapper
 
@@ -69,7 +69,7 @@ def log_assertion_almost(method_name):
             error = True
             raise
         finally:
-            if not error:
+            if not error and self.assertion_log:
                 self.logger.info("success %s: %s", method_name, msg)
     return wrapper
 
@@ -79,6 +79,7 @@ class TestCase(unittest.TestCase):
         self.__result = result
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger
+        self.assertion_log = result.assertion_log
         super(TestCase, self).run(result)
 
     def pause(self, info=None):

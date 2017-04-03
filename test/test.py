@@ -44,7 +44,8 @@ class SampleTest(pausable_unittest.TestCase):
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "debug":
-        pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG)
+        pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG,
+                               assertion_log=True)
     else:
         pausable_unittest.main(testpauser.Pauser())
 

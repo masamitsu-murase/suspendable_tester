@@ -8,7 +8,8 @@ from . import picklablelogger
 
 
 class TestResult(object):
-    def __init__(self, stream_type="stdout", filename=None, loglevel=None):
+    def __init__(self, stream_type="stdout", filename=None, loglevel=None,
+                 assertion_log=False):
         if loglevel is None:
             loglevel = logging.INFO
 
@@ -21,6 +22,8 @@ class TestResult(object):
         self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
         if filename != False:
             self.logger.addHandler(picklablelogger.PicklableFileHandler(filename))
+
+        self.assertion_log = assertion_log
 
         self._stream_type = stream_type
         self._results = []

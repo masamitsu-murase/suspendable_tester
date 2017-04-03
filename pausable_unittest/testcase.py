@@ -2,7 +2,10 @@
 
 import unittest
 import os
+import os.path
 import logging
+import inspect
+import functools
 
 
 __pausable_unittest = True
@@ -13,7 +16,6 @@ def log_assertion1(method_name):
 
     This wrapper expects that method takes 1 parameter and msg parameter.
     """
-    import functools
     method = getattr(unittest.TestCase, method_name)
 
     @functools.wraps(method)
@@ -26,7 +28,14 @@ def log_assertion1(method_name):
             raise
         finally:
             if not error and self.assertion_log:
-                self.logger.info("success %s: %s", method_name, msg)
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
     return wrapper
 
 
@@ -36,7 +45,6 @@ def log_assertion2(method_name):
 
     This wrapper expects that method takes 1 parameter and msg parameter.
     """
-    import functools
     method = getattr(unittest.TestCase, method_name)
 
     @functools.wraps(method)
@@ -49,7 +57,14 @@ def log_assertion2(method_name):
             raise
         finally:
             if not error and self.assertion_log:
-                self.logger.info("success %s: %s", method_name, msg)
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
     return wrapper
 
 
@@ -70,7 +85,14 @@ def log_assertion_almost(method_name):
             raise
         finally:
             if not error and self.assertion_log:
-                self.logger.info("success %s: %s", method_name, msg)
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
     return wrapper
 
 

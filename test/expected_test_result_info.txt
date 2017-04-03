@@ -1,65 +1,96 @@
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
 ----------------------------------------------------------------------
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:26]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : Result: success
+[2017-04-04T00:58:26]  INFO -- : End test_chdir (__main__.SampleTest) (2.507000s)
+[2017-04-04T00:58:26]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 test_exec_for_reboot 0
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : Result: success
+[2017-04-04T00:58:26]  INFO -- : End test_chdir (__main__.SampleTest) (2.507000s)
+[2017-04-04T00:58:26]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
 test_exec_for_reboot 1
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : Result: success
+[2017-04-04T00:58:26]  INFO -- : End test_chdir (__main__.SampleTest) (2.507000s)
+[2017-04-04T00:58:26]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
 test_exec_for_reboot 2
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : Result: success
+[2017-04-04T00:58:26]  INFO -- : End test_chdir (__main__.SampleTest) (2.507000s)
+[2017-04-04T00:58:26]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2016-10-12T08:15:56]  INFO -- : Result: success
-[2016-10-12T08:15:56]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.111000s)
-[2016-10-12T08:15:56]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-04T00:58:30]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:30]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:30]  INFO -- : Result: success
+[2017-04-04T00:58:30]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.071000s)
+[2017-04-04T00:58:30]  INFO -- : Start test_reboot (__main__.SampleTest)
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2016-10-12T08:15:56]  INFO -- : Result: success
-[2016-10-12T08:15:56]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.111000s)
-[2016-10-12T08:15:56]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-04T00:58:23]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T00:58:24]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : success assertEqual: None
+[2017-04-04T00:58:26]  INFO -- : Result: success
+[2017-04-04T00:58:26]  INFO -- : End test_chdir (__main__.SampleTest) (2.507000s)
+[2017-04-04T00:58:26]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:27]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:28]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:30]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:30]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:30]  INFO -- : Result: success
+[2017-04-04T00:58:30]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.071000s)
+[2017-04-04T00:58:30]  INFO -- : Start test_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 success: test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2016-10-12T08:15:58]  INFO -- : Result: success
-[2016-10-12T08:15:58]  INFO -- : End test_reboot (__main__.SampleTest) (1.333000s)
+[2017-04-04T00:58:31]  INFO -- : success assertTrue: start + 1 should be less than end.
+[2017-04-04T00:58:31]  INFO -- : success assertTrue: start + 1 + margin should be more than end.
+[2017-04-04T00:58:31]  INFO -- : Result: success
+[2017-04-04T00:58:31]  INFO -- : End test_reboot (__main__.SampleTest) (1.300000s)
 
 ======================================================================
 Results:
- Ran 3 tests in 8.0s
+ Ran 3 tests in 7.9s
  success:    3
  failure:    0
-   0:[   2.6s] success: test_chdir (__main__.SampleTest)
+   0:[   2.5s] success: test_chdir (__main__.SampleTest)
    1:[   4.1s] success: test_exec_for_reboot (__main__.SampleTest)
    2:[   1.3s] success: test_reboot (__main__.SampleTest)
 ======================================================================

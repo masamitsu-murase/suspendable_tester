@@ -2,13 +2,106 @@
 
 import unittest
 import os
+import os.path
 import logging
+import inspect
+import functools
+
+
+__pausable_unittest = True
+
+def log_assertion1(method_name):
+    u"""
+    Wrapper method to log assertion.
+
+    This wrapper expects that method takes 1 parameter and msg parameter.
+    """
+    method = getattr(unittest.TestCase, method_name)
+
+    @functools.wraps(method)
+    def wrapper(self, arg, msg=None):
+        error = False
+        try:
+            method(self, arg, msg)
+        except:
+            error = True
+            raise
+        finally:
+            if not error and self.assertion_log:
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
+    return wrapper
+
+
+def log_assertion2(method_name):
+    u"""
+    Wrapper method to log assertion.
+
+    This wrapper expects that method takes 1 parameter and msg parameter.
+    """
+    method = getattr(unittest.TestCase, method_name)
+
+    @functools.wraps(method)
+    def wrapper(self, first, second, msg=None):
+        error = False
+        try:
+            method(self, first, second, msg)
+        except:
+            error = True
+            raise
+        finally:
+            if not error and self.assertion_log:
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
+    return wrapper
+
+
+def log_assertion_almost(method_name):
+    u"""
+    Wrap assertAlmostEqual and assertNotAlmostEqual.
+    """
+    import functools
+    method = getattr(unittest.TestCase, method_name)
+
+    @functools.wraps(method)
+    def wrapper(self, first, second, places=7, msg=None, delta=None):
+        error = False
+        try:
+            return method(self, first, second, places, msg, delta)
+        except:
+            error = True
+            raise
+        finally:
+            if not error and self.assertion_log:
+                frame = inspect.currentframe(1)
+                if msg is None:
+                    msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
+    return wrapper
+
 
 class TestCase(unittest.TestCase):
     def run(self, result):
         self.__result = result
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger
+        self.assertion_log = result.assertion_log
         super(TestCase, self).run(result)
 
     def pause(self, info=None):
@@ -38,3 +131,26 @@ class TestCase(unittest.TestCase):
     @staticmethod
     def add_action(method_name, method):
         setattr(TestCase, method_name, method)
+
+
+# 1 parameter
+for name in ("assertTrue", "assertFalse", "assertIsNone", "assertIsNotNone"):
+    setattr(TestCase, name, log_assertion1(name))
+
+# 2 parameters
+for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
+             "assertIn", "assertNotIn", "assertIsInstance", "assertNotIsInstance",
+             "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual",
+             "assertRegexpMatches", "assertNotRegexpMatches", "assertItemsEqual",
+             "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
+             "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual"):
+    setattr(TestCase, name, log_assertion2(name))
+
+# assertAlmostEqual(first, second, places=7, msg=None, delta=None)
+# assertNotAlmostEqual(first, second, places=7, msg=None, delta=None)
+for name in ("assertAlmostEqual", "assertNotAlmostEqual"):
+    setattr(TestCase, name, log_assertion_almost(name))
+
+# assertRaises(exc, fun, *args, **kwds)
+# assertRaisesRegexp(exc, r, fun, *args, **kwds)
+

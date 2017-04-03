@@ -1,65 +1,65 @@
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T08:20:03]  INFO -- : Result: success
+[2017-04-04T08:20:03]  INFO -- : End test_chdir (__main__.SampleTest) (2.529000s)
+[2017-04-04T08:20:03]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 test_exec_for_reboot 0
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:03]  INFO -- : Result: success
+[2017-04-04T08:20:03]  INFO -- : End test_chdir (__main__.SampleTest) (2.529000s)
+[2017-04-04T08:20:03]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 test_exec_for_reboot 1
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:03]  INFO -- : Result: success
+[2017-04-04T08:20:03]  INFO -- : End test_chdir (__main__.SampleTest) (2.529000s)
+[2017-04-04T08:20:03]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 test_exec_for_reboot 2
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:03]  INFO -- : Result: success
+[2017-04-04T08:20:03]  INFO -- : End test_chdir (__main__.SampleTest) (2.529000s)
+[2017-04-04T08:20:03]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2016-10-12T08:15:56]  INFO -- : Result: success
-[2016-10-12T08:15:56]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.111000s)
-[2016-10-12T08:15:56]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-04T08:20:08]  INFO -- : Result: success
+[2017-04-04T08:20:08]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.135000s)
+[2017-04-04T08:20:08]  INFO -- : Start test_reboot (__main__.SampleTest)
 Reboot!
-[2016-10-12T08:15:50]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2016-10-12T08:15:52]  INFO -- : Result: success
-[2016-10-12T08:15:52]  INFO -- : End test_chdir (__main__.SampleTest) (2.577000s)
-[2016-10-12T08:15:52]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2016-10-12T08:15:56]  INFO -- : Result: success
-[2016-10-12T08:15:56]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.111000s)
-[2016-10-12T08:15:56]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-04T08:20:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-04T08:20:03]  INFO -- : Result: success
+[2017-04-04T08:20:03]  INFO -- : End test_chdir (__main__.SampleTest) (2.529000s)
+[2017-04-04T08:20:03]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-04T08:20:08]  INFO -- : Result: success
+[2017-04-04T08:20:08]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.135000s)
+[2017-04-04T08:20:08]  INFO -- : Start test_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_chdir (__main__.SampleTest)
 success: test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2016-10-12T08:15:58]  INFO -- : Result: success
-[2016-10-12T08:15:58]  INFO -- : End test_reboot (__main__.SampleTest) (1.333000s)
+[2017-04-04T08:20:09]  INFO -- : Result: success
+[2017-04-04T08:20:09]  INFO -- : End test_reboot (__main__.SampleTest) (1.267000s)
 
 ======================================================================
 Results:
- Ran 3 tests in 8.0s
+ Ran 3 tests in 7.9s
  success:    3
  failure:    0
-   0:[   2.6s] success: test_chdir (__main__.SampleTest)
+   0:[   2.5s] success: test_chdir (__main__.SampleTest)
    1:[   4.1s] success: test_exec_for_reboot (__main__.SampleTest)
    2:[   1.3s] success: test_reboot (__main__.SampleTest)
 ======================================================================

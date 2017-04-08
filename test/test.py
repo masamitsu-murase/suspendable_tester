@@ -33,6 +33,9 @@ class SampleTest(pausable_unittest.TestCase):
 
         os.chdir(dir1)
 
+    def test_options(self):
+        self.assertEqual(self.assertion_log, self.options.get("test", False))
+
     def test_exec_for_reboot(self):
         for i in range(3):
             start = time.time()
@@ -45,7 +48,7 @@ class SampleTest(pausable_unittest.TestCase):
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "debug":
         pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG,
-                               assertion_log=True)
+                               assertion_log=True, options={"test": True})
     else:
         pausable_unittest.main(testpauser.Pauser())
 

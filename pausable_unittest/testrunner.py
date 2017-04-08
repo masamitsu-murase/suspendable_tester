@@ -24,10 +24,11 @@ def _run_test(con, param):
     log_filename = param[1]
     loglevel = param[2]
     assertion_log = param[3]
+    options = param[4]
 
     sf = PauseForwarder(con)
     result = TestResult(filename=log_filename, loglevel=loglevel,
-                        assertion_log=assertion_log)
+                        assertion_log=assertion_log, options=options)
     result.pause_forwarder = sf
     test_suite(result)
     if hasattr(result, "show_results"):
@@ -47,7 +48,7 @@ class TestRunner(object):
 
     def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH,
             command_after_test=None, log_filename=None, loglevel=None,
-            assertion_log=False):
+            assertion_log=False, options={}):
         pauser.add_actions()
 
         if not os.path.isabs(filename):
@@ -61,7 +62,8 @@ class TestRunner(object):
                 self.load_file(filename)
                 pauser.after_pause()
             else:
-                continulet_args = (test_suite, log_filename, loglevel, assertion_log)
+                continulet_args = (test_suite, log_filename, loglevel,
+                                   assertion_log, options)
                 self._continulet = continulet(_run_test, continulet_args)
             action, info = self.run_continulet(exc)
             exc = None

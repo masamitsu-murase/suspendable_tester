@@ -102,6 +102,7 @@ class TestCase(unittest.TestCase):
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger
         self.assertion_log = result.assertion_log
+        self.options = result._options
         super(TestCase, self).run(result)
 
     def pause(self, info=None):

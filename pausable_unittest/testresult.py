@@ -9,7 +9,7 @@ from . import picklablelogger
 
 class TestResult(object):
     def __init__(self, stream_type="stdout", filename=None, loglevel=None,
-                 assertion_log=False):
+                 assertion_log=False, options={}):
         if loglevel is None:
             loglevel = logging.INFO
 
@@ -30,6 +30,7 @@ class TestResult(object):
         self._file = None
         self._running_test = None
         self._total_start_time = None
+        self._options = options
 
     def close_logger(self):
         for handler in self.logger.handlers:

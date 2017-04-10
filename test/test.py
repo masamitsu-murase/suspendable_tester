@@ -16,8 +16,8 @@ class SampleTest(pausable_unittest.TestCase):
         self.reboot()
         end = time.time()
         margin = 2
-        self.assertTrue(start + 1 < end, "%f + 1 should be less than %f." % (start, end))
-        self.assertTrue(start + 1 + margin > end, "%f + 1 + %f should be more than %f." % (start, margin, end))
+        self.assertTrue(start + 1 < end, "start + 1 should be less than end.")
+        self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
     def test_chdir(self):
         dir1 = os.path.abspath(os.getcwd())
@@ -33,18 +33,22 @@ class SampleTest(pausable_unittest.TestCase):
 
         os.chdir(dir1)
 
+    def test_options(self):
+        self.assertEqual(self.assertion_log, self.options.get("test", False))
+
     def test_exec_for_reboot(self):
         for i in range(3):
             start = time.time()
             self.exec_for_reboot("bash -c 'echo test_exec_for_reboot %d'" % i)
             end = time.time()
             margin = 2
-            self.assertTrue(start + 1 < end, "%f + 1 should be less than %f." % (start, end))
-            self.assertTrue(start + 1 + margin > end, "%f + 1 + %f should be more than %f." % (start, margin, end))
+            self.assertTrue(start + 1 < end, "start + 1 should be less than end.")
+            self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "debug":
-        pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG)
+        pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG,
+                               assertion_log=True, options={"test": True})
     else:
         pausable_unittest.main(testpauser.Pauser())
 

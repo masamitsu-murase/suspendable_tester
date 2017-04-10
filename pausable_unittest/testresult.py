@@ -6,10 +6,10 @@ import logging
 import time
 from . import picklablelogger
 
-__unittest = False
 
 class TestResult(object):
-    def __init__(self, stream_type="stdout", filename=None, loglevel=None):
+    def __init__(self, stream_type="stdout", filename=None, loglevel=None,
+                 assertion_log=False, options=None):
         if loglevel is None:
             loglevel = logging.INFO
 
@@ -23,11 +23,14 @@ class TestResult(object):
         if filename != False:
             self.logger.addHandler(picklablelogger.PicklableFileHandler(filename))
 
+        self.assertion_log = assertion_log
+
         self._stream_type = stream_type
         self._results = []
         self._file = None
         self._running_test = None
         self._total_start_time = None
+        self._options = options
 
     def close_logger(self):
         for handler in self.logger.handlers:
@@ -73,7 +76,7 @@ class TestResult(object):
 
         text = result_type.ljust(7, " ") + ": " + str(result[1])
         if not ok:
-            text += self._exc_info_to_string(result[2], result[1], 6)
+            text += "\n" + self._exc_info_to_string(result[2], result[1], 6)
         return text
 
     def show_results(self):
@@ -203,7 +206,7 @@ class TestResult(object):
         self.logger.error("Result: unexpected success")
 
     def _is_relevant_tb_level(self, tb):
-        return '__unittest' in tb.tb_frame.f_globals
+        return '__unittest' in tb.tb_frame.f_globals or '__pausable_unittest' in tb.tb_frame.f_globals
 
     def _exc_info_to_string(self, err, test, indent=None):
         """Converts a sys.exc_info()-style tuple of values into a string."""
@@ -223,7 +226,7 @@ class TestResult(object):
             lines = []
             for msg in msgLines:
                 lines.extend(msg.rstrip().split("\n"))
-            return ("\n" + ' ' * indent).join(lines)
+            return " " * indent + ("\n" + ' ' * indent).join(lines)
         else:
             return ''.join(msgLines)
 

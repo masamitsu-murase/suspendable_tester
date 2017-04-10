@@ -9,7 +9,7 @@ from . import picklablelogger
 
 class TestResult(object):
     def __init__(self, stream_type="stdout", filename=None, loglevel=None,
-                 assertion_log=False, options={}):
+                 assertion_log=False, options=None):
         if loglevel is None:
             loglevel = logging.INFO
 

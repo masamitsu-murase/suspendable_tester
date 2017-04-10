@@ -24,7 +24,7 @@ def _run_test(con, param):
     log_filename = param[1]
     loglevel = param[2]
     assertion_log = param[3]
-    options = param[4]
+    options = param[4] if param[4] is not None else {}
 
     sf = PauseForwarder(con)
     result = TestResult(filename=log_filename, loglevel=loglevel,
@@ -48,7 +48,7 @@ class TestRunner(object):
 
     def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH,
             command_after_test=None, log_filename=None, loglevel=None,
-            assertion_log=False, options={}):
+            assertion_log=False, options=None):
         pauser.add_actions()
 
         if not os.path.isabs(filename):

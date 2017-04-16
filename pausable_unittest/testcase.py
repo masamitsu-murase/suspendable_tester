@@ -152,6 +152,15 @@ for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
 for name in ("assertAlmostEqual", "assertNotAlmostEqual"):
     setattr(TestCase, name, log_assertion_almost(name))
 
+
+# def _AssertRaises(self, excClass, callableObj=None, *args, **kwargs):
+#     if callableObj is None:
+#         context = _AssertRaisesContext(excClass, self)
+#         if callableObj is None:
+#             return context
+#         with context:
+#             callableObj(*args, **kwargs)
+
 # assertRaises(exc, fun, *args, **kwds)
 # assertRaisesRegexp(exc, r, fun, *args, **kwds)
 

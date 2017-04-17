@@ -215,34 +215,3 @@ for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
 # assertNotAlmostEqual(first, second, places=7, msg=None, delta=None)
 for name in ("assertAlmostEqual", "assertNotAlmostEqual"):
     setattr(TestCase, name, log_assertion_almost(name))
-
-
-def _AssertRaises(self, excClass, callableObj=None, *args, **kwargs):
-    if callableObj is None:
-        pass
-    else:
-        error = False
-        try:
-            self.assertRaises(excClass, callableObj, *args, **kwargs)
-        except:
-            error = True
-            raise
-        finally:
-            if not error and self.assertion_log:
-                frame = inspect.currentframe(1)
-                msg = "(No message)"
-                self.logger.info("success %s (L%d in '%s'): %s",
-                                 method_name,
-                                 frame.f_lineno,
-                                 os.path.basename(frame.f_code.co_filename),
-                                 msg)
-
-#         context = _AssertRaisesContext(excClass, self)
-#         if callableObj is None:
-#             return context
-#         with context:
-#             callableObj(*args, **kwargs)
-
-# assertRaises(exc, fun, *args, **kwds)
-# assertRaisesRegexp(exc, r, fun, *args, **kwds)
-

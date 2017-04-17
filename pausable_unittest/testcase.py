@@ -29,7 +29,7 @@ def log_assertion1(method_name):
             raise
         finally:
             if not error:
-                frame = inspect.currentframe(1)
+                frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
@@ -54,7 +54,7 @@ def log_assertion2(method_name):
             raise
         finally:
             if not error:
-                frame = inspect.currentframe(1)
+                frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
@@ -78,7 +78,7 @@ def log_assertion_almost(method_name):
             raise
         finally:
             if not error:
-                frame = inspect.currentframe(1)
+                frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
@@ -130,7 +130,7 @@ class TestCase(unittest.TestCase):
             self.logger.info(text)
 
     def assertRaises(self, excClass, callableObj=None, *args, **kwargs):
-        frame = inspect.currentframe(1)
+        frame = inspect.currentframe().f_back
         lineno = frame.f_lineno
         filename = frame.f_code.co_filename
         if (not callable(callableObj)) and (not args) and (not kwargs):
@@ -164,7 +164,7 @@ class TestCase(unittest.TestCase):
                                            None)
 
     def assertRaisesRegexp(self, excClass, regexp, callableObj=None, *args, **kwargs):
-        frame = inspect.currentframe(1)
+        frame = inspect.currentframe().f_back
         lineno = frame.f_lineno
         filename = frame.f_code.co_filename
         if (not callable(callableObj)) and (not args) and (not kwargs):

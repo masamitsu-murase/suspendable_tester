@@ -3,7 +3,13 @@ import logging
 import time
 import os.path
 import sys
-import codecs
+
+if isinstance(u"", str):
+    # Python 3
+    codecs = None
+else:
+    # Python 2
+    import codecs
 
 FORMAT = '[%(asctime)s] %(levelname)5s -- : %(message)s'
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
@@ -87,9 +93,12 @@ class PicklableFileHandler(PicklableHandler):
 
     def raw_writeln(self, text):
         self.open()
-        try:
-            encoded_text = codecs.encode(text, "utf-8", "replace")
-        except UnicodeDecodeError:
+        if codecs:
+            try:
+                encoded_text = codecs.encode(text, "utf-8", "replace")
+            except UnicodeDecodeError:
+                encoded_text = text
+        else:
             encoded_text = text
         self.__file.write(encoded_text + "\n")
 

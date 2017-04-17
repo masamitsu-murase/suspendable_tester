@@ -1,19 +1,19 @@
 
 if [ -z ${python+x} ]; then
-    python="pypy --jit off"
+    python="pypy --jit off -B"
 fi
 echo ${python}
 
 rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
 
 # test.py
-for i in {0..6}
+for i in {0..7}
 do
     ${python} test/test.py debug | tee -a test/test_result.txt
     sleep 1
 done
 
-for i in {0..6}
+for i in {0..7}
 do
     ${python} test/test.py | tee -a test/test_result_info.txt
     sleep 1

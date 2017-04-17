@@ -22,17 +22,20 @@ def log_assertion1(method_name):
     @functools.wraps(method)
     def wrapper(self, arg, msg=None):
         error = False
+        log_assertion_calling = self._log_assertion_calling
         try:
+            self._log_assertion_calling = True
             method(self, arg, msg)
         except:
             error = True
             raise
         finally:
-            if not error:
+            if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
+            self._log_assertion_calling = log_assertion_calling
     return wrapper
 
 
@@ -47,17 +50,20 @@ def log_assertion2(method_name):
     @functools.wraps(method)
     def wrapper(self, first, second, msg=None):
         error = False
+        log_assertion_calling = self._log_assertion_calling
         try:
+            self._log_assertion_calling = True
             method(self, first, second, msg)
         except:
             error = True
             raise
         finally:
-            if not error:
+            if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
+            self._log_assertion_calling = log_assertion_calling
     return wrapper
 
 
@@ -71,17 +77,20 @@ def log_assertion_almost(method_name):
     @functools.wraps(method)
     def wrapper(self, first, second, places=7, msg=None, delta=None):
         error = False
+        log_assertion_calling = self._log_assertion_calling
         try:
+            self._log_assertion_calling = True
             return method(self, first, second, places, msg, delta)
         except:
             error = True
             raise
         finally:
-            if not error:
+            if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
                 self.log_for_assertion(method_name, frame.f_lineno,
                                        os.path.basename(frame.f_code.co_filename),
                                        msg)
+            self._log_assertion_calling = log_assertion_calling
     return wrapper
 
 
@@ -91,6 +100,7 @@ class TestCase(unittest.TestCase):
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger
         self.assertion_log = result.assertion_log
+        self._log_assertion_calling = False
         self.options = result._options
         super(TestCase, self).run(result)
 

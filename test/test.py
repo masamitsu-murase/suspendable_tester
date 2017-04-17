@@ -33,6 +33,9 @@ class SampleTest(pausable_unittest.TestCase):
 
         os.chdir(dir1)
 
+    def test_version(self):
+        self.assertIsInstance(pausable_unittest.__version__, str, "__version__ should be string")
+
     def test_options(self):
         self.assertEqual(self.assertion_log, self.options.get("test", False))
 

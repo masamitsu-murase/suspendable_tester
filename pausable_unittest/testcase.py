@@ -206,10 +206,18 @@ for name in ("assertTrue", "assertFalse", "assertIsNone", "assertIsNotNone"):
 for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
              "assertIn", "assertNotIn", "assertIsInstance", "assertNotIsInstance",
              "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual",
-             "assertRegexpMatches", "assertNotRegexpMatches", "assertItemsEqual",
+             ("assertRegexpMatches", "assertRegex"),
+             ("assertNotRegexpMatches", "assertNotRegex"),
+             "assertItemsEqual",
              "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
              "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual"):
-    setattr(TestCase, name, log_assertion2(name))
+    if isinstance(name, tuple):
+        if hasattr(unittest.TestCase, name[0]):
+            setattr(TestCase, name[0], log_assertion2(name[0]))
+        else:
+            setattr(TestCase, name[1], log_assertion2(name[1]))
+    else:
+        setattr(TestCase, name, log_assertion2(name))
 
 # assertAlmostEqual(first, second, places=7, msg=None, delta=None)
 # assertNotAlmostEqual(first, second, places=7, msg=None, delta=None)

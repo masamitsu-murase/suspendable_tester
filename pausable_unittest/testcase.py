@@ -208,13 +208,14 @@ for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
              "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual",
              ("assertRegexpMatches", "assertRegex"),
              ("assertNotRegexpMatches", "assertNotRegex"),
-             "assertItemsEqual",
-             "assertDictContainsSubset", "assertMultiLineEqual", "assertSequenceEqual",
+             ("assertItemsEqual", None),
+             ("assertDictContainsSubset", None),
+             "assertMultiLineEqual", "assertSequenceEqual",
              "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual"):
     if isinstance(name, tuple):
         if hasattr(unittest.TestCase, name[0]):
             setattr(TestCase, name[0], log_assertion2(name[0]))
-        else:
+        elif name[1] is not None:
             setattr(TestCase, name[1], log_assertion2(name[1]))
     else:
         setattr(TestCase, name, log_assertion2(name))

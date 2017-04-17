@@ -1,90 +1,90 @@
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
 Reboot!
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 Reboot!
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 ----------------------------------------------------------------------
 Reboot!
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2017-04-18T00:54:50]  INFO -- : Result: success
-[2017-04-18T00:54:50]  INFO -- : End test_chdir (__main__.SampleTest) (2.743000s)
-[2017-04-18T00:54:50]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-18T08:09:04]  INFO -- : Result: success
+[2017-04-18T08:09:04]  INFO -- : End test_chdir (__main__.SampleTest) (2.674000s)
+[2017-04-18T08:09:04]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 test_exec_for_reboot 0
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2017-04-18T00:54:50]  INFO -- : Result: success
-[2017-04-18T00:54:50]  INFO -- : End test_chdir (__main__.SampleTest) (2.743000s)
-[2017-04-18T00:54:50]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:04]  INFO -- : Result: success
+[2017-04-18T08:09:04]  INFO -- : End test_chdir (__main__.SampleTest) (2.674000s)
+[2017-04-18T08:09:04]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 test_exec_for_reboot 1
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2017-04-18T00:54:50]  INFO -- : Result: success
-[2017-04-18T00:54:50]  INFO -- : End test_chdir (__main__.SampleTest) (2.743000s)
-[2017-04-18T00:54:50]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:04]  INFO -- : Result: success
+[2017-04-18T08:09:04]  INFO -- : End test_chdir (__main__.SampleTest) (2.674000s)
+[2017-04-18T08:09:04]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
 test_exec_for_reboot 2
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2017-04-18T00:54:50]  INFO -- : Result: success
-[2017-04-18T00:54:50]  INFO -- : End test_chdir (__main__.SampleTest) (2.743000s)
-[2017-04-18T00:54:50]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:04]  INFO -- : Result: success
+[2017-04-18T08:09:04]  INFO -- : End test_chdir (__main__.SampleTest) (2.674000s)
+[2017-04-18T08:09:04]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2017-04-18T00:54:54]  INFO -- : Result: success
-[2017-04-18T00:54:54]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.069000s)
-[2017-04-18T00:54:54]  INFO -- : Start test_options (__main__.SampleTest)
-[2017-04-18T00:54:54]  INFO -- : Result: success
-[2017-04-18T00:54:54]  INFO -- : End test_options (__main__.SampleTest) (0.005000s)
-[2017-04-18T00:54:54]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-18T08:09:08]  INFO -- : Result: success
+[2017-04-18T08:09:08]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.100000s)
+[2017-04-18T08:09:08]  INFO -- : Start test_options (__main__.SampleTest)
+[2017-04-18T08:09:08]  INFO -- : Result: success
+[2017-04-18T08:09:08]  INFO -- : End test_options (__main__.SampleTest) (0.004000s)
+[2017-04-18T08:09:08]  INFO -- : Start test_reboot (__main__.SampleTest)
 Reboot!
-[2017-04-18T00:54:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2017-04-18T00:54:47]  INFO -- : Result: success
-[2017-04-18T00:54:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.255000s)
-[2017-04-18T00:54:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2017-04-18T00:54:50]  INFO -- : Result: success
-[2017-04-18T00:54:50]  INFO -- : End test_chdir (__main__.SampleTest) (2.743000s)
-[2017-04-18T00:54:50]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2017-04-18T00:54:54]  INFO -- : Result: success
-[2017-04-18T00:54:54]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.069000s)
-[2017-04-18T00:54:54]  INFO -- : Start test_options (__main__.SampleTest)
-[2017-04-18T00:54:54]  INFO -- : Result: success
-[2017-04-18T00:54:54]  INFO -- : End test_options (__main__.SampleTest) (0.005000s)
-[2017-04-18T00:54:54]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2017-04-18T08:09:00]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2017-04-18T08:09:01]  INFO -- : Result: success
+[2017-04-18T08:09:01]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.283000s)
+[2017-04-18T08:09:01]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2017-04-18T08:09:04]  INFO -- : Result: success
+[2017-04-18T08:09:04]  INFO -- : End test_chdir (__main__.SampleTest) (2.674000s)
+[2017-04-18T08:09:04]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2017-04-18T08:09:08]  INFO -- : Result: success
+[2017-04-18T08:09:08]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.100000s)
+[2017-04-18T08:09:08]  INFO -- : Start test_options (__main__.SampleTest)
+[2017-04-18T08:09:08]  INFO -- : Result: success
+[2017-04-18T08:09:08]  INFO -- : End test_options (__main__.SampleTest) (0.004000s)
+[2017-04-18T08:09:08]  INFO -- : Start test_reboot (__main__.SampleTest)
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
@@ -92,17 +92,21 @@ success: test_chdir (__main__.SampleTest)
 success: test_exec_for_reboot (__main__.SampleTest)
 success: test_options (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2017-04-18T00:54:55]  INFO -- : Result: success
-[2017-04-18T00:54:55]  INFO -- : End test_reboot (__main__.SampleTest) (1.317000s)
+[2017-04-18T08:09:09]  INFO -- : Result: success
+[2017-04-18T08:09:09]  INFO -- : End test_reboot (__main__.SampleTest) (1.306000s)
+[2017-04-18T08:09:09]  INFO -- : Start test_version (__main__.SampleTest)
+[2017-04-18T08:09:09]  INFO -- : Result: success
+[2017-04-18T08:09:09]  INFO -- : End test_version (__main__.SampleTest) (0.001000s)
 
 ======================================================================
 Results:
- Ran 5 tests in 9.4s
- success:    5
+ Ran 6 tests in 9.4s
+ success:    6
  failure:    0
    0:[   1.3s] success: test_assert_raises (__main__.SampleTest)
    1:[   2.7s] success: test_chdir (__main__.SampleTest)
    2:[   4.1s] success: test_exec_for_reboot (__main__.SampleTest)
    3:[   0.0s] success: test_options (__main__.SampleTest)
    4:[   1.3s] success: test_reboot (__main__.SampleTest)
+   5:[   0.0s] success: test_version (__main__.SampleTest)
 ======================================================================

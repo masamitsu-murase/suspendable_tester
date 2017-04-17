@@ -45,6 +45,14 @@ class SampleTest(pausable_unittest.TestCase):
             self.assertTrue(start + 1 < end, "start + 1 should be less than end.")
             self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
+    def test_assert_raises(self):
+        num = 1
+        with self.assertRaises(ZeroDivisionError, "msg") as cm:
+            self.reboot()
+            1 / (num - 1)
+        self.assertEqual(type(cm.exception), ZeroDivisionError)
+        self.assertRaises(ZeroDivisionError, lambda x: 1 / x, 0)
+
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "debug":
         pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG,

@@ -6,6 +6,7 @@ import os.path
 import logging
 import inspect
 import functools
+import contextlib
 
 
 __pausable_unittest = True
@@ -27,15 +28,11 @@ def log_assertion1(method_name):
             error = True
             raise
         finally:
-            if not error and self.assertion_log:
+            if not error:
                 frame = inspect.currentframe(1)
-                if msg is None:
-                    msg = "(No message)"
-                self.logger.info("success %s (L%d in '%s'): %s",
-                                 method_name,
-                                 frame.f_lineno,
-                                 os.path.basename(frame.f_code.co_filename),
-                                 msg)
+                self.log_for_assertion(method_name, frame.f_lineno,
+                                       os.path.basename(frame.f_code.co_filename),
+                                       msg)
     return wrapper
 
 
@@ -56,15 +53,11 @@ def log_assertion2(method_name):
             error = True
             raise
         finally:
-            if not error and self.assertion_log:
+            if not error:
                 frame = inspect.currentframe(1)
-                if msg is None:
-                    msg = "(No message)"
-                self.logger.info("success %s (L%d in '%s'): %s",
-                                 method_name,
-                                 frame.f_lineno,
-                                 os.path.basename(frame.f_code.co_filename),
-                                 msg)
+                self.log_for_assertion(method_name, frame.f_lineno,
+                                       os.path.basename(frame.f_code.co_filename),
+                                       msg)
     return wrapper
 
 
@@ -84,15 +77,11 @@ def log_assertion_almost(method_name):
             error = True
             raise
         finally:
-            if not error and self.assertion_log:
+            if not error:
                 frame = inspect.currentframe(1)
-                if msg is None:
-                    msg = "(No message)"
-                self.logger.info("success %s (L%d in '%s'): %s",
-                                 method_name,
-                                 frame.f_lineno,
-                                 os.path.basename(frame.f_code.co_filename),
-                                 msg)
+                self.log_for_assertion(method_name, frame.f_lineno,
+                                       os.path.basename(frame.f_code.co_filename),
+                                       msg)
     return wrapper
 
 
@@ -133,6 +122,81 @@ class TestCase(unittest.TestCase):
     def add_action(method_name, method):
         setattr(TestCase, method_name, method)
 
+    def log_for_assertion(self, method_name, lineno, filename, message):
+        if self.assertion_log:
+            text = "success %s (L%d in '%s')" % (method_name, lineno, filename)
+            if message is not None:
+                text += ": %s" % message
+            self.logger.info(text)
+
+    def assertRaises(self, excClass, callableObj=None, *args, **kwargs):
+        frame = inspect.currentframe(1)
+        lineno = frame.f_lineno
+        filename = frame.f_code.co_filename
+        if (not callable(callableObj)) and (not args) and (not kwargs):
+            @contextlib.contextmanager
+            def helper():
+                error = False
+                msg = callableObj
+                try:
+                    with super(TestCase, self).assertRaises(excClass) as cm:
+                        yield cm
+                except:
+                    error = True
+                    raise
+                finally:
+                    if not error:
+                        self.log_for_assertion("assertRaises", lineno,
+                                               os.path.basename(filename),
+                                               msg)
+            return helper()
+        else:
+            error = False
+            try:
+                super(TestCase, self).assertRaises(excClass, callableObj, *args, **kwargs)
+            except:
+                error = True
+                raise
+            finally:
+                if not error:
+                    self.log_for_assertion("assertRaises", lineno,
+                                           os.path.basename(filename),
+                                           None)
+
+    def assertRaisesRegexp(self, excClass, regexp, callableObj=None, *args, **kwargs):
+        frame = inspect.currentframe(1)
+        lineno = frame.f_lineno
+        filename = frame.f_code.co_filename
+        if (not callable(callableObj)) and (not args) and (not kwargs):
+            @contextlib.contextmanager
+            def helper():
+                error = False
+                msg = callableObj
+                try:
+                    with super(TestCase, self).assertRaisesRegexp(excClass, regexp) as cm:
+                        yield cm
+                except:
+                    error = True
+                    raise
+                finally:
+                    if not error:
+                        self.log_for_assertion("assertRaisesRegexp", lineno,
+                                               os.path.basename(filename),
+                                               msg)
+            return helper()
+        else:
+            error = False
+            try:
+                super(TestCase, self).assertRaisesRegexp(excClass, regexp, callableObj,
+                                                         *args, **kwargs)
+            except:
+                error = True
+                raise
+            finally:
+                if not error:
+                    self.log_for_assertion("assertRaisesRegexp", lineno,
+                                           os.path.basename(filename),
+                                           None)
 
 # 1 parameter
 for name in ("assertTrue", "assertFalse", "assertIsNone", "assertIsNotNone"):
@@ -151,6 +215,33 @@ for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
 # assertNotAlmostEqual(first, second, places=7, msg=None, delta=None)
 for name in ("assertAlmostEqual", "assertNotAlmostEqual"):
     setattr(TestCase, name, log_assertion_almost(name))
+
+
+def _AssertRaises(self, excClass, callableObj=None, *args, **kwargs):
+    if callableObj is None:
+        pass
+    else:
+        error = False
+        try:
+            self.assertRaises(excClass, callableObj, *args, **kwargs)
+        except:
+            error = True
+            raise
+        finally:
+            if not error and self.assertion_log:
+                frame = inspect.currentframe(1)
+                msg = "(No message)"
+                self.logger.info("success %s (L%d in '%s'): %s",
+                                 method_name,
+                                 frame.f_lineno,
+                                 os.path.basename(frame.f_code.co_filename),
+                                 msg)
+
+#         context = _AssertRaisesContext(excClass, self)
+#         if callableObj is None:
+#             return context
+#         with context:
+#             callableObj(*args, **kwargs)
 
 # assertRaises(exc, fun, *args, **kwds)
 # assertRaisesRegexp(exc, r, fun, *args, **kwds)

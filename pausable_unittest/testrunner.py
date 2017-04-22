@@ -18,6 +18,7 @@ from .pauseforwarder import PauseForwarder
 
 BASE_DIR = os.path.abspath(os.getcwd())
 DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
+PICKLE_PROTOCOL_VERSION = 1
 
 def _run_test(con, param):
     test_suite = param[0]
@@ -102,7 +103,7 @@ class TestRunner(object):
         if hasattr(self._continulet, "restorable"):
             if not self._continulet.restorable():
                 raise RestorableError("current tasklet is not restorable")
-        pickled_data = pickle.dumps(self._continulet, pickle.HIGHEST_PROTOCOL)
+        pickled_data = pickle.dumps(self._continulet, PICKLE_PROTOCOL_VERSION)
         with open(filename, "wb") as f:
             f.write(zlib.compress(pickled_data))
 

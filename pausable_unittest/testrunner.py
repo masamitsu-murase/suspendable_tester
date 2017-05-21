@@ -58,7 +58,10 @@ class TestRunner(object):
         exc = None
         while True:
             if exc:
-                pass
+                if os.path.exists(filename):
+                    # This means "failure of exec_for_reboot"
+                    os.remove(filename)
+                    pauser.after_pause()
             elif os.path.exists(filename):
                 self.load_file(filename)
                 pauser.after_pause()

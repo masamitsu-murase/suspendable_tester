@@ -57,6 +57,10 @@ fi
 
 ${python} test/check_simple_runner_result.py
 
+${python} test/test_failure_of_exec_for_reboot.py
+if [ -e teststate.bin ]; then
+    exit 1
+fi
 
 echo ""
 echo OK

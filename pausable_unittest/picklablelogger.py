@@ -105,4 +105,3 @@ class PicklableFileHandler(PicklableHandler):
     def prepare_for_pause(self):
         super(PicklableFileHandler, self).prepare_for_pause()
         self.close()
-

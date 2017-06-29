@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+        // <![CDATA[
+            var start_registered = false;
+            var start = function(){
+                start_registered = false;
+                var url = "ws://localhost:12345/";
+                var ws = new WebSocket(url);
+                ws.onopen = function() {
+                    console.log("open");
+                };
+                ws.onmessage = function(event) {
+                    log(event.data);
+                };
+                ws.onerror = function() {
+                    if (!start_registered) {
+                        console.log("error");
+                        setTimeout(start, 100);
+                        start_registered = true;
+                    }
+                };
+                ws.onclose = function() {
+                    if (!start_registered) {
+                        console.log("close");
+                        setTimeout(start, 100);
+                        start_registered = true;
+                    }
+                };
+            };
+
+            var log = function(text) {
+                document.getElementById("output").innerText += text + "\n";
+            };
+
+            window.onload = function() {
+                start();
+            };
+        // ]]>
+    </script>
+  </head>
+  <body>
+      <div id="output"></div>
+  </body>
+</html>

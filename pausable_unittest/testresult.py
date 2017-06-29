@@ -5,6 +5,10 @@ import traceback
 import logging
 import time
 from . import picklablelogger
+try:
+    from . import websocketlogger
+except ImportError:
+    websocketlogger = None
 
 
 class TestResult(object):
@@ -22,6 +26,8 @@ class TestResult(object):
         self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
         if filename != False:
             self.logger.addHandler(picklablelogger.PicklableFileHandler(filename))
+        if websocketlogger:
+            self.logger.addHandler(websocketlogger.PicklableWebSocketHandler())
 
         self.assertion_log = assertion_log
 

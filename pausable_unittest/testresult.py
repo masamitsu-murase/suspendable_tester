@@ -17,7 +17,8 @@ class TestResult(object):
         self.failFast = False
         self.pausable_runner = None
 
-        self.logger = logging.getLogger("pausable_unittest")
+        logging_manager = logging.Manager(logging.RootLogger(logging.WARNING))
+        self.logger = logging_manager.getLogger("pausable_unittest")
         self.logger.setLevel(loglevel)
         self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
         if filename != False:

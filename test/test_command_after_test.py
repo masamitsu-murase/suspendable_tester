@@ -6,6 +6,16 @@ sys.path.append(ROOT_DIR)
 
 import pausable_unittest
 import testpauser
+import logging
+
+class NullHandler(logging.Handler):
+    """A Handler that does nothing."""
+    def emit(self, record):
+        pass
+
+# logger shares Logger.manager, so it prevents pickle.
+logger = logging.getLogger("another_log")
+logger.addHandler(NullHandler())
 
 class SampleTest(pausable_unittest.TestCase):
     def test_dummy(self):

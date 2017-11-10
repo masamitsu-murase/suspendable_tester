@@ -16,7 +16,7 @@ class SampleTest(pausable_unittest.TestCase):
         self.reboot()
         end = time.time()
         margin = 2
-        self.assertTrue(start + 1 < end, "start + 1 should be less than end.")
+        self.assertTrue(start + 0.75 < end, "start + 0.75 should be less than end.")
         self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
     def test_chdir(self):
@@ -42,10 +42,13 @@ class SampleTest(pausable_unittest.TestCase):
     def test_exec_for_reboot(self):
         for i in range(3):
             start = time.time()
-            self.exec_for_reboot("bash -c 'echo test_exec_for_reboot %d'" % i)
+            if sys.platform == "win32":
+                self.exec_for_reboot("cmd /c echo test_exec_for_reboot %d" % i)
+            else:
+                self.exec_for_reboot("bash -c 'echo test_exec_for_reboot %d'" % i)
             end = time.time()
             margin = 2
-            self.assertTrue(start + 1 < end, "start + 1 should be less than end.")
+            self.assertTrue(start + 0.75 < end, "start + 0.75 should be less than end." )
             self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
     def test_assert_raises(self):

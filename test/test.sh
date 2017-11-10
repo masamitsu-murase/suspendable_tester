@@ -4,7 +4,7 @@ if [ -z ${python+x} ]; then
 fi
 echo ${python}
 
-rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
+rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt test/test_result_simple.txt
 
 # test.py
 for i in {0..7}
@@ -43,14 +43,12 @@ if [ -e teststate.bin ]; then
     exit 1
 fi
 
-rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt
-
-${python} test/test_simple_runner.py | tee -a test/test_result.txt
+${python} test/test_simple_runner.py | tee -a test/test_result_simple.txt
 if [ ! -e teststate.bin ]; then
     exit 1
 fi
 
-${python} test/test_simple_runner.py | tee -a test/test_result.txt
+${python} test/test_simple_runner.py | tee -a test/test_result_simple.txt
 if [ -e teststate.bin ]; then
     exit 1
 fi

@@ -74,3 +74,4 @@ set /P x=.<NUL
 
 echo.
 echo OK
+exit /b 0

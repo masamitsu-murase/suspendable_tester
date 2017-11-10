@@ -1,5 +1,6 @@
 @echo off
 
+set python=%1
 if "%1"=="" (
     set python=pypy --jit off -B
 )

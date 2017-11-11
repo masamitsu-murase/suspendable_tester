@@ -2,3 +2,4 @@
 /log*.txt
 /test/test_result.txt
 /test/test_result_info.txt
+/test/test_result_simple.txt

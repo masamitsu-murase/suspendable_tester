@@ -4,7 +4,23 @@ if [ -z ${python+x} ]; then
 fi
 echo ${python}
 
-rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt test/test_result_simple.txt
+rm -f test/test_result.txt teststate.bin command_after_test.txt test/test_result_info.txt test/test_result_simple.txt test/test_result_general.txt
+
+${python} test/test_pause_while_exception_handling.py | tee -a test/test_result_general.txt
+if [ ! -e teststate.bin ]; then
+    exit 1
+fi
+${python} test/test_pause_while_exception_handling.py | tee -a test/test_result_general.txt
+if [ ! -e teststate.bin ]; then
+    exit 1
+fi
+${python} test/test_pause_while_exception_handling.py | tee -a test/test_result_general.txt
+if [ -e teststate.bin ]; then
+    exit 1
+fi
+
+${python} test/check_general_result.py 2
+rm -f test/test_result_general.txt
 
 # test.py
 for i in {0..7}

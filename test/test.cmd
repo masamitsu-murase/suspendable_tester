@@ -6,7 +6,18 @@ if "%1"=="" (
 )
 echo Using %python%
 
-del test\test_result.txt teststate.bin command_after_test.txt test\test_result_info.txt test\test_result_simple.txt > NUL 2>&1
+del test\test_result.txt teststate.bin command_after_test.txt test\test_result_info.txt test\test_result_simple.txt test\test_result_general.txt > NUL 2>&1
+
+%python% test/test_pause_while_exception_handling.py >> test/test_result_general.txt
+if NOT EXIST teststate.bin exit /b 1
+%python% test/test_pause_while_exception_handling.py >> test/test_result_general.txt
+if NOT EXIST teststate.bin exit /b 1
+%python% test/test_pause_while_exception_handling.py >> test/test_result_general.txt
+if EXIST teststate.bin exit /b 1
+
+%python% test/check_general_result.py 2
+del test\test_result_general.txt
+set /P x=.<NUL
 
 rem test.py
 for /l %%i in (0, 1, 7) do (

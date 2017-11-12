@@ -2,6 +2,7 @@
 # Pausable Unittest
 
 [![Build Status](https://travis-ci.org/masamitsu-murase/pausable_unittest.svg?branch=master)](https://travis-ci.org/masamitsu-murase/pausable_unittest)
+[![Build status](https://ci.appveyor.com/api/projects/status/5n4gt33gmd9clo0m/branch/master?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/pausable-unittest/branch/master)
 
 ## 概要
 

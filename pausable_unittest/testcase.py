@@ -54,7 +54,7 @@ def _clear_unnecessary_locals():
     try:
         while frame:
             locals_hash = frame.f_locals
-            if locals_hash and "__tag_for_clear_unnecessary_locals" in locals_hash:
+            if locals_hash and "_tag_for_clear_unnecessary_locals" in locals_hash:
                 break
             target_frames.append(frame)
             frame = frame.f_back
@@ -161,7 +161,7 @@ def log_assertion_almost(method_name):
 
 class TestCase(unittest.TestCase):
     def run(self, result):
-        __tag_for_clear_unnecessary_locals = None
+        _tag_for_clear_unnecessary_locals = None
         self.__result = result
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger

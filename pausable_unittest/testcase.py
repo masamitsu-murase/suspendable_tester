@@ -7,9 +7,74 @@ import logging
 import inspect
 import functools
 import contextlib
+import ctypes
+import sys
 
+try:
+    import stackless
+    import stackless._wrap as stackless_wrap
+except ImportError:
+    stackless_wrap = None
 
 __pausable_unittest = True
+
+def _find_traceback_in_frame(frame):
+    if stackless_wrap and hasattr(stackless_wrap, "frame"):
+        # Really hacking code...
+        # See prickelpit.c
+        obj = stackless_wrap.frame.__reduce__(frame)
+        try:
+            for traceback in reversed(obj[-1][-1]):
+                if inspect.istraceback(traceback):
+                    return traceback
+        except:
+            pass
+    return None
+
+def _clear_locals_in_traceback(traceback, target_frames):
+    frame = traceback.tb_frame
+    if frame is None or frame in target_frames:
+        return
+
+    new_hash = {}
+    for key in frame.f_locals:
+        new_hash[key] = None
+    if hasattr(ctypes, "pythonapi") and hasattr(ctypes.pythonapi, "PyFrame_LocalsToFast"):
+        frame.f_locals.update(new_hash)
+        ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(0))
+    elif '__pypy__' in sys.builtin_module_names:
+        import __pypy__
+        if hasattr(__pypy__, "locals_to_fast"):
+            frame.f_locals.update(new_hash)
+            __pypy__.locals_to_fast(frame)
+
+def _clear_unnecessary_locals():
+    frame = inspect.currentframe().f_back
+    target_frames = []
+    try:
+        while frame:
+            locals_hash = frame.f_locals
+            if locals_hash and "__tag_for_clear_unnecessary_locals" in locals_hash:
+                break
+            target_frames.append(frame)
+            frame = frame.f_back
+        traceback = sys.exc_info()[2]
+        try:
+            if traceback:
+                while traceback:
+                    _clear_locals_in_traceback(traceback, target_frames)
+                    traceback = traceback.tb_next
+            for frame in target_frames:
+                traceback = _find_traceback_in_frame(frame)
+                while traceback:
+                    _clear_locals_in_traceback(traceback, target_frames)
+                    traceback = traceback.tb_next
+        finally:
+            del traceback
+    finally:
+        del frame
+        del target_frames
+
 
 def log_assertion1(method_name):
     u"""
@@ -96,6 +161,7 @@ def log_assertion_almost(method_name):
 
 class TestCase(unittest.TestCase):
     def run(self, result):
+        __tag_for_clear_unnecessary_locals = None
         self.__result = result
         self.__pause_forwarder = result.pause_forwarder
         self.__logger = result.logger
@@ -106,19 +172,21 @@ class TestCase(unittest.TestCase):
 
     def pause(self, info=None):
         self.__result.before_pause(info)
-        status = self.extra_status()
+        status = self._extra_status()
+
+        _clear_unnecessary_locals()
 
         self.__pause_forwarder.pause(info)
 
-        self.restore_extra_status(status)
+        self._restore_extra_status(status)
         self.__result.after_pause(info)
 
-    def extra_status(self):
+    def _extra_status(self):
         status = {}
         status["cwd"] = os.path.abspath(os.getcwd())
         return status
 
-    def restore_extra_status(self, status):
+    def _restore_extra_status(self, status):
         try:
             os.chdir(status["cwd"])
         except:

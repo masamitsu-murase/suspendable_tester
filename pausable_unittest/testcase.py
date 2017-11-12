@@ -32,21 +32,24 @@ def _find_traceback_in_frame(frame):
     return None
 
 def _clear_locals_in_traceback(traceback, target_frames):
-    frame = traceback.tb_frame
-    if frame is None or frame in target_frames:
-        return
+    try:
+        frame = traceback.tb_frame
+        if frame is None or frame in target_frames:
+            return
 
-    new_hash = {}
-    for key in frame.f_locals:
-        new_hash[key] = None
-    if hasattr(ctypes, "pythonapi") and hasattr(ctypes.pythonapi, "PyFrame_LocalsToFast"):
-        frame.f_locals.update(new_hash)
-        ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(0))
-    elif '__pypy__' in sys.builtin_module_names:
-        import __pypy__
-        if hasattr(__pypy__, "locals_to_fast"):
+        new_hash = {}
+        for key in frame.f_locals:
+            new_hash[key] = None
+        if hasattr(ctypes, "pythonapi") and hasattr(ctypes.pythonapi, "PyFrame_LocalsToFast"):
             frame.f_locals.update(new_hash)
-            __pypy__.locals_to_fast(frame)
+            ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(0))
+        elif '__pypy__' in sys.builtin_module_names:
+            import __pypy__
+            if hasattr(__pypy__, "locals_to_fast"):
+                frame.f_locals.update(new_hash)
+                __pypy__.locals_to_fast(frame)
+    finally:
+        del frame
 
 def _clear_unnecessary_locals():
     frame = inspect.currentframe().f_back

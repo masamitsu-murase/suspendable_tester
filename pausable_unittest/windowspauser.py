@@ -119,6 +119,14 @@ class Pauser(pausable_unittest.BasePauser):
             self.pause(("exec_for_reboot", command, expected_exitcode, register_startup))
         self.add_action("exec_for_reboot", exec_for_reboot)
 
+        def bat_path(self):
+            return self.call_pauser_callback("bat_path")
+        self.add_action("bat_path", bat_path)
+
+        def create_bat(self):
+            self.call_pauser_callback("create_bat")
+        self.add_action("create_bat", create_bat)
+
     def do_pause(self, info):
         if info[0] == "reboot":
             self.register_startup()
@@ -138,7 +146,14 @@ class Pauser(pausable_unittest.BasePauser):
             elif expected_exitcode is not None:
                 if ret != expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
-
+    
     def after_pause(self):
         self.unregister_startup()
 
+    def exec_callback(self, action, info):
+        if action == "create_bat":
+            return self.create_bat()
+        elif action == "bat_path":
+            return self.bat_path()
+        else:
+            return super(Pauser, self).exec_callback(action, info)

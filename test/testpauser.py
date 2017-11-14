@@ -18,6 +18,14 @@ class Pauser(pausable_unittest.BasePauser):
             self.pause(("exec_for_reboot", command, expected_exitcode))
         self.add_action("exec_for_reboot", exec_for_reboot)
 
+        def bat_path(self, base_dir):
+            return self.call_pauser_callback("bat_path", base_dir)
+        self.add_action("bat_path", bat_path)
+
+        def create_bat(self):
+            return self.call_pauser_callback("create_bat")
+        self.add_action("create_bat", create_bat)
+
 
     def do_pause(self, info):
         # for consistent output of travis ci.
@@ -40,3 +48,16 @@ class Pauser(pausable_unittest.BasePauser):
                 if ret != expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
 
+    def bat_path(self, base_dir):
+        return base_dir + "_sample"
+
+    def create_bat(self):
+        pass
+
+    def exec_callback(self, action, info):
+        if action == "bat_path":
+            return self.bat_path(info)
+        elif action == "create_bat":
+            return self.create_bat()
+        else:
+            super(Pauser, self).exec_callback(action, info)

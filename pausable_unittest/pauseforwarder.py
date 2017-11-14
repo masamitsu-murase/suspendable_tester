@@ -5,7 +5,11 @@ class PauseForwarder(object):
         self.__con = con
 
     def pause(self, info=None):
-        exc = self.__con.switch(("pause", info))
+        return self.exec_callback("pause", info)
+
+    def exec_callback(self, action, info=None):
+        ret_value, exc = self.__con.switch((action, info))
         if exc:
             raise exc
+        return ret_value
 

@@ -55,22 +55,28 @@ class TestRunner(object):
         if not os.path.isabs(filename):
             filename = os.path.abspath(filename)
 
+        ret_value = None
         exc = None
+        first_run = False
         while True:
             if exc:
                 if os.path.exists(filename):
-                    # This means "failure of exec_for_reboot"
+                    # This means "failure of do_pause"
                     os.remove(filename)
                     pauser.after_pause()
             elif os.path.exists(filename):
                 self.load_file(filename)
                 pauser.after_pause()
             else:
+                # New test
                 continulet_args = (test_suite, log_filename, loglevel,
                                    assertion_log, options)
                 self._continulet = continulet(_run_test, continulet_args)
-            action, info = self.run_continulet(exc)
+                first_run = True
+            action, info = self.run_continulet(ret_value, exc, pauser, first=first_run)
+            ret_value = None
             exc = None
+            first_run = False
 
             if action == "pause":
                 try:
@@ -81,12 +87,13 @@ class TestRunner(object):
 
             try:
                 if action == "pause":
-                    pauser.do_pause(info)
+                    ret_value = pauser.do_pause(info)
                 elif action == "finish":
                     if hasattr(pauser, "do_finish"):
                         pauser.do_finish()
             except:
                 exc = sys.exc_info()[1]
+                sys.exc_clear()
             else:
                 break
 
@@ -110,22 +117,21 @@ class TestRunner(object):
         with open(filename, "wb") as f:
             f.write(zlib.compress(pickled_data))
 
-    def exec_callback(self, action, info):
-        if action in self._callback:
-            for func in self._callback[action]:
-                func(info)
-
-    def add_callback(self, action, function):
-        if action in self._callback:
-            self._callback[action].append(function)
-        else:
-            self._callback[action] = [ function ]
-
-    def run_continulet(self, exc):
+    def run_continulet(self, ret_value, exc, pauser, first=False):
         while True:
-            action, info = self._continulet.switch(exc)
+            if first:
+                action, info = self._continulet.switch(None)
+                first = False
+            else:
+                action, info = self._continulet.switch((ret_value, exc))
             exc = None
-            self.exec_callback(action, info)
+            ret_value = None
+
             if action in ("finish", "pause"):
                 return (action, info)
-
+            else:
+                try:
+                    ret_value = pauser.exec_callback(action, info)
+                except:
+                    exc = sys.exc_info()[1]
+                    sys.exc_clear()

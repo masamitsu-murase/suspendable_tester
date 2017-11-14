@@ -179,10 +179,14 @@ class TestCase(unittest.TestCase):
 
         _clear_unnecessary_locals()
 
-        self.__pause_forwarder.pause(info)
-
-        self._restore_extra_status(status)
+        try:
+            self.__pause_forwarder.pause(info)
+        finally:
+            self._restore_extra_status(status)
         self.__result.after_pause(info)
+
+    def call_pauser_callback(self, action, info=None):
+        return self.__pause_forwarder.exec_callback(action, info)
 
     def _extra_status(self):
         status = {}

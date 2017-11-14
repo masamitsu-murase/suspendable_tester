@@ -76,5 +76,11 @@ if [ -e teststate.bin ]; then
     exit 1
 fi
 
+${python} test/test_exec_callback.py | tee test/test_result_general.txt
+if [ -e teststate.bin ]; then
+    exit 1
+fi
+${python} test/check_general_result.py 1
+
 echo ""
 echo OK

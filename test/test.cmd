@@ -83,6 +83,14 @@ if EXIST teststate.bin exit /b 1
 set /P x=.<NUL
 
 
+%python% test/test_exec_callback.py > test/test_result_general.txt
+if ERRORLEVEL 1 exit /b 1
+if EXIST teststate.bin exit /b 1
+%python% test/check_general_result.py 1
+if ERRORLEVEL 1 exit /b 1
+
+set /P x=.<NUL
+
 echo.
 echo OK
 exit /b 0

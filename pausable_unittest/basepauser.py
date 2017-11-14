@@ -18,3 +18,5 @@ class BasePauser(object):
     def after_pause(self):
         pass
 
+    def exec_callback(self, action, info):
+        raise NotImplementedError(action)

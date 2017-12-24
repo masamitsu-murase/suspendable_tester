@@ -76,7 +76,6 @@ class Pauser(pausable_unittest.BasePauser):
             if os.path.exists(path):
                 os.remove(path)
 
-    @property
     def bat_path(self):
         return BAT_PATH
 

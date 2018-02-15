@@ -18,6 +18,16 @@ except ImportError:
 
 __pausable_unittest = True
 
+def safe_repr(obj, short=False):
+    max_length = 40
+    try:
+        result = repr(obj)
+    except Exception:
+        result = object.__repr__(obj)
+    if not short or len(result) < max_length:
+        return result
+    return result[:max_length] + ' [truncated]...'
+
 def _find_traceback_in_frame(frame):
     if stackless_wrap and hasattr(stackless_wrap, "frame"):
         # Really hacking code...
@@ -91,6 +101,10 @@ def log_assertion1(method_name):
     def wrapper(self, arg, msg=None):
         error = False
         log_assertion_calling = self._log_assertion_calling
+        if msg is None:
+            msg = safe_repr(arg)
+        else:
+            msg = "%s (%s)" % (msg, safe_repr(arg))
         try:
             self._log_assertion_calling = True
             method(self, arg, msg)
@@ -119,6 +133,10 @@ def log_assertion2(method_name):
     def wrapper(self, first, second, msg=None):
         error = False
         log_assertion_calling = self._log_assertion_calling
+        if msg is None:
+            msg = "%s, %s" % (safe_repr(first), safe_repr(second))
+        else:
+            msg = "%s (%s, %s)" % (msg, safe_repr(first), safe_repr(second))
         try:
             self._log_assertion_calling = True
             method(self, first, second, msg)
@@ -146,6 +164,10 @@ def log_assertion_almost(method_name):
     def wrapper(self, first, second, places=7, msg=None, delta=None):
         error = False
         log_assertion_calling = self._log_assertion_calling
+        if msg is None:
+            msg = "%s, %s" % (safe_repr(first), safe_repr(second))
+        else:
+            msg = "%s (%s, %s)" % (msg, safe_repr(first), safe_repr(second))
         try:
             self._log_assertion_calling = True
             return method(self, first, second, places, msg, delta)

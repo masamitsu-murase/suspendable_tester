@@ -15,7 +15,7 @@ class SampleTest(pausable_unittest.TestCase):
         start = time.time()
         self.reboot()
         end = time.time()
-        margin = 2
+        margin = 3
         self.assertTrue(start + 0.75 < end, "start + 0.75 should be less than end.")
         self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 
@@ -23,13 +23,15 @@ class SampleTest(pausable_unittest.TestCase):
         dir1 = os.path.abspath(os.getcwd())
         self.reboot()
         dir2 = os.path.abspath(os.getcwd())
-        self.assertEqual(dir1, dir2)
+        # self.assertEqual(dir1, dir2)
+        self.assertTrue(dir1 == dir2)  # Keep independency of the test code.
 
         os.chdir(os.path.pardir)
         dir3 = os.path.abspath(os.getcwd())
         self.reboot()
         dir4 = os.path.abspath(os.getcwd())
-        self.assertEqual(dir3, dir4)
+        # self.assertEqual(dir3, dir4)
+        self.assertTrue(dir3 == dir4)  # Keep independency of the test code
 
         os.chdir(dir1)
 
@@ -47,7 +49,7 @@ class SampleTest(pausable_unittest.TestCase):
             else:
                 self.exec_for_reboot("bash -c 'echo test_exec_for_reboot %d'" % i)
             end = time.time()
-            margin = 2
+            margin = 3
             self.assertTrue(start + 0.75 < end, "start + 0.75 should be less than end." )
             self.assertTrue(start + 1 + margin > end, "start + 1 + margin should be more than end.")
 

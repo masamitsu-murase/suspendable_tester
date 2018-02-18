@@ -2,7 +2,7 @@
 
 # The MIT License (MIT)
 
-# Copyright (c) 2016-2017 Masamitsu MURASE
+# Copyright (c) 2016-2018 Masamitsu MURASE
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 # and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -23,7 +23,7 @@ from .testrunner import TestRunner
 from .testcase import TestCase
 from .basepauser import BasePauser
 
-__version__ = "1.3.1"
+__version__ = "1.3.2"
 
 def main(pauser, filename="teststate.bin", command_after_test=None,
          log_filename=None, loglevel=None, assertion_log=False,

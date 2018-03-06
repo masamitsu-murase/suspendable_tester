@@ -3,7 +3,18 @@
 set python=%1
 if "%1"=="" (
     set python=pypy --jit off -B
+    goto START_TEST
 )
+
+REM download python from Single Binary Stackless Python
+if EXIST C:\Ruby23\bin\ruby.exe (
+    set RUBY_EXE=C:\Ruby23\bin\ruby.exe
+) else (
+    set RUBY_EXE=ruby.exe
+)
+%RUBY_EXE% test\download_python.rb %python%
+
+:START_TEST
 echo Using %python%
 
 del test\test_result.txt teststate.bin command_after_test.txt test\test_result_info.txt test\test_result_simple.txt test\test_result_general.txt > NUL 2>&1

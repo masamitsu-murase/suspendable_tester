@@ -7,7 +7,10 @@ import logging
 import inspect
 import functools
 import contextlib
-import ctypes
+try:
+    import ctypes
+except ImportError:
+    ctypes = None
 import sys
 
 try:

@@ -6,6 +6,7 @@ import sys
 import subprocess
 import tempfile
 import ctypes
+from .utils import winutils
 
 TASK_NAME = "pausable_unittest"
 BASE_DIR = os.path.abspath(os.getcwd())
@@ -37,29 +38,9 @@ class Pauser(pausable_unittest.BasePauser):
 
     def register_admin_startup(self):
         try:
-            user = os.environ["USERNAME"]
-            command = [ "schtasks.exe", "/Create", "/RU", user, "/SC", "ONLOGON", "/TN", TASK_NAME, "/TR", '"' + BAT_PATH + '"', "/F", "/RL", "HIGHEST" ]
-            self.check_call(command)
-
-            command = [ "schtasks.exe", "/Query", "/TN", TASK_NAME, "/XML", "ONE" ]
-            xml = self.check_output(command)
-            xml = xml.replace("<DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>",
-                              "<DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>")
-            xml = xml.replace("<StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>",
-                              "<StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>")
-
-            with tempfile.NamedTemporaryFile(dir=BASE_DIR, delete=False) as xml_file:
-                xml_file.write(xml)
-                xml_file.close()
-                xml_filename = xml_file.name
-
-            try:
-                command = [ "schtasks.exe", "/Create", "/TN", TASK_NAME, "/F", "/XML", xml_filename ]
-                self.check_call(command)
-            finally:
-                os.remove(xml_filename)
-        except:
-            self.unregister_startup()
+            winutils.register_schtasks(TASK_NAME, BAT_PATH, os.environ["USERNAME"], None, True)
+       except:
+            winutils.unregister_schtasks(TASK_NAME)
 
 
     def nonadmin_startup_filepath(self):

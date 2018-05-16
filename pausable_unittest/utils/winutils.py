@@ -29,6 +29,8 @@ def register_schtasks(task_name, path, user, password=None, admin=True):
 
     try:
         command = ["schtasks.exe", "/Create", "/TN", task_name, "/F", "/XML", xml_filename]
+        if password:
+            command += ["/RU", user, "/RP", password]
         subprocess.check_output(command, stderr=subprocess.STDOUT)
     finally:
         os.remove(xml_filename)

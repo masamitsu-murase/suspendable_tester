@@ -7,6 +7,7 @@ import logging
 import inspect
 import functools
 import contextlib
+import traceback as traceback_lib
 try:
     import ctypes
 except ImportError:
@@ -65,6 +66,14 @@ def _clear_locals_in_traceback(traceback, target_frames):
         del frame
 
 def _clear_unnecessary_locals():
+    # For Stackless Python 3.6
+    if hasattr(traceback_lib, "clear_frames"):
+        traceback = sys.exc_info()[2]
+        if traceback:
+            traceback_lib.clear_frames(traceback)
+            return
+
+    # For Stackless Python 2.7
     frame = inspect.currentframe().f_back
     target_frames = []
     try:

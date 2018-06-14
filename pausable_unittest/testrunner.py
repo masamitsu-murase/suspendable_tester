@@ -93,7 +93,6 @@ class TestRunner(object):
                         pauser.do_finish()
             except:
                 exc = sys.exc_info()[1]
-                sys.exc_clear()
             else:
                 break
 
@@ -134,4 +133,3 @@ class TestRunner(object):
                     ret_value = pauser.exec_callback(action, info)
                 except:
                     exc = sys.exc_info()[1]
-                    sys.exc_clear()

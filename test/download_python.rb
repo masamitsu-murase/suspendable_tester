@@ -31,6 +31,8 @@ def main(python_exe_name, python_version)
         res = get("https://api.github.com/repos/masamitsu-murase/single_binary_stackless_python/releases/latest")
     end
     latest_release_info = JSON.parse(res.body)
+    require "pp"
+    pp latest_release_info
 
     puts "Finding #{python_exe_name}..."
     exe_url = latest_release_info["assets"].find{ |i| i["name"] == python_exe_name }["browser_download_url"]

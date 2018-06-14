@@ -1,3 +1,6 @@
+clone_depth: 5
+image:
+  - Visual Studio 2015
 environment:
   github_key:
     secure: djkJ7PAcpttmIyTDPeev5f1G/RkDQ1EZPhJNHZiWVQDe9VRFTWnndhmnkFW4oyAF

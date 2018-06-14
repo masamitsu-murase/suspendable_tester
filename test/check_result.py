@@ -2,6 +2,7 @@
 import os
 import os.path
 import re
+import sys
 
 def format_str(str):
     str = str.replace("\r\n", "\n")
@@ -32,6 +33,9 @@ def check(expected_result, actual_result):
         print("ERROR")
         exit(1)
 
-check("expected_test_result.txt", "test_result.txt")
-check("expected_test_result_info.txt", "test_result_info.txt")
-
+if sys.version_info[0] == 3:
+    check("expected_test_result_py3.txt", "test_result.txt")
+    check("expected_test_result_info_py3.txt", "test_result_info.txt")
+else:
+    check("expected_test_result.txt", "test_result.txt")
+    check("expected_test_result_info.txt", "test_result_info.txt")

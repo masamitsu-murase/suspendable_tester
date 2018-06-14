@@ -23,9 +23,13 @@ def get(url, header=nil, limit=10)
     end
 end
 
-def main(python_exe_name)
+def main(python_exe_name, python_version)
     puts "Getting latest release information..."
-    res = get("https://api.github.com/repos/masamitsu-murase/single_binary_stackless_python/releases/latest")
+    if python_version == "2"
+        res = get("https://api.github.com/repos/masamitsu-murase/single_binary_stackless_python/releases/10437463")
+    else
+        res = get("https://api.github.com/repos/masamitsu-murase/single_binary_stackless_python/releases/latest")
+    end
     latest_release_info = JSON.parse(res.body)
 
     puts "Finding #{python_exe_name}..."
@@ -36,4 +40,4 @@ def main(python_exe_name)
     File.binwrite(python_exe_name, res.body.b)
 end
 
-main(ARGV[0])
+main(ARGV[0], ARGV[1])

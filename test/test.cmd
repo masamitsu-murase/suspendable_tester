@@ -12,7 +12,11 @@ if EXIST C:\Ruby23\bin\ruby.exe (
 ) else (
     set RUBY_EXE=ruby.exe
 )
-%RUBY_EXE% test\download_python.rb %python%
+if "%2"=="2" (
+    %RUBY_EXE% test\download_python.rb %python% 2
+) else if "%2"=="3" (
+    %RUBY_EXE% test\download_python.rb %python% 3
+)
 
 :START_TEST
 echo Using %python%

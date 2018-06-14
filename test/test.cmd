@@ -31,6 +31,7 @@ if NOT EXIST teststate.bin exit /b 1
 if EXIST teststate.bin exit /b 1
 
 %python% test/check_general_result.py 2
+if ERRORLEVEL 1 exit /b 1
 del test\test_result_general.txt
 set /P x=.<NUL
 

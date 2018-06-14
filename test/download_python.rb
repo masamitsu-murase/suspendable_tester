@@ -13,6 +13,9 @@ def get(url, header=nil, limit=10)
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     res = http.start do |h|
         req = Net::HTTP::Get.new(url.request_uri, header)
+        if ENV.key?("github_key")
+            req.basic_auth "masamitsu-murase", ENV["github_key"]
+        end
         h.request(req)
     end
 

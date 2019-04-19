@@ -4,7 +4,6 @@ import os
 import os.path
 import sys
 import subprocess
-import tempfile
 import ctypes
 from .utils import winutils
 
@@ -34,19 +33,17 @@ class Pauser(pausable_unittest.BasePauser):
         return (ctypes.windll.shell32.IsUserAnAdmin() != 0)
 
     def system_reboot(self):
-        self.check_call([ "shutdown.exe", "/r", "/t", "5" ])
+        self.check_call(["shutdown.exe", "/r", "/t", "5"])
 
     def register_admin_startup(self):
         try:
             winutils.register_schtasks(TASK_NAME, BAT_PATH, os.environ["USERNAME"], None, True)
-       except:
+        except:
             winutils.unregister_schtasks(TASK_NAME)
-
 
     def nonadmin_startup_filepath(self):
         startup_folder = os.path.join(os.environ["APPDATA"], r'Microsoft\Windows\Start Menu\Programs\Startup')
         return os.path.join(startup_folder, "pausable_unittest.bat")
-
 
     def register_nonadmin_startup(self):
         path = self.nonadmin_startup_filepath()

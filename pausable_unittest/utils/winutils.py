@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 import os
 
+
 def register_schtasks(task_name, path, user, password=None, admin=True):
     command = ["schtasks.exe", "/Create", "/RU", user]
     if password:
@@ -16,13 +17,13 @@ def register_schtasks(task_name, path, user, password=None, admin=True):
     subprocess.check_output(command, stderr=subprocess.STDOUT)
 
     command = ["schtasks.exe", "/Query", "/TN", task_name, "/XML", "ONE"]
-    xml = subprocess.check_output(command, stderr=subprocess.STDOUT)
+    xml = subprocess.check_output(command, stderr=subprocess.STDOUT, universal_newlines=True)
     xml = xml.replace("<DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>",
-                        "<DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>")
+                      "<DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>")
     xml = xml.replace("<StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>",
-                        "<StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>")
+                      "<StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>")
 
-    with tempfile.NamedTemporaryFile(delete=False) as xml_file:
+    with tempfile.NamedTemporaryFile(delete=False, mode="w") as xml_file:
         xml_file.write(xml)
         xml_file.close()
         xml_filename = xml_file.name

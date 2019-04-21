@@ -40,6 +40,7 @@ class Pauser(pausable_unittest.BasePauser):
             winutils.register_schtasks(TASK_NAME, BAT_PATH, os.environ["USERNAME"], None, True)
         except:
             winutils.unregister_schtasks(TASK_NAME)
+            raise
 
     def nonadmin_startup_filepath(self):
         startup_folder = os.path.join(os.environ["APPDATA"], r'Microsoft\Windows\Start Menu\Programs\Startup')
@@ -53,6 +54,7 @@ class Pauser(pausable_unittest.BasePauser):
         except:
             if os.path.exists(path):
                 os.remove(path)
+            raise
 
     def bat_path(self):
         return BAT_PATH

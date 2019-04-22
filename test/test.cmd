@@ -1,5 +1,3 @@
-where timeout
-timeout --help
 @echo off
 
 set python=%1
@@ -41,13 +39,13 @@ rem test.py
 for /l %%i in (0, 1, 7) do (
     %python% test/test.py debug >> test/test_result.txt
     if ERRORLEVEL 1 exit /b 1
-    timeout /T 1 /NOBREAK > NUL
+    %SystemRoot%\System32\timeout /T 1 /NOBREAK > NUL
 )
 
 for /l %%i in (0, 1, 7) do (
     %python% test/test.py >> test/test_result_info.txt
     if ERRORLEVEL 1 exit /b 1
-    timeout /T 1 /NOBREAK > NUL
+    %SystemRoot%\System32\timeout /T 1 /NOBREAK > NUL
 )
 
 %python% test/check_result.py > NUL

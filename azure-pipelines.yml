@@ -1,0 +1,24 @@
+
+jobs:
+- job: windows
+  displayName: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: git config --global core.autoCRLF false
+    displayName: "Disable git autoCRLF"
+  - checkout: self
+    displayName: "Checkout"
+    fetchDepth: 50
+  - script: cmd /c test\test.cmd python.exe 2
+    displayName: python2
+  - script: cmd /c test\test.cmd python64.exe 2
+    displayName: python2 64
+  - script: cmd /c test\test.cmd python64_pe.exe 2
+    displayName: python2 64_pe
+  - script: cmd /c test\test.cmd python.exe 3
+    displayName: python
+  - script: cmd /c test\test.cmd python64.exe 3
+    displayName: python64
+  - script: cmd /c test\test.cmd python64_pe.exe 3
+    displayName: python64_pe

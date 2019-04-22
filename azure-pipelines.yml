@@ -10,9 +10,9 @@ jobs:
   - checkout: self
     displayName: "Checkout"
     fetchDepth: 50
-  - sctipt: cmd /c test\test.cmd python.exe 3
+  - script: cmd /c test\test.cmd python.exe 3
     displayName: python
-  - sctipt: cmd /c test\test.cmd python64.exe 3
+  - script: cmd /c test\test.cmd python64.exe 3
     displayName: python64
-  - sctipt: cmd /c test\test.cmd python64_pe.exe 3
+  - script: cmd /c test\test.cmd python64_pe.exe 3
     displayName: python64_pe

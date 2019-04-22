@@ -1,3 +1,5 @@
+where timeout
+timeout --help
 @echo off
 
 set python=%1

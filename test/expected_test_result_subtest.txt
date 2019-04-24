@@ -1,0 +1,80 @@
+[2019-04-25T08:38:14]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-25T08:38:14]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:14]  INFO -- : End test_exception (__main__.SubtestTest) (0.002000s)
+[2019-04-25T08:38:14]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-25T08:38:14]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:14]  INFO -- : End test_subtest (__main__.SubtestTest) (0.000000s)
+
+======================================================================
+Results:
+ Ran 2 tests in 0.0s
+ success:    0
+ failure:    0
+ others:     2
+   0:[   0.0s] skip   : test_exception (__main__.SubtestTest)
+   1:[   0.0s] skip   : test_subtest (__main__.SubtestTest)
+======================================================================
+[2019-04-25T08:38:18]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-25T08:38:18]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:18]  INFO -- : End test_exception (__main__.SubtestTest) (0.001000s)
+[2019-04-25T08:38:18]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-25T08:38:18]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:18]  INFO -- : End test_subtest (__main__.SubtestTest) (0.001000s)
+
+======================================================================
+Results:
+ Ran 2 tests in 0.0s
+ success:    0
+ failure:    0
+ others:     2
+   0:[   0.0s] skip   : test_exception (__main__.SubtestTest)
+   1:[   0.0s] skip   : test_subtest (__main__.SubtestTest)
+======================================================================
+[2019-04-25T08:38:21]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-25T08:38:21]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:21]  INFO -- : End test_exception (__main__.SubtestTest) (0.002000s)
+[2019-04-25T08:38:21]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-25T08:38:21]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:21]  INFO -- : End test_subtest (__main__.SubtestTest) (0.000000s)
+
+======================================================================
+Results:
+ Ran 2 tests in 0.0s
+ success:    0
+ failure:    0
+ others:     2
+   0:[   0.0s] skip   : test_exception (__main__.SubtestTest)
+   1:[   0.0s] skip   : test_subtest (__main__.SubtestTest)
+======================================================================
+[2019-04-25T08:38:23]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-25T08:38:23]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:23]  INFO -- : End test_exception (__main__.SubtestTest) (0.002000s)
+[2019-04-25T08:38:23]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-25T08:38:23]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:23]  INFO -- : End test_subtest (__main__.SubtestTest) (0.000000s)
+
+======================================================================
+Results:
+ Ran 2 tests in 0.0s
+ success:    0
+ failure:    0
+ others:     2
+   0:[   0.0s] skip   : test_exception (__main__.SubtestTest)
+   1:[   0.0s] skip   : test_subtest (__main__.SubtestTest)
+======================================================================
+[2019-04-25T08:38:24]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-25T08:38:24]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:24]  INFO -- : End test_exception (__main__.SubtestTest) (0.001000s)
+[2019-04-25T08:38:24]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-25T08:38:24]  INFO -- : Result: Skipped 'for Python3'
+[2019-04-25T08:38:24]  INFO -- : End test_subtest (__main__.SubtestTest) (0.000000s)
+
+======================================================================
+Results:
+ Ran 2 tests in 0.0s
+ success:    0
+ failure:    0
+ others:     2
+   0:[   0.0s] skip   : test_exception (__main__.SubtestTest)
+   1:[   0.0s] skip   : test_subtest (__main__.SubtestTest)
+======================================================================

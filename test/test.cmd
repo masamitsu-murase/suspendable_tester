@@ -112,7 +112,7 @@ for /l %%i in (0, 1, 4) do (
     %python% test/test_subtest.py >> test/test_result_subtest.txt
     if ERRORLEVEL 1 exit /b 1
 )
-%python% test/check_general_result.py 1
+%python% test/check_subtest_result.py
 if ERRORLEVEL 1 exit /b 1
 
 set /P x=.<NUL

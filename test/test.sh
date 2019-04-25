@@ -82,5 +82,14 @@ if [ -e teststate.bin ]; then
 fi
 ${python} test/check_general_result.py 1
 
+# subTest
+rm -f test/test_result_subtest.txt
+for i in {0..4}
+do
+    ${python} test/test_subtest.py | tee -a test/test_result_subtest.txt
+done
+${python} test/check_subtest_result.py
+
+
 echo ""
 echo OK

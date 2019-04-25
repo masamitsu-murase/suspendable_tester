@@ -1,0 +1,141 @@
+[2019-04-24T08:12:12]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-24T08:12:12]  INFO -- : End test_exception (__main__.SubtestTest) (0.000999s)
+[2019-04-24T08:12:12]  INFO -- : Start test_subtest (__main__.SubtestTest)
+Reboot!
+[2019-04-24T08:12:12]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-24T08:12:12]  INFO -- : End test_exception (__main__.SubtestTest) (0.000999s)
+[2019-04-24T08:12:12]  INFO -- : Start test_subtest (__main__.SubtestTest)
+----------------------------------------------------------------------
+Current results:
+error  : test_exception (__main__.SubtestTest) [check3] (i=0)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check3] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check4]
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 42, in test_exception
+          raise RuntimeError()
+      RuntimeError
+----------------------------------------------------------------------
+[2019-04-24T08:12:15]  INFO -- : success assertEqual (L22 in 'test_subtest.py'): 0, 0
+[2019-04-24T08:12:15]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+Reboot!
+[2019-04-24T08:12:12]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-24T08:12:12]  INFO -- : End test_exception (__main__.SubtestTest) (0.000999s)
+[2019-04-24T08:12:12]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-24T08:12:15]  INFO -- : success assertEqual (L22 in 'test_subtest.py'): 0, 0
+[2019-04-24T08:12:15]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+----------------------------------------------------------------------
+Current results:
+error  : test_exception (__main__.SubtestTest) [check3] (i=0)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check3] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check4]
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 42, in test_exception
+          raise RuntimeError()
+      RuntimeError
+----------------------------------------------------------------------
+[2019-04-24T08:12:16]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+[2019-04-24T08:12:16]  INFO -- : success assertEqual (L28 in 'test_subtest.py'): 0, 0
+Reboot!
+[2019-04-24T08:12:12]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-24T08:12:12]  INFO -- : End test_exception (__main__.SubtestTest) (0.000999s)
+[2019-04-24T08:12:12]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-24T08:12:15]  INFO -- : success assertEqual (L22 in 'test_subtest.py'): 0, 0
+[2019-04-24T08:12:15]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+[2019-04-24T08:12:16]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+[2019-04-24T08:12:16]  INFO -- : success assertEqual (L28 in 'test_subtest.py'): 0, 0
+----------------------------------------------------------------------
+Current results:
+error  : test_exception (__main__.SubtestTest) [check3] (i=0)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check3] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check4]
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 42, in test_exception
+          raise RuntimeError()
+      RuntimeError
+----------------------------------------------------------------------
+Reboot!
+[2019-04-24T08:12:12]  INFO -- : Start test_exception (__main__.SubtestTest)
+[2019-04-24T08:12:12]  INFO -- : End test_exception (__main__.SubtestTest) (0.000999s)
+[2019-04-24T08:12:12]  INFO -- : Start test_subtest (__main__.SubtestTest)
+[2019-04-24T08:12:15]  INFO -- : success assertEqual (L22 in 'test_subtest.py'): 0, 0
+[2019-04-24T08:12:15]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+[2019-04-24T08:12:16]  INFO -- : success assertTrue (L23 in 'test_subtest.py'): True
+[2019-04-24T08:12:16]  INFO -- : success assertEqual (L28 in 'test_subtest.py'): 0, 0
+----------------------------------------------------------------------
+Current results:
+error  : test_exception (__main__.SubtestTest) [check3] (i=0)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check3] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+error  : test_exception (__main__.SubtestTest) [check4]
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 42, in test_exception
+          raise RuntimeError()
+      RuntimeError
+----------------------------------------------------------------------
+[2019-04-24T08:12:19]  INFO -- : End test_subtest (__main__.SubtestTest) (6.741162s)
+
+======================================================================
+Results:
+ Ran 7 tests in 6.7s
+ success:    2
+ failure:    2
+ others:     3
+   0:[   0.0s] error  : test_exception (__main__.SubtestTest) [check3] (i=0)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+   1:[   0.0s] error  : test_exception (__main__.SubtestTest) [check3] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 36, in test_exception
+          raise RuntimeError()
+      RuntimeError
+   2:[   0.0s] error  : test_exception (__main__.SubtestTest) [check4]
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 42, in test_exception
+          raise RuntimeError()
+      RuntimeError
+   3:[   6.7s] success: test_subtest (__main__.SubtestTest) [check1] (i=0)
+   4:[   6.7s] failure: test_subtest (__main__.SubtestTest) [check1] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 22, in test_subtest
+          self.assertEqual(i, 0)
+      AssertionError: 1 != 0 : 1, 0
+   5:[   6.7s] success: test_subtest (__main__.SubtestTest) [check2] (i=0)
+   6:[   6.7s] failure: test_subtest (__main__.SubtestTest) [check2] (i=1)
+      Traceback (most recent call last):
+        File "test/test_subtest.py", line 28, in test_subtest
+          self.assertEqual(i, 0)
+      AssertionError: 1 != 0 : 1, 0
+======================================================================

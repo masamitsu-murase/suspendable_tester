@@ -14,7 +14,7 @@ class TestResult(object):
             loglevel = logging.INFO
 
         self.shouldStop = False
-        self.failFast = False
+        self.failFast = self.failfast = False
         self.pausable_runner = None
 
         logging_manager = logging.Manager(logging.RootLogger(logging.WARNING))
@@ -93,6 +93,21 @@ class TestResult(object):
         for i, result in enumerate(self._results):
             self.raw_log(("%4d:[%6.1fs] " % (i, result[3])) + self.result_text(result))
         self.raw_log("=" * 70)
+
+    def addSubTest(self, test, subtest, err):
+        """Called at the end of a subtest.
+        'err' is None if the subtest ended successfully, otherwise it's a
+        tuple of values as returned by sys.exc_info().
+        """
+        if err is None:
+            self.addSuccess(subtest, without_log=True)
+        else:
+            if getattr(self, 'failfast', False):
+                self.stop()
+            if issubclass(err[0], test.failureException):
+                self.addFailure(subtest, err, without_log=True)
+            else:
+                self.addError(subtest, err, without_log=True)
 
     @property
     def errors(self):
@@ -181,18 +196,21 @@ class TestResult(object):
     def stopTestRun(self, test):
         pass
 
-    def addSuccess(self, test):
+    def addSuccess(self, test, without_log=False):
         self.addResult("success", test)
-        self.logger.info("Result: success")
+        if not without_log:
+            self.logger.info("Result: success")
 
-    def addError(self, test, err):
+    def addError(self, test, err, without_log=False):
         self.addResult("error", test, err)
-        self.logger.error("Result: ERROR")
-        self.logger.error(self._exc_info_to_string(err, test, 6))
+        if not without_log:
+            self.logger.error("Result: ERROR")
+            self.logger.error(self._exc_info_to_string(err, test, 6))
 
-    def addFailure(self, test, err):
+    def addFailure(self, test, err, without_log=False):
         self.addResult("failure", test, err)
-        self.logger.error("Result: FAILURE")
+        if not without_log:
+            self.logger.error("Result: FAILURE")
 
     def addSkip(self, test, reason):
         self.addResult("skip", test, reason)

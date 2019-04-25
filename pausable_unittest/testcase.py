@@ -207,6 +207,9 @@ class TestCase(unittest.TestCase):
         self.options = result._options
         super(TestCase, self).run(result)
 
+    def subTest(self, msg="subtest", **params):
+        return super(TestCase, self).subTest(msg, **params)
+
     def pause(self, info=None):
         self.__result.before_pause(info)
         status = self._extra_status()

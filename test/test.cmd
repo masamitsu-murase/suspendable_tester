@@ -107,6 +107,16 @@ if ERRORLEVEL 1 exit /b 1
 
 set /P x=.<NUL
 
+del test\test_result_subtest.txt > NUL 2>&1
+for /l %%i in (0, 1, 4) do (
+    %python% test/test_subtest.py >> test/test_result_subtest.txt
+    if ERRORLEVEL 1 exit /b 1
+)
+%python% test/check_subtest_result.py
+if ERRORLEVEL 1 exit /b 1
+
+set /P x=.<NUL
+
 echo.
 echo OK
 exit /b 0

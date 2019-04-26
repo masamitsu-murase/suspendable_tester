@@ -25,14 +25,14 @@ class WindowsPauserTest(unittest.TestCase):
             return
 
         with self.assertRaises(subprocess.CalledProcessError):
-            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
+            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME], stderr=subprocess.STDOUT)
         self.pauser.register_startup()
         output = subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
         self.assertTrue(output)
 
         self.pauser.unregister_startup()
         with self.assertRaises(subprocess.CalledProcessError):
-            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
+            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME], stderr=subprocess.STDOUT)
 
 
 if __name__ == "__main__":

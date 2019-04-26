@@ -8,7 +8,7 @@ sys.path.append(ROOT_DIR)
 import pausable_unittest
 import pausable_unittest.windowspauser as windowspauser
 import unittest
-
+import subprocess
 import time
 import re
 
@@ -19,6 +19,20 @@ class WindowsPauserTest(unittest.TestCase):
 
     def test_is_admin(self):
         self.assertTrue(self.pauser.is_admin())
+
+    def test_register_startup(self):
+        if not self.pauser.is_admin():
+            return
+
+        with self.assertRaises(subprocess.CalledProcessError):
+            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
+        self.pauser.register_startup()
+        output = subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
+        self.assertTrue(output)
+
+        self.pauser.unregister_startup()
+        with self.assertRaises(subprocess.CalledProcessError):
+            subprocess.check_output(["schtasks", "/Query", "/TN", windowspauser.TASK_NAME])
 
 
 if __name__ == "__main__":

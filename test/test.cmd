@@ -121,7 +121,7 @@ echo.
 echo OK
 echo.
 
-REM test for windowspauser
+echo test for windowspauser
 %python% test/test_windowspauser.py
 if ERRORLEVEL 1 exit /b 1
 

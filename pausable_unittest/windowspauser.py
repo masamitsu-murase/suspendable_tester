@@ -125,7 +125,7 @@ class Pauser(pausable_unittest.BasePauser):
             elif expected_exitcode is not None:
                 if ret != expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
-    
+
     def after_pause(self):
         self.unregister_startup()
 

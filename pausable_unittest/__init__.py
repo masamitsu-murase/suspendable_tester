@@ -23,7 +23,7 @@ from .testrunner import TestRunner
 from .testcase import TestCase
 from .basepauser import BasePauser
 
-__version__ = "1.4.1"
+__version__ = "1.5.0"
 
 def main(pauser, filename="teststate.bin", command_after_test=None,
          log_filename=None, loglevel=None, assertion_log=False,

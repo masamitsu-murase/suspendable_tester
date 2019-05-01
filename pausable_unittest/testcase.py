@@ -22,15 +22,16 @@ except ImportError:
 
 __pausable_unittest = True
 
-def safe_repr(obj, short=False):
-    max_length = 40
+
+def safe_repr(obj, max_length=100):
     try:
         result = repr(obj)
     except Exception:
         result = object.__repr__(obj)
-    if not short or len(result) < max_length:
+    if max_length is None or len(result) < max_length:
         return result
     return result[:max_length] + ' [truncated]...'
+
 
 def _find_traceback_in_frame(frame):
     if stackless_wrap and hasattr(stackless_wrap, "frame"):
@@ -44,6 +45,7 @@ def _find_traceback_in_frame(frame):
         except:
             pass
     return None
+
 
 def _clear_locals_in_traceback(traceback, target_frames):
     try:
@@ -64,6 +66,7 @@ def _clear_locals_in_traceback(traceback, target_frames):
                 __pypy__.locals_to_fast(frame)
     finally:
         del frame
+
 
 def _clear_unnecessary_locals():
     # For Stackless Python 3.6
@@ -114,9 +117,9 @@ def log_assertion1(method_name):
         error = False
         log_assertion_calling = self._log_assertion_calling
         if msg is None:
-            msg = safe_repr(arg)
+            msg = safe_repr(arg, self._msg_repr_max_length)
         else:
-            msg = "%s (%s)" % (msg, safe_repr(arg))
+            msg = "%s (%s)" % (msg, safe_repr(arg, self._msg_repr_max_length))
         try:
             self._log_assertion_calling = True
             method(self, arg, msg)
@@ -146,9 +149,9 @@ def log_assertion2(method_name):
         error = False
         log_assertion_calling = self._log_assertion_calling
         if msg is None:
-            msg = "%s, %s" % (safe_repr(first), safe_repr(second))
+            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
         else:
-            msg = "%s (%s, %s)" % (msg, safe_repr(first), safe_repr(second))
+            msg = "%s (%s, %s)" % (msg, safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
         try:
             self._log_assertion_calling = True
             method(self, first, second, msg)
@@ -177,9 +180,9 @@ def log_assertion_almost(method_name):
         error = False
         log_assertion_calling = self._log_assertion_calling
         if msg is None:
-            msg = "%s, %s" % (safe_repr(first), safe_repr(second))
+            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
         else:
-            msg = "%s (%s, %s)" % (msg, safe_repr(first), safe_repr(second))
+            msg = "%s (%s, %s)" % (msg, safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
         try:
             self._log_assertion_calling = True
             return method(self, first, second, places, msg, delta)
@@ -205,6 +208,10 @@ class TestCase(unittest.TestCase):
         self.assertion_log = result.assertion_log
         self._log_assertion_calling = False
         self.options = result._options
+        if self.options is not None and "msg_repr_max_length" in self.options:
+            self._msg_repr_max_length = self.options["msg_repr_max_length"]
+        else:
+            self._msg_repr_max_length = 100
         super(TestCase, self).run(result)
 
     def subTest(self, msg="subtest", **params):

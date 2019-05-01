@@ -62,6 +62,10 @@ class SampleTest(pausable_unittest.TestCase):
         self.assertEqual(type(cm.exception), ZeroDivisionError)
         self.assertRaises(ZeroDivisionError, lambda x: 1 / x, 0)
 
+    def test_msg_repr_max_length(self):
+        self.assertEqual("a" * 101, "a" * 101)
+
+
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "debug":
         pausable_unittest.main(testpauser.Pauser(), loglevel=logging.DEBUG,

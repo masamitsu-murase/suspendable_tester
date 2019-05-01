@@ -1,230 +1,240 @@
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
 Reboot!
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
 ----------------------------------------------------------------------
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
 Reboot!
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
 Reboot!
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:49] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49]  INFO -- : success assertTrue (L34 in 'test.py'): True
-[2018-06-14T08:45:49]  INFO -- : Result: success
-[2018-06-14T08:45:49]  INFO -- : End test_chdir (__main__.SampleTest) (2.076503s)
-[2018-06-14T08:45:49]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2018-06-14T08:45:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:47] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47]  INFO -- : success assertTrue (L34 in 'test.py'): True
+[2019-05-01T09:27:47]  INFO -- : Result: success
+[2019-05-01T09:27:47]  INFO -- : End test_chdir (__main__.SampleTest) (4.171280s)
+[2019-05-01T09:27:47]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2019-05-01T09:27:47] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 test_exec_for_reboot 0
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49]  INFO -- : success assertTrue (L34 in 'test.py'): True
-[2018-06-14T08:45:49]  INFO -- : Result: success
-[2018-06-14T08:45:49]  INFO -- : End test_chdir (__main__.SampleTest) (2.076503s)
-[2018-06-14T08:45:49]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2018-06-14T08:45:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47]  INFO -- : success assertTrue (L34 in 'test.py'): True
+[2019-05-01T09:27:47]  INFO -- : Result: success
+[2019-05-01T09:27:47]  INFO -- : End test_chdir (__main__.SampleTest) (4.171280s)
+[2019-05-01T09:27:47]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2019-05-01T09:27:47] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:50] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:50] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 test_exec_for_reboot 1
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49]  INFO -- : success assertTrue (L34 in 'test.py'): True
-[2018-06-14T08:45:49]  INFO -- : Result: success
-[2018-06-14T08:45:49]  INFO -- : End test_chdir (__main__.SampleTest) (2.076503s)
-[2018-06-14T08:45:49]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2018-06-14T08:45:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:50] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47]  INFO -- : success assertTrue (L34 in 'test.py'): True
+[2019-05-01T09:27:47]  INFO -- : Result: success
+[2019-05-01T09:27:47]  INFO -- : End test_chdir (__main__.SampleTest) (4.171280s)
+[2019-05-01T09:27:47]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2019-05-01T09:27:47] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:52] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:52] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:51] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 test_exec_for_reboot 2
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49]  INFO -- : success assertTrue (L34 in 'test.py'): True
-[2018-06-14T08:45:49]  INFO -- : Result: success
-[2018-06-14T08:45:49]  INFO -- : End test_chdir (__main__.SampleTest) (2.076503s)
-[2018-06-14T08:45:49]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2018-06-14T08:45:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:50] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:52] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:52] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47]  INFO -- : success assertTrue (L34 in 'test.py'): True
+[2019-05-01T09:27:47]  INFO -- : Result: success
+[2019-05-01T09:27:47]  INFO -- : End test_chdir (__main__.SampleTest) (4.171280s)
+[2019-05-01T09:27:47]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2019-05-01T09:27:47] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:51] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:54] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:54]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:54]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:54]  INFO -- : Result: success
-[2018-06-14T08:45:54]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.248480s)
-[2018-06-14T08:45:54]  INFO -- : Start test_options (__main__.SampleTest)
-[2018-06-14T08:45:54]  INFO -- : success assertEqual (L43 in 'test.py'): True, True
-[2018-06-14T08:45:54]  INFO -- : Result: success
-[2018-06-14T08:45:54]  INFO -- : End test_options (__main__.SampleTest) (0.000999s)
-[2018-06-14T08:45:54]  INFO -- : Start test_reboot (__main__.SampleTest)
-[2018-06-14T08:45:54] DEBUG -- : Pause test_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:53] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:53]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:53]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (5.767675s)
+[2019-05-01T09:27:53]  INFO -- : Start test_msg_repr_max_length (__main__.SampleTest)
+[2019-05-01T09:27:53]  INFO -- : success assertEqual (L66 in 'test.py'): 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [truncated]..., 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [truncated]...
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_msg_repr_max_length (__main__.SampleTest) (0.000000s)
+[2019-05-01T09:27:53]  INFO -- : Start test_options (__main__.SampleTest)
+[2019-05-01T09:27:53]  INFO -- : success assertEqual (L43 in 'test.py'): True, True
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_options (__main__.SampleTest) (0.000000s)
+[2019-05-01T09:27:53]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2019-05-01T09:27:53] DEBUG -- : Pause test_reboot (__main__.SampleTest)...
 Reboot!
-[2018-06-14T08:45:46]  INFO -- : Start test_assert_raises (__main__.SampleTest)
-[2018-06-14T08:45:46] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L59 in 'test.py'): msg
-[2018-06-14T08:45:47]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
-[2018-06-14T08:45:47]  INFO -- : success assertRaises (L63 in 'test.py')
-[2018-06-14T08:45:47]  INFO -- : Result: success
-[2018-06-14T08:45:47]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.138823s)
-[2018-06-14T08:45:47]  INFO -- : Start test_chdir (__main__.SampleTest)
-[2018-06-14T08:45:47] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:48]  INFO -- : success assertTrue (L27 in 'test.py'): True
-[2018-06-14T08:45:48] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
-[2018-06-14T08:45:49]  INFO -- : success assertTrue (L34 in 'test.py'): True
-[2018-06-14T08:45:49]  INFO -- : Result: success
-[2018-06-14T08:45:49]  INFO -- : End test_chdir (__main__.SampleTest) (2.076503s)
-[2018-06-14T08:45:49]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
-[2018-06-14T08:45:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:50]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:50] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:52] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:52]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:52] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:54] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:54]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:54]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:54]  INFO -- : Result: success
-[2018-06-14T08:45:54]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (4.248480s)
-[2018-06-14T08:45:54]  INFO -- : Start test_options (__main__.SampleTest)
-[2018-06-14T08:45:54]  INFO -- : success assertEqual (L43 in 'test.py'): True, True
-[2018-06-14T08:45:54]  INFO -- : Result: success
-[2018-06-14T08:45:54]  INFO -- : End test_options (__main__.SampleTest) (0.000999s)
-[2018-06-14T08:45:54]  INFO -- : Start test_reboot (__main__.SampleTest)
-[2018-06-14T08:45:54] DEBUG -- : Pause test_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:41]  INFO -- : Start test_assert_raises (__main__.SampleTest)
+[2019-05-01T09:27:41] DEBUG -- : Pause test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43] DEBUG -- : Resume test_assert_raises (__main__.SampleTest)...
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L59 in 'test.py'): msg
+[2019-05-01T09:27:43]  INFO -- : success assertEqual (L62 in 'test.py'): <class 'ZeroDivisionError'>, <class 'ZeroDivisionError'>
+[2019-05-01T09:27:43]  INFO -- : success assertRaises (L63 in 'test.py')
+[2019-05-01T09:27:43]  INFO -- : Result: success
+[2019-05-01T09:27:43]  INFO -- : End test_assert_raises (__main__.SampleTest) (1.928038s)
+[2019-05-01T09:27:43]  INFO -- : Start test_chdir (__main__.SampleTest)
+[2019-05-01T09:27:43] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:45]  INFO -- : success assertTrue (L27 in 'test.py'): True
+[2019-05-01T09:27:45] DEBUG -- : Pause test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47] DEBUG -- : Resume test_chdir (__main__.SampleTest)...
+[2019-05-01T09:27:47]  INFO -- : success assertTrue (L34 in 'test.py'): True
+[2019-05-01T09:27:47]  INFO -- : Result: success
+[2019-05-01T09:27:47]  INFO -- : End test_chdir (__main__.SampleTest) (4.171280s)
+[2019-05-01T09:27:47]  INFO -- : Start test_exec_for_reboot (__main__.SampleTest)
+[2019-05-01T09:27:47] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:49]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:49] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:51]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:51] DEBUG -- : Pause test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:53] DEBUG -- : Resume test_exec_for_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:53]  INFO -- : success assertTrue (L54 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:53]  INFO -- : success assertTrue (L55 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_exec_for_reboot (__main__.SampleTest) (5.767675s)
+[2019-05-01T09:27:53]  INFO -- : Start test_msg_repr_max_length (__main__.SampleTest)
+[2019-05-01T09:27:53]  INFO -- : success assertEqual (L66 in 'test.py'): 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [truncated]..., 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [truncated]...
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_msg_repr_max_length (__main__.SampleTest) (0.000000s)
+[2019-05-01T09:27:53]  INFO -- : Start test_options (__main__.SampleTest)
+[2019-05-01T09:27:53]  INFO -- : success assertEqual (L43 in 'test.py'): True, True
+[2019-05-01T09:27:53]  INFO -- : Result: success
+[2019-05-01T09:27:53]  INFO -- : End test_options (__main__.SampleTest) (0.000000s)
+[2019-05-01T09:27:53]  INFO -- : Start test_reboot (__main__.SampleTest)
+[2019-05-01T09:27:53] DEBUG -- : Pause test_reboot (__main__.SampleTest)...
 ----------------------------------------------------------------------
 Current results:
 success: test_assert_raises (__main__.SampleTest)
 success: test_chdir (__main__.SampleTest)
 success: test_exec_for_reboot (__main__.SampleTest)
+success: test_msg_repr_max_length (__main__.SampleTest)
 success: test_options (__main__.SampleTest)
 ----------------------------------------------------------------------
-[2018-06-14T08:45:57] DEBUG -- : Resume test_reboot (__main__.SampleTest)...
-[2018-06-14T08:45:57]  INFO -- : success assertTrue (L19 in 'test.py'): start + 0.75 should be less than end. (True)
-[2018-06-14T08:45:57]  INFO -- : success assertTrue (L20 in 'test.py'): start + 1 + margin should be more than end. (True)
-[2018-06-14T08:45:57]  INFO -- : Result: success
-[2018-06-14T08:45:57]  INFO -- : End test_reboot (__main__.SampleTest) (3.489331s)
-[2018-06-14T08:45:57]  INFO -- : Start test_version (__main__.SampleTest)
-[2018-06-14T08:45:57]  INFO -- : success assertTrue (L40 in 'test.py'): __version__ should be string (True)
-[2018-06-14T08:45:57]  INFO -- : Result: success
-[2018-06-14T08:45:57]  INFO -- : End test_version (__main__.SampleTest) (0.001003s)
+[2019-05-01T09:27:55] DEBUG -- : Resume test_reboot (__main__.SampleTest)...
+[2019-05-01T09:27:55]  INFO -- : success assertTrue (L19 in 'test.py'): start + 0.75 should be less than end. (True)
+[2019-05-01T09:27:55]  INFO -- : success assertTrue (L20 in 'test.py'): start + 1 + margin should be more than end. (True)
+[2019-05-01T09:27:55]  INFO -- : Result: success
+[2019-05-01T09:27:55]  INFO -- : End test_reboot (__main__.SampleTest) (1.955477s)
+[2019-05-01T09:27:55]  INFO -- : Start test_version (__main__.SampleTest)
+[2019-05-01T09:27:55]  INFO -- : success assertTrue (L40 in 'test.py'): __version__ should be string (True)
+[2019-05-01T09:27:55]  INFO -- : Result: success
+[2019-05-01T09:27:55]  INFO -- : End test_version (__main__.SampleTest) (0.000000s)
 
 ======================================================================
 Results:
- Ran 6 tests in 11.0s
- success:    6
+ Ran 7 tests in 13.8s
+ success:    7
  failure:    0
-   0:[   1.1s] success: test_assert_raises (__main__.SampleTest)
-   1:[   2.1s] success: test_chdir (__main__.SampleTest)
-   2:[   4.2s] success: test_exec_for_reboot (__main__.SampleTest)
-   3:[   0.0s] success: test_options (__main__.SampleTest)
-   4:[   3.5s] success: test_reboot (__main__.SampleTest)
-   5:[   0.0s] success: test_version (__main__.SampleTest)
+   0:[   1.9s] success: test_assert_raises (__main__.SampleTest)
+   1:[   4.2s] success: test_chdir (__main__.SampleTest)
+   2:[   5.8s] success: test_exec_for_reboot (__main__.SampleTest)
+   3:[   0.0s] success: test_msg_repr_max_length (__main__.SampleTest)
+   4:[   0.0s] success: test_options (__main__.SampleTest)
+   5:[   2.0s] success: test_reboot (__main__.SampleTest)
+   6:[   0.0s] success: test_version (__main__.SampleTest)
 ======================================================================

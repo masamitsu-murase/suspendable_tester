@@ -11,10 +11,10 @@ BASE_DIR = os.path.abspath(os.getcwd())
 BAT_PATH = os.path.join(BASE_DIR, "startup.bat")
 PYTHON_PATH = os.path.abspath(sys.executable)
 SCRIPT_PATH = os.path.relpath(sys.argv[0])
-BAT_CONTENT_CMD_OPEN = ("cd /d \"%~dp0\"\n"
+BAT_CONTENT_CMD_OPEN = ("cd /d \"%~dp0\"\n" +
                         'start "pausable_unittest" cmd /k ""%s" "%s""\n' %
                         (PYTHON_PATH, SCRIPT_PATH))
-BAT_CONTENT_CMD_CLOSE = ("cd /d \"%~dp0\"\n"
+BAT_CONTENT_CMD_CLOSE = ("cd /d \"%~dp0\"\n" +
                          'start "pausable_unittest" cmd /c ""%s" "%s""\n' %
                          (PYTHON_PATH, SCRIPT_PATH))
 

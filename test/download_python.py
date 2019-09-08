@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 import requests
 
-BASE_DIR = Path(__file__).absolute().parent
+BASE_DIR = Path(__file__).absolute().parent.parent
 
 
 def main(python_exe_name, python_version):

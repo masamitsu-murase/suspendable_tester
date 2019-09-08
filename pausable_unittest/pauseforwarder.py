@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class PauseForwarder(object):
     def __init__(self, con):
         self.__con = con
@@ -12,4 +13,3 @@ class PauseForwarder(object):
         if exc:
             raise exc
         return ret_value
-

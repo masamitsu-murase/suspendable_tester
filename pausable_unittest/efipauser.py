@@ -1,4 +1,3 @@
-
 import pausable_unittest
 import os
 import os.path
@@ -22,8 +21,11 @@ class CalledProcessError(Exception):
         self.returncode = returncode
         self.cmd = cmd
         self.output = output
+
     def __str__(self):
-        return "Command '%s' returned non-zero exit status %d" % (self.cmd, self.returncode)
+        return "Command '%s' returned non-zero exit status %d" % (
+            self.cmd, self.returncode)
+
 
 class Pauser(pausable_unittest.BasePauser):
     def register_startup(self):
@@ -42,6 +44,7 @@ class Pauser(pausable_unittest.BasePauser):
     def add_actions(self):
         def exec_for_reboot(self, command, expected_exitcode=0):
             self.pause(("exec_for_reboot", command, expected_exitcode))
+
         self.add_action("exec_for_reboot", exec_for_reboot)
 
     def do_pause(self, info):
@@ -50,7 +53,8 @@ class Pauser(pausable_unittest.BasePauser):
             expected_exitcode = info[2]
             self.register_startup()
             ret = os.system(cmd)
-            if isinstance(expected_exitcode, list) or isinstance(expected_exitcode, tuple):
+            if isinstance(expected_exitcode, list) or isinstance(
+                    expected_exitcode, tuple):
                 if ret in expected_exitcode:
                     raise CalledProcessError(ret, str(cmd))
             else:
@@ -59,4 +63,3 @@ class Pauser(pausable_unittest.BasePauser):
 
     def after_pause(self):
         self.unregister_startup()
-

@@ -2,6 +2,7 @@
 
 import pausable_unittest
 
+
 class BasePauser(object):
     def __init__(self):
         pass

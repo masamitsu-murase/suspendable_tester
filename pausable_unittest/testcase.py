@@ -3,7 +3,6 @@
 import unittest
 import os
 import os.path
-import logging
 import inspect
 import functools
 import contextlib
@@ -56,9 +55,11 @@ def _clear_locals_in_traceback(traceback, target_frames):
         new_hash = {}
         for key in frame.f_locals:
             new_hash[key] = None
-        if hasattr(ctypes, "pythonapi") and hasattr(ctypes.pythonapi, "PyFrame_LocalsToFast"):
+        if hasattr(ctypes, "pythonapi") and hasattr(ctypes.pythonapi,
+                                                    "PyFrame_LocalsToFast"):
             frame.f_locals.update(new_hash)
-            ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(0))
+            ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame),
+                                                  ctypes.c_int(0))
         elif '__pypy__' in sys.builtin_module_names:
             import __pypy__
             if hasattr(__pypy__, "locals_to_fast"):
@@ -80,9 +81,10 @@ def _clear_unnecessary_locals():
     frame = inspect.currentframe().f_back
     target_frames = []
     try:
+        tag_to_detect_bottom_of_stack = "_tag_for_clear_unnecessary_locals"
         while frame:
             locals_hash = frame.f_locals
-            if locals_hash and "_tag_for_clear_unnecessary_locals" in locals_hash:
+            if locals_hash and tag_to_detect_bottom_of_stack in locals_hash:
                 break
             target_frames.append(frame)
             frame = frame.f_back
@@ -129,10 +131,11 @@ def log_assertion1(method_name):
         finally:
             if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
-                self.log_for_assertion(method_name, frame.f_lineno,
-                                       os.path.basename(frame.f_code.co_filename),
-                                       msg)
+                self.log_for_assertion(
+                    method_name, frame.f_lineno,
+                    os.path.basename(frame.f_code.co_filename), msg)
             self._log_assertion_calling = log_assertion_calling
+
     return wrapper
 
 
@@ -149,9 +152,12 @@ def log_assertion2(method_name):
         error = False
         log_assertion_calling = self._log_assertion_calling
         if msg is None:
-            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
+            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length),
+                              safe_repr(second, self._msg_repr_max_length))
         else:
-            msg = "%s (%s, %s)" % (msg, safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
+            msg = "%s (%s, %s)" % (
+                msg, safe_repr(first, self._msg_repr_max_length),
+                safe_repr(second, self._msg_repr_max_length))
         try:
             self._log_assertion_calling = True
             method(self, first, second, msg)
@@ -161,10 +167,11 @@ def log_assertion2(method_name):
         finally:
             if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
-                self.log_for_assertion(method_name, frame.f_lineno,
-                                       os.path.basename(frame.f_code.co_filename),
-                                       msg)
+                self.log_for_assertion(
+                    method_name, frame.f_lineno,
+                    os.path.basename(frame.f_code.co_filename), msg)
             self._log_assertion_calling = log_assertion_calling
+
     return wrapper
 
 
@@ -180,9 +187,12 @@ def log_assertion_almost(method_name):
         error = False
         log_assertion_calling = self._log_assertion_calling
         if msg is None:
-            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
+            msg = "%s, %s" % (safe_repr(first, self._msg_repr_max_length),
+                              safe_repr(second, self._msg_repr_max_length))
         else:
-            msg = "%s (%s, %s)" % (msg, safe_repr(first, self._msg_repr_max_length), safe_repr(second, self._msg_repr_max_length))
+            msg = "%s (%s, %s)" % (
+                msg, safe_repr(first, self._msg_repr_max_length),
+                safe_repr(second, self._msg_repr_max_length))
         try:
             self._log_assertion_calling = True
             return method(self, first, second, places, msg, delta)
@@ -192,10 +202,11 @@ def log_assertion_almost(method_name):
         finally:
             if not error and not log_assertion_calling:
                 frame = inspect.currentframe().f_back
-                self.log_for_assertion(method_name, frame.f_lineno,
-                                       os.path.basename(frame.f_code.co_filename),
-                                       msg)
+                self.log_for_assertion(
+                    method_name, frame.f_lineno,
+                    os.path.basename(frame.f_code.co_filename), msg)
             self._log_assertion_calling = log_assertion_calling
+
     return wrapper
 
 
@@ -241,7 +252,8 @@ class TestCase(unittest.TestCase):
         try:
             os.chdir(status["cwd"])
         except:
-            self.logger.error("Cannot change directory to '%s'.", status["cwd"])
+            self.logger.error("Cannot change directory to '%s'.",
+                              status["cwd"])
 
     @property
     def logger(self):
@@ -263,6 +275,7 @@ class TestCase(unittest.TestCase):
         lineno = frame.f_lineno
         filename = frame.f_code.co_filename
         if (not callable(callableObj)) and (not args) and (not kwargs):
+
             @contextlib.contextmanager
             def helper():
                 error = False
@@ -276,33 +289,41 @@ class TestCase(unittest.TestCase):
                 finally:
                     if not error:
                         self.log_for_assertion("assertRaises", lineno,
-                                               os.path.basename(filename),
-                                               msg)
+                                               os.path.basename(filename), msg)
+
             return helper()
         else:
             error = False
             try:
-                super(TestCase, self).assertRaises(excClass, callableObj, *args, **kwargs)
+                super(TestCase, self).assertRaises(excClass, callableObj,
+                                                   *args, **kwargs)
             except:
                 error = True
                 raise
             finally:
                 if not error:
                     self.log_for_assertion("assertRaises", lineno,
-                                           os.path.basename(filename),
-                                           None)
+                                           os.path.basename(filename), None)
 
-    def assertRaisesRegexp(self, excClass, regexp, callableObj=None, *args, **kwargs):
+    def assertRaisesRegexp(self,
+                           excClass,
+                           regexp,
+                           callableObj=None,
+                           *args,
+                           **kwargs):
         frame = inspect.currentframe().f_back
         lineno = frame.f_lineno
         filename = frame.f_code.co_filename
         if (not callable(callableObj)) and (not args) and (not kwargs):
+
             @contextlib.contextmanager
             def helper():
                 error = False
                 msg = callableObj
                 try:
-                    with super(TestCase, self).assertRaisesRegexp(excClass, regexp) as cm:
+                    with super(TestCase,
+                               self).assertRaisesRegexp(excClass,
+                                                        regexp) as cm:
                         yield cm
                 except:
                     error = True
@@ -310,37 +331,53 @@ class TestCase(unittest.TestCase):
                 finally:
                     if not error:
                         self.log_for_assertion("assertRaisesRegexp", lineno,
-                                               os.path.basename(filename),
-                                               msg)
+                                               os.path.basename(filename), msg)
+
             return helper()
         else:
             error = False
             try:
-                super(TestCase, self).assertRaisesRegexp(excClass, regexp, callableObj,
-                                                         *args, **kwargs)
+                super(TestCase,
+                      self).assertRaisesRegexp(excClass, regexp, callableObj,
+                                               *args, **kwargs)
             except:
                 error = True
                 raise
             finally:
                 if not error:
                     self.log_for_assertion("assertRaisesRegexp", lineno,
-                                           os.path.basename(filename),
-                                           None)
+                                           os.path.basename(filename), None)
+
 
 # 1 parameter
 for name in ("assertTrue", "assertFalse", "assertIsNone", "assertIsNotNone"):
     setattr(TestCase, name, log_assertion1(name))
 
 # 2 parameters
-for name in ("assertEqual", "assertNotEqual", "assertIs", "assertIsNot",
-             "assertIn", "assertNotIn", "assertIsInstance", "assertNotIsInstance",
-             "assertGreater", "assertGreaterEqual", "assertLess", "assertLessEqual",
-             ("assertRegexpMatches", "assertRegex"),
-             ("assertNotRegexpMatches", "assertNotRegex"),
-             ("assertItemsEqual", None),
-             ("assertDictContainsSubset", None),
-             "assertMultiLineEqual", "assertSequenceEqual",
-             "assertListEqual", "assertTupleEqual", "assertSetEqual", "assertDictEqual"):
+for name in (
+        "assertEqual",
+        "assertNotEqual",
+        "assertIs",
+        "assertIsNot",
+        "assertIn",
+        "assertNotIn",
+        "assertIsInstance",
+        "assertNotIsInstance",
+        "assertGreater",
+        "assertGreaterEqual",
+        "assertLess",
+        "assertLessEqual",
+        ("assertRegexpMatches", "assertRegex"),
+        ("assertNotRegexpMatches", "assertNotRegex"),
+        ("assertItemsEqual", None),
+        ("assertDictContainsSubset", None),
+        "assertMultiLineEqual",
+        "assertSequenceEqual",
+        "assertListEqual",
+        "assertTupleEqual",
+        "assertSetEqual",
+        "assertDictEqual",
+):
     if isinstance(name, tuple):
         if hasattr(unittest.TestCase, name[0]):
             setattr(TestCase, name[0], log_assertion2(name[0]))

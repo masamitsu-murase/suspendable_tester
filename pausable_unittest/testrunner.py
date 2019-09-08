@@ -2,7 +2,7 @@
 
 try:
     import cPickle as pickle
-except:
+except ImportError:
     import pickle
 import zlib
 import os
@@ -12,13 +12,14 @@ import sys
 from .testresult import TestResult
 try:
     from _continuation import continulet
-except:
+except ImportError:
     from .continulet import continulet
 from .pauseforwarder import PauseForwarder
 
 BASE_DIR = os.path.abspath(os.getcwd())
 DEFAULT_STATEFILE_PATH = os.path.join(BASE_DIR, "teststate.bin")
 PICKLE_PROTOCOL_VERSION = 1
+
 
 def _run_test(con, param):
     test_suite = param[0]
@@ -28,8 +29,10 @@ def _run_test(con, param):
     options = param[4] if param[4] is not None else {}
 
     sf = PauseForwarder(con)
-    result = TestResult(filename=log_filename, loglevel=loglevel,
-                        assertion_log=assertion_log, options=options)
+    result = TestResult(filename=log_filename,
+                        loglevel=loglevel,
+                        assertion_log=assertion_log,
+                        options=options)
     result.pause_forwarder = sf
     test_suite(result)
     if hasattr(result, "show_results"):
@@ -47,9 +50,15 @@ class TestRunner(object):
         self._continulet = None
         self._callback = {}
 
-    def run(self, test_suite, pauser, filename=DEFAULT_STATEFILE_PATH,
-            command_after_test=None, log_filename=None, loglevel=None,
-            assertion_log=False, options=None):
+    def run(self,
+            test_suite,
+            pauser,
+            filename=DEFAULT_STATEFILE_PATH,
+            command_after_test=None,
+            log_filename=None,
+            loglevel=None,
+            assertion_log=False,
+            options=None):
         pauser.add_actions()
 
         if not os.path.isabs(filename):
@@ -73,7 +82,10 @@ class TestRunner(object):
                                    assertion_log, options)
                 self._continulet = continulet(_run_test, continulet_args)
                 first_run = True
-            action, info = self.run_continulet(ret_value, exc, pauser, first=first_run)
+            action, info = self.run_continulet(ret_value,
+                                               exc,
+                                               pauser,
+                                               first=first_run)
             ret_value = None
             exc = None
             first_run = False
@@ -97,7 +109,7 @@ class TestRunner(object):
                 break
 
         if action == "finish" and callable(command_after_test):
-            command_after_test({ "result": info })
+            command_after_test({"result": info})
 
     def load_file(self, filename):
         try:

@@ -1,4 +1,3 @@
-
 import logging
 import time
 import os.path
@@ -13,6 +12,7 @@ else:
 
 FORMAT = '[%(asctime)s] %(levelname)5s -- : %(message)s'
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
+
 
 class PicklableHandler(logging.Handler):
     def __init__(self, fmt=FORMAT, date_format=DATE_FORMAT):
@@ -29,7 +29,11 @@ class PicklableHandler(logging.Handler):
 class PicklableStreamHandler(PicklableHandler):
     MAX_LOG_COUNT = 1000
 
-    def __init__(self, stream_type="stdout", fmt=FORMAT, date_format=DATE_FORMAT, max_log_count=MAX_LOG_COUNT):
+    def __init__(self,
+                 stream_type="stdout",
+                 fmt=FORMAT,
+                 date_format=DATE_FORMAT,
+                 max_log_count=MAX_LOG_COUNT):
         super(PicklableStreamHandler, self).__init__()
         self.__log_count = 0
         self.__max_log_count = max_log_count
@@ -63,17 +67,20 @@ class PicklableStreamHandler(PicklableHandler):
         if self.__max_log_count and self.__log_count >= self.__max_log_count:
             output.write("...snip...\n")
             for i in range(self.__max_log_count):
-                index = (self.__log_count - self.__max_log_count + i) % self.__max_log_count
+                index = (self.__log_count - self.__max_log_count +
+                         i) % self.__max_log_count
                 output.write(self.__log_list[index] + "\n")
         else:
             for log in self.__log_list:
                 output.write(log + "\n")
 
+
 class PicklableFileHandler(PicklableHandler):
     def __init__(self, filename=None, fmt=FORMAT, date_format=DATE_FORMAT):
         super(PicklableFileHandler, self).__init__()
         if filename is None:
-            self.filename = os.path.abspath(time.strftime("log_%Y%m%d_%H%M%S.txt"))
+            self.filename = os.path.abspath(
+                time.strftime("log_%Y%m%d_%H%M%S.txt"))
         else:
             self.filename = os.path.abspath(filename)
         self.__file = None
@@ -105,4 +112,3 @@ class PicklableFileHandler(PicklableHandler):
     def prepare_for_pause(self):
         super(PicklableFileHandler, self).prepare_for_pause()
         self.close()
-

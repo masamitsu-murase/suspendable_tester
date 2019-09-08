@@ -2,6 +2,7 @@
 
 import stackless
 
+
 class _ContinuletInterface(object):
     def __init__(self, channel):
         self._channel = channel
@@ -23,7 +24,8 @@ def _tasklet_func(func, channel, *args, **kwargs):
 class continulet(object):
     def __init__(self, func, *args, **kwargs):
         self._channel = stackless.channel()
-        self._tasklet = stackless.tasklet(_tasklet_func)(func, self._channel, *args, **kwargs)
+        self._tasklet = stackless.tasklet(_tasklet_func)(func, self._channel,
+                                                         *args, **kwargs)
         stackless.run()
 
     def switch(self, data=None):
@@ -36,4 +38,3 @@ class continulet(object):
 
     def restorable(self):
         return self._tasklet.restorable
-

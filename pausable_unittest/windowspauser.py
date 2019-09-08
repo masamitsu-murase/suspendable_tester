@@ -1,4 +1,3 @@
-
 import pausable_unittest
 import os
 import os.path
@@ -12,10 +11,12 @@ BASE_DIR = os.path.abspath(os.getcwd())
 BAT_PATH = os.path.join(BASE_DIR, "startup.bat")
 PYTHON_PATH = os.path.abspath(sys.executable)
 SCRIPT_PATH = os.path.relpath(sys.argv[0])
-BAT_CONTENT_CMD_OPEN = "cd /d \"%~dp0\"\n" + \
-    ('start "pausable_unittest" cmd /k ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
-BAT_CONTENT_CMD_CLOSE = "cd /d \"%~dp0\"\n" + \
-    ('start "pausable_unittest" cmd /c ""%s" "%s""\n' % (PYTHON_PATH, SCRIPT_PATH))
+BAT_CONTENT_CMD_OPEN = ("cd /d \"%~dp0\"\n"
+                        'start "pausable_unittest" cmd /k ""%s" "%s""\n' %
+                        (PYTHON_PATH, SCRIPT_PATH))
+BAT_CONTENT_CMD_CLOSE = ("cd /d \"%~dp0\"\n"
+                         'start "pausable_unittest" cmd /c ""%s" "%s""\n' %
+                         (PYTHON_PATH, SCRIPT_PATH))
 
 
 class Pauser(pausable_unittest.BasePauser):
@@ -37,13 +38,16 @@ class Pauser(pausable_unittest.BasePauser):
 
     def register_admin_startup(self):
         try:
-            winutils.register_schtasks(TASK_NAME, BAT_PATH, os.environ["USERNAME"], None, True)
+            winutils.register_schtasks(TASK_NAME, BAT_PATH,
+                                       os.environ["USERNAME"], None, True)
         except:
             winutils.unregister_schtasks(TASK_NAME)
             raise
 
     def nonadmin_startup_filepath(self):
-        startup_folder = os.path.join(os.environ["APPDATA"], r'Microsoft\Windows\Start Menu\Programs\Startup')
+        startup_folder = os.path.join(
+            os.environ["APPDATA"],
+            r'Microsoft\Windows\Start Menu\Programs\Startup')
         return os.path.join(startup_folder, "pausable_unittest.bat")
 
     def register_nonadmin_startup(self):
@@ -80,7 +84,8 @@ class Pauser(pausable_unittest.BasePauser):
     def unregister_startup(self):
         try:
             if self.is_admin():
-                self.check_call([ "schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F" ])
+                self.check_call(
+                    ["schtasks.exe", "/Delete", "/TN", TASK_NAME, "/F"])
             else:
                 path = self.nonadmin_startup_filepath()
                 if os.path.exists(path):
@@ -91,19 +96,27 @@ class Pauser(pausable_unittest.BasePauser):
 
     def add_actions(self):
         def reboot(self):
-            self.pause(("reboot",))
+            self.pause(("reboot", ))
+
         self.add_action("reboot", reboot)
 
-        def exec_for_reboot(self, command, expected_exitcode=0, register_startup=True):
-            self.pause(("exec_for_reboot", command, expected_exitcode, register_startup))
+        def exec_for_reboot(self,
+                            command,
+                            expected_exitcode=0,
+                            register_startup=True):
+            self.pause(("exec_for_reboot", command, expected_exitcode,
+                        register_startup))
+
         self.add_action("exec_for_reboot", exec_for_reboot)
 
         def bat_path(self):
             return self.call_pauser_callback("bat_path")
+
         self.add_action("bat_path", bat_path)
 
         def create_bat(self):
             self.call_pauser_callback("create_bat")
+
         self.add_action("create_bat", create_bat)
 
     def do_pause(self, info):
@@ -119,7 +132,8 @@ class Pauser(pausable_unittest.BasePauser):
             if register_startup:
                 self.register_startup()
             ret = subprocess.call(cmd)
-            if type(expected_exitcode) == list or type(expected_exitcode) == tuple:
+            if type(expected_exitcode) == list or type(
+                    expected_exitcode) == tuple:
                 if ret in expected_exitcode:
                     raise subprocess.CalledProcessError(ret, str(cmd))
             elif expected_exitcode is not None:

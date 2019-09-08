@@ -8,8 +8,12 @@ from . import picklablelogger
 
 
 class TestResult(object):
-    def __init__(self, stream_type="stdout", filename=None, loglevel=None,
-                 assertion_log=False, options=None):
+    def __init__(self,
+                 stream_type="stdout",
+                 filename=None,
+                 loglevel=None,
+                 assertion_log=False,
+                 options=None):
         if loglevel is None:
             loglevel = logging.INFO
 
@@ -20,9 +24,11 @@ class TestResult(object):
         logging_manager = logging.Manager(logging.RootLogger(logging.WARNING))
         self.logger = logging_manager.getLogger("pausable_unittest")
         self.logger.setLevel(loglevel)
-        self.logger.addHandler(picklablelogger.PicklableStreamHandler(stream_type))
-        if filename != False:
-            self.logger.addHandler(picklablelogger.PicklableFileHandler(filename))
+        self.logger.addHandler(
+            picklablelogger.PicklableStreamHandler(stream_type))
+        if filename is not False:
+            self.logger.addHandler(
+                picklablelogger.PicklableFileHandler(filename))
 
         self.assertion_log = assertion_log
 
@@ -66,11 +72,11 @@ class TestResult(object):
             self.logger.debug("Resume...")
 
     def _filterResult(self, type):
-        return [ (x[1], x[2]) for x in self._results if x[0] == type ]
+        return [(x[1], x[2]) for x in self._results if x[0] == type]
 
     def result_text(self, result):
         result_type = result[0]
-        if result_type in { "success", "expected_failure", "skip" }:
+        if result_type in {"success", "expected_failure", "skip"}:
             ok = True
         else:
             ok = False
@@ -84,14 +90,16 @@ class TestResult(object):
         self.raw_log("")
         self.raw_log("=" * 70)
         self.raw_log("Results:")
-        self.raw_log(" Ran %d tests in %.1fs" % (len(self._results), self._total_end_time - self._total_start_time))
+        self.raw_log(" Ran %d tests in %.1fs" % (len(
+            self._results), self._total_end_time - self._total_start_time))
         self.raw_log(" success: %4d" % len(self.successes))
         self.raw_log(" failure: %4d" % len(self.failures))
         others = len(self._results) - len(self.successes) - len(self.failures)
         if others > 0:
             self.raw_log(" others:  %4d" % others)
         for i, result in enumerate(self._results):
-            self.raw_log(("%4d:[%6.1fs] " % (i, result[3])) + self.result_text(result))
+            self.raw_log(("%4d:[%6.1fs] " % (i, result[3])) +
+                         self.result_text(result))
         self.raw_log("=" * 70)
 
     def addSubTest(self, test, subtest, err):
@@ -143,7 +151,6 @@ class TestResult(object):
 
     def stop(self):
         self.shouldStop = True
-
 
     def _outputResult(self):
         pass
@@ -225,7 +232,10 @@ class TestResult(object):
         self.logger.error("Result: unexpected success")
 
     def _is_relevant_tb_level(self, tb):
-        return '__unittest' in tb.tb_frame.f_globals or '__pausable_unittest' in tb.tb_frame.f_globals
+        global_variable_names = tb.tb_frame.f_globals
+        tags_for_global_scope = ('__unittest', '__pausable_unittest')
+        return any(tag in global_variable_names
+                   for tag in tags_for_global_scope)
 
     def _exc_info_to_string(self, err, test, indent=None):
         """Converts a sys.exc_info()-style tuple of values into a string."""
@@ -255,4 +265,3 @@ class TestResult(object):
             length += 1
             tb = tb.tb_next
         return length
-

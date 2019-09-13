@@ -14,7 +14,6 @@ except ImportError:
 import sys
 
 try:
-    import stackless
     import stackless._wrap as stackless_wrap
 except ImportError:
     stackless_wrap = None
@@ -41,7 +40,7 @@ def _find_traceback_in_frame(frame):
             for traceback in reversed(obj[-1][-1]):
                 if inspect.istraceback(traceback):
                     return traceback
-        except:
+        except BaseException:
             pass
     return None
 
@@ -125,7 +124,7 @@ def log_assertion1(method_name):
         try:
             self._log_assertion_calling = True
             method(self, arg, msg)
-        except:
+        except BaseException:
             error = True
             raise
         finally:
@@ -161,7 +160,7 @@ def log_assertion2(method_name):
         try:
             self._log_assertion_calling = True
             method(self, first, second, msg)
-        except:
+        except BaseException:
             error = True
             raise
         finally:
@@ -196,7 +195,7 @@ def log_assertion_almost(method_name):
         try:
             self._log_assertion_calling = True
             return method(self, first, second, places, msg, delta)
-        except:
+        except BaseException:
             error = True
             raise
         finally:
@@ -224,6 +223,7 @@ class TestCase(unittest.TestCase):
         else:
             self._msg_repr_max_length = 100
         super(TestCase, self).run(result)
+        assert _tag_for_clear_unnecessary_locals is None
 
     def subTest(self, msg="subtest", **params):
         return super(TestCase, self).subTest(msg, **params)
@@ -251,7 +251,7 @@ class TestCase(unittest.TestCase):
     def _restore_extra_status(self, status):
         try:
             os.chdir(status["cwd"])
-        except:
+        except BaseException:
             self.logger.error("Cannot change directory to '%s'.",
                               status["cwd"])
 
@@ -283,7 +283,7 @@ class TestCase(unittest.TestCase):
                 try:
                     with super(TestCase, self).assertRaises(excClass) as cm:
                         yield cm
-                except:
+                except BaseException:
                     error = True
                     raise
                 finally:
@@ -297,7 +297,7 @@ class TestCase(unittest.TestCase):
             try:
                 super(TestCase, self).assertRaises(excClass, callableObj,
                                                    *args, **kwargs)
-            except:
+            except BaseException:
                 error = True
                 raise
             finally:
@@ -325,7 +325,7 @@ class TestCase(unittest.TestCase):
                                self).assertRaisesRegexp(excClass,
                                                         regexp) as cm:
                         yield cm
-                except:
+                except BaseException:
                     error = True
                     raise
                 finally:
@@ -340,7 +340,7 @@ class TestCase(unittest.TestCase):
                 super(TestCase,
                       self).assertRaisesRegexp(excClass, regexp, callableObj,
                                                *args, **kwargs)
-            except:
+            except BaseException:
                 error = True
                 raise
             finally:

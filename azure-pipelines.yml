@@ -63,7 +63,7 @@ jobs:
     displayName: Create archive
   - task: GitHubRelease@0
     inputs:
-      gitHubConnection: 'masamitsu-murase'
+      gitHubConnection: 'github_connection'
       repositoryName: '$(Build.Repository.Name)'
       action: 'create'
       target: '$(Build.SourceVersion)'

@@ -40,7 +40,7 @@ class Pauser(pausable_unittest.BasePauser):
         try:
             winutils.register_schtasks(TASK_NAME, BAT_PATH,
                                        os.environ["USERNAME"], None, True)
-        except:
+        except BaseException:
             winutils.unregister_schtasks(TASK_NAME)
             raise
 
@@ -55,7 +55,7 @@ class Pauser(pausable_unittest.BasePauser):
         try:
             with open(path, "w") as f:
                 f.write('"%s"' % BAT_PATH)
-        except:
+        except BaseException:
             if os.path.exists(path):
                 os.remove(path)
             raise
@@ -91,7 +91,7 @@ class Pauser(pausable_unittest.BasePauser):
                 if os.path.exists(path):
                     os.remove(path)
             self.remove_bat()
-        except:
+        except BaseException:
             pass
 
     def add_actions(self):

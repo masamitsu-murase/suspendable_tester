@@ -93,7 +93,7 @@ class TestRunner(object):
             if action == "pause":
                 try:
                     self.save_state(filename)
-                except:
+                except BaseException:
                     exc = sys.exc_info()[1]
                     continue
 
@@ -103,7 +103,7 @@ class TestRunner(object):
                 elif action == "finish":
                     if hasattr(pauser, "do_finish"):
                         pauser.do_finish()
-            except:
+            except BaseException:
                 exc = sys.exc_info()[1]
             else:
                 break
@@ -143,5 +143,5 @@ class TestRunner(object):
             else:
                 try:
                     ret_value = pauser.exec_callback(action, info)
-                except:
+                except BaseException:
                     exc = sys.exc_info()[1]

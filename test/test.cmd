@@ -6,18 +6,6 @@ if "%1"=="" (
     goto START_TEST
 )
 
-REM download python from Single Binary Stackless Python
-if EXIST C:\Ruby23\bin\ruby.exe (
-    set RUBY_EXE=C:\Ruby23\bin\ruby.exe
-) else (
-    set RUBY_EXE=ruby.exe
-)
-if "%2"=="2" (
-    %RUBY_EXE% test\download_python.rb %python% 2
-) else if "%2"=="3" (
-    %RUBY_EXE% test\download_python.rb %python% 3
-)
-
 :START_TEST
 echo Using %python%
 

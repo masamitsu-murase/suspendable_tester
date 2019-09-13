@@ -2,14 +2,22 @@ clone_depth: 5
 image:
   - Visual Studio 2015
 environment:
-  github_key:
-    secure: djkJ7PAcpttmIyTDPeev5f1G/RkDQ1EZPhJNHZiWVQDe9VRFTWnndhmnkFW4oyAF
+  matrix:
+    - python_version: 2
+      python_exe_name: python.exe
+    - python_version: 2
+      python_exe_name: python64.exe
+    - python_version: 3
+      python_exe_name: python64_pe.exe
+    - python_version: 3
+      python_exe_name: python.exe
+    - python_version: 3
+      python_exe_name: python64.exe
+    - python_version: 3
+      python_exe_name: python64_pe.exe
 build: off
 test_script:
-  - test\test.cmd python.exe 2
-  - test\test.cmd python64.exe 2
-  - test\test.cmd python64_pe.exe 2
-  - test\test.cmd python.exe 3
-  - test\test.cmd python64.exe 3
-  - test\test.cmd python64_pe.exe 3
+  - C:\Python37\python -m pip install requests
+  - C:\Python37\python test/download_python.py %python_exe_name% %python_version%
+  - test\test.cmd %python_exe_name% %python_version%
 deploy: off

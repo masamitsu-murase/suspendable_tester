@@ -21,7 +21,9 @@ class TestResult(object):
         self.failFast = self.failfast = False
         self.pausable_runner = None
 
-        logging_manager = logging.Manager(logging.RootLogger(logging.WARNING))
+        logging_manager = logging.Manager(
+            picklablelogger.RootLogger(logging.WARNING))
+        logging_manager.setLoggerClass(picklablelogger.Logger)
         self.logger = logging_manager.getLogger("pausable_unittest")
         self.logger.setLevel(loglevel)
         self.logger.addHandler(

@@ -14,6 +14,23 @@ FORMAT = '[%(asctime)s] %(levelname)5s -- : %(message)s'
 DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
+class Logger(logging.Logger):
+    def __reduce__(self):
+        # Override this method to hide the original definition.
+        # The original one calls global `getLogger`
+        # and it conflicts with `TestResult` in this package
+        # because `TestResult` creates another `logging.Manager`
+        # object.
+        # To avoid this conflict, my `Logger` class overrides
+        # `__reduce__` method.
+        return object.__reduce__(self)
+
+
+class RootLogger(Logger):
+    def __init__(self, level):
+        Logger.__init__(self, "root", level)
+
+
 class PicklableHandler(logging.Handler):
     def __init__(self, fmt=FORMAT, date_format=DATE_FORMAT):
         super(PicklableHandler, self).__init__()

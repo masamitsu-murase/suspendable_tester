@@ -25,7 +25,7 @@ from .testcase import TestCase
 from .basepauser import BasePauser
 
 __all__ = ["TestRunner", "TestCase", "BasePauser"]
-__version__ = "1.5.2"
+__version__ = "1.6.0"
 
 
 def main(pauser,

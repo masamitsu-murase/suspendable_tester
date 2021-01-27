@@ -1,8 +1,0 @@
-language: python
-python:
-  - "pypy"
-  - "pypy3"
-script: "bash -e test/test.sh"
-matrix:
-  allow_failures:
-    - python: "pypy3"

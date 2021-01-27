@@ -1,9 +1,7 @@
 
 # Pausable Unittest
 
-[![Build Status](https://dev.azure.com/masamitsu-murase/pausable_unittest/_apis/build/status/masamitsu-murase.pausable_unittest?branchName=master)](https://dev.azure.com/masamitsu-murase/pausable_unittest/_build/latest?definitionId=3&branchName=master)
-[![Build Status](https://travis-ci.org/masamitsu-murase/pausable_unittest.svg?branch=master)](https://travis-ci.org/masamitsu-murase/pausable_unittest)
-[![Build status](https://ci.appveyor.com/api/projects/status/5n4gt33gmd9clo0m/branch/master?svg=true)](https://ci.appveyor.com/project/masamitsu-murase/pausable-unittest/branch/master)
+[![Test](https://github.com/masamitsu-murase/pausable_unittest/workflows/Test%20and%20Release/badge.svg)](https://github.com/masamitsu-murase/pausable_unittest/actions?query=workflow%3A%22Test+and+Release%22)
 
 [Japanese](https://github.com/masamitsu-murase/pausable_unittest/blob/master/README.ja.md)
 

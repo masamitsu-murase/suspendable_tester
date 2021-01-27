@@ -1,0 +1,70 @@
+name: Test and Release
+
+on:
+  push:
+    branches: [ '*' ]
+    tags: ['*']
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python_version: ["2.7", "3.6", "3.7"]
+        python_exe_name: ["python.exe", "python64.exe", "python64_pe.exe"]
+
+    runs-on: windows-latest
+
+    steps:
+    - name: "Disable git autoCRLF"
+      run: git config --global core.autoCRLF false
+
+    - uses: actions/checkout@v2
+
+    - name: Install libraries
+      run: pip install requests
+
+    - name: Download single binary stackless python
+      run: python test/download_python.py ${{ matrix.python_exe_name }} ${{ matrix.python_version }}
+
+    - name: Run test
+      run: cmd /c test\test.cmd ${{ matrix.python_exe_name }} ${{ matrix.python_version }}
+
+  release:
+    # if: startsWith(github.ref, 'refs/tags/')
+
+    needs: test
+    runs-on: windows-latest
+
+    steps:
+    - name: "Disable git autoCRLF"
+      run: git config --global core.autoCRLF false
+
+    - uses: actions/checkout@v2
+
+    - name: Create archive
+      run: python -c "import shutil; shutil.make_archive('pausable_unittest', 'zip', '.', 'pausable_unittest')"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./pausable_unittest.zip
+        asset_name: pausable_unittest.zip
+        asset_content_type: application/zip
